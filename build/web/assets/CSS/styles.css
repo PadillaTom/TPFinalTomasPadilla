@@ -14,9 +14,11 @@ Variables
     --ColorPink: #f2d0de;
     --ColorBlue: #96baec;
     /* BTN Colors */
-    --FontColorDark: #17171B;
-    --FontColorLight: #17171B;
+    --FontColorBlack: #0d0c21;
+    --FontColorDark: #777b80;
+    --FontColorLight: #cdcfd4;
     --FontColorWhite: #ffffff;
+    --FontColorPink: #d85888;
     /* Font Colors */
     --BtnColorPrimary: #f2d0de;
     --BtnColorSecondary: #faeecf;
@@ -40,7 +42,6 @@ body {
 .main-sect{
     padding-top: 5rem;
     width: 100%;
-    height: 150vh;
 }
 .section-title {
     text-align: center;
@@ -48,6 +49,7 @@ body {
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-top: 1.5rem;
+    color: var(--FontColorBlack);
 }
 ul {
     list-style: none;
@@ -171,12 +173,84 @@ a {
 }
 
 
-
-
 /***************************** 
 ******** Inicio Page ********
 ******************************/
-
+.hab-cardsContainer {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hab-cardContainer {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    place-items: center;
+    width: 45rem;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 9px rgba(0,0,0,0.25);
+    margin-bottom: 2rem;
+}
+.hab-cardLeft{
+    width: 18rem;
+    height: 100%;
+}
+.hab-cardLeft >img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+.hab-cardRight{
+    background: var(--ColorWhite);
+    width: 100%;
+    height: 100%;
+     border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+.hab-cardRightCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.hab-cardRight-title {
+    margin-bottom: 2.3rem;
+}
+.hab-cardRight-title > p {
+    color: var(--FontColorLight);
+    letter-spacing: 1px;
+}
+.hab-cardRight-title > h3 {
+    color: var(--FontColorBlack);
+    font-size: 1.8rem;
+    letter-spacing: 1.3px;
+    text-align: center;
+    padding: 0.3rem 0rem;
+}
+.hab-cardRight-title > h6 {
+    text-align: right;
+    color: var(--FontColorDark);
+    font-size: 1rem;
+    letter-spacing: 1.2px;
+}
+.hab-cardRight-info {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between;
+}
+.hab-cardRight-info > p {
+    letter-spacing: 1.1px
+}
+.hab-cardRight-info > span {
+    color: var(--FontColorPink);
+    letter-spacing: 1.2px;
+}
 
 
 /***************************** 

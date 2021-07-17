@@ -54,9 +54,137 @@
         </nav>
         <!-- *** Seccion Principal *** -->
         <section class="section main-sect">
+            
+            <!--*** Titulo ***-->
             <h1 class="section-title">
-                Inicio
+                Habitaciones
             </h1>
+            
+            <!--*** Cards ***-->
+            <div class="hab-cardsContainer">
+                
+                <!--*** Single Room ***-->
+                <article class="hab-cardContainer">
+                    <div class="hab-cardLeft">
+                        <img src="assets/Images/singleRoom.jpeg">
+                    </div>
+                    <div class="hab-cardRight">
+                        <div class="hab-cardRightCenter">
+                            <div class="hab-cardRight-title">
+                                <p>
+                                    #001
+                                </p>
+                                <h3>
+                                    Habitacion Simple
+                                </h3>
+                                <h6>
+                                    Piso: 01
+                                </h6>
+                            </div>
+                            <div class="hab-cardRight-info">
+                                <p>
+                                    Tipo: Single Room
+                                </p>
+                                <span>
+                                    $150 / Noche
+                                </span>
+                            </div>
+                         </div>
+                    </div>
+                </article>
+                
+                 <!--*** Double Room ***-->
+                                 <article class="hab-cardContainer">
+                    <div class="hab-cardLeft">
+                        <img src="assets/Images/doubleRoom.jpeg">
+                    </div>
+                    <div class="hab-cardRight">
+                        <div class="hab-cardRightCenter">
+                            <div class="hab-cardRight-title">
+                                <p>
+                                    #002
+                                </p>
+                                <h3>
+                                    Habitacion Doble
+                                </h3>
+                                <h6>
+                                    Piso: 02
+                                </h6>
+                            </div>
+                            <div class="hab-cardRight-info">
+                                <p>
+                                    Tipo: Double Room
+                                </p>
+                                <span>
+                                    $250 / Noche
+                                </span>
+                            </div>
+                         </div>
+                    </div>
+                </article>
+                 
+                 <!--*** Triple Room ***-->
+                                 <article class="hab-cardContainer">
+                    <div class="hab-cardLeft">
+                        <img src="assets/Images/tripleRoom.jpeg">
+                    </div>
+                    <div class="hab-cardRight">
+                        <div class="hab-cardRightCenter">
+                            <div class="hab-cardRight-title">
+                                <p>
+                                    #003
+                                </p>
+                                <h3>
+                                    Habitacion Triple
+                                </h3>
+                                <h6>
+                                    Piso: 02
+                                </h6>
+                            </div>
+                            <div class="hab-cardRight-info">
+                                <p>
+                                    Tipo: Triple Room
+                                </p>
+                                <span>
+                                    $300 / Noche
+                                </span>
+                            </div>
+                         </div>
+                    </div>
+                </article>
+                 
+                 <!--*** Multiple Room ***-->
+                                 <article class="hab-cardContainer">
+                    <div class="hab-cardLeft">
+                        <img src="assets/Images/multipleRoom.jpeg">
+                    </div>
+                    <div class="hab-cardRight">
+                        <div class="hab-cardRightCenter">
+                            <div class="hab-cardRight-title">
+                                <p>
+                                    #004
+                                </p>
+                                <h3>
+                                    Habitacion Multiple
+                                </h3>
+                                <h6>
+                                    Piso: 03
+                                </h6>
+                            </div>
+                            <div class="hab-cardRight-info">
+                                <p>
+                                    Tipo: Multiple Room
+                                </p>
+                                <span>
+                                    $450 / Noche
+                                </span>
+                            </div>
+                         </div>
+                    </div>
+                </article>
+                 
+            </div>
+            
         </section>
     </body>
 </html>
