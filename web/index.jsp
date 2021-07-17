@@ -8,38 +8,31 @@
     </head>
     
     <body>
-        
         <!--*** HOMEPAGE ***-->
-        <section class="Homepage">
-            <div class="Home_elements-center">
-                <!-- *** Main Title *** -->
-                <h1 class="mainTitle">Administración de Hotel</h1>        
-                <!-- *** Form *** -->
-                <div class="formContainer">  
-                    <form action="pagina2.jsp" method="POST">
-                        <h2>Formulario</h2>
-                        <p class="singleInput">
-                            Nombre: <input type="text" name="nombre">
-                        </p>
-                        <p class="singleInput">
-                            Apellido: <input type="text" name="apellido">
-                        </p>
-                        <p class="singleInput">
-                            Color de Pelo: 
-                            <select name="colorPelo">
-                                <option>Castaño</option>
-                                <option>Rubio</option>
-                                <option>Pelirrojo</option>
-                            </select>
-                        </p>
-                        <br>
-                        <input type="sumit" value="Enviar">           
+        <section class="section login-sect">
+            <div class="loginElements-center">
+                <!-- *** Login Form *** -->
+                <div class="login-formContainer">  
+                    <form action="dashboard.jsp" method="POST">
+                        <div class="login-formTitle">
+                            <h2>Mi Hotel</h2>
+                        </div>
+                        <div class="login-formContent">
+                            <div class="login-formInputs">
+                                <p class="login-singleInput">
+                                    Usuario: <input type="text" name="usuario">
+                                </p>
+                                <p class="login-singleInput">
+                                    Contraseña: <input type="text" name="contraseña">
+                                </p>
+                            </div>
+                            <div class="login-formButtons">
+                                <input type="submit" class="formBtn" value="Login" />
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </section>
-        
-        
-        
     </body>
 </html>
