@@ -55,14 +55,21 @@
         <!-- *** Seccion Principal *** -->
         <section class="section main-sect">
             
+            <!--*** Welcome Section ***-->
+            <div class="hab-welcomeSect">
+                <h1>
+                    Bienvenido: <span> <%= session.getAttribute("username") %> </span>
+                </h1>
+            </div>
+            
+                
             <!--*** Titulo ***-->
             <h1 class="section-title">
                 Habitaciones
-            </h1>
+            </h1>            
             
             <!--*** Cards ***-->
-            <div class="hab-cardsContainer">
-                
+            <div class="hab-cardsContainer">                
                 <!--*** Single Room ***-->
                 <article class="hab-cardContainer">
                     <div class="hab-cardLeft">
@@ -94,7 +101,7 @@
                 </article>
                 
                  <!--*** Double Room ***-->
-                                 <article class="hab-cardContainer">
+                <article class="hab-cardContainer">
                     <div class="hab-cardLeft">
                         <img src="assets/Images/doubleRoom.jpeg">
                     </div>
@@ -124,7 +131,7 @@
                 </article>
                  
                  <!--*** Triple Room ***-->
-                                 <article class="hab-cardContainer">
+                <article class="hab-cardContainer">
                     <div class="hab-cardLeft">
                         <img src="assets/Images/tripleRoom.jpeg">
                     </div>
@@ -154,7 +161,7 @@
                 </article>
                  
                  <!--*** Multiple Room ***-->
-                                 <article class="hab-cardContainer">
+                <article class="hab-cardContainer">
                     <div class="hab-cardLeft">
                         <img src="assets/Images/multipleRoom.jpeg">
                     </div>
@@ -182,9 +189,7 @@
                          </div>
                     </div>
                 </article>
-                 
             </div>
-            
         </section>
     </body>
 </html>

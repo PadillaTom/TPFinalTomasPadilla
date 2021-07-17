@@ -7,8 +7,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SvPrincipal", urlPatterns = {"/SvPrincipal"})
-public class SvPrincipal extends HttpServlet {
+@WebServlet(name = "SvIndex", urlPatterns = {"/SvIndex"})
+public class SvIndex extends HttpServlet {
 
        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,8 +24,17 @@ public class SvPrincipal extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        throws ServletException, IOException { 
+        
+//          *** REQ: User and Pass ***
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");            
+//          *** SET: Attributes de la request ***
+            request.getSession().setAttribute("username", username);
+            request.getSession().setAttribute("password", password);
+            
+//          *** Redirect ***
+            response.sendRedirect("dashboard.jsp");    
     }
     
     @Override

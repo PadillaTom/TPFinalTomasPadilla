@@ -13,17 +13,17 @@
             <div class="loginElements-center">
                 <!-- *** Login Form *** -->
                 <div class="login-formContainer">  
-                    <form action="dashboard.jsp" method="POST">
+                    <form action="SvIndex" method="POST">
                         <div class="login-formTitle">
                             <h2>Mi Hotel</h2>
                         </div>
                         <div class="login-formContent">
                             <div class="login-formInputs">
                                 <p class="login-singleInput">
-                                    Usuario: <input type="text" name="usuario">
+                                    Usuario: <input type="text" name="username">
                                 </p>
                                 <p class="login-singleInput">
-                                    Contraseña: <input type="text" name="contraseña">
+                                    Contraseña: <input type="password" name="password">
                                 </p>
                             </div>
                             <div class="login-formButtons">
