@@ -60,7 +60,7 @@
             
             <!--*** Formulario ***-->
             <div class="res-formContainer">
-                <form action="formEnviado.jsp" method="POST">
+                <form action="ResponseReserva.jsp" method="POST">
                     <div class="res-formCenter">
                         <div class="res-formSection">
                             <div class="res-formTitle">

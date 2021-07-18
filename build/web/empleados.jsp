@@ -55,8 +55,15 @@
         <!-- *** Seccion Principal *** -->
         <section class="section main-sect">
             <h1 class="section-title">
-                Empleados
+                Lista de Empleados
             </h1>
+            <div class="emp-mainCenter">                
+                <div class="section-title-underline"></div>
+
+                <!--*** Add Empleado ***-->
+                <input type="submit" class="emp-addEmp" value="Agregar Empleado" />
+
+            </div>
         </section>
     </body>
 </html>

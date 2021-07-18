@@ -55,7 +55,7 @@
         <!-- *** Seccion Principal *** -->
         <section class="section main-sect">
             <h1 class="section-title">
-                Form Enviado
+                Reserva Enviada
             </h1>
         </section>
     </body>
