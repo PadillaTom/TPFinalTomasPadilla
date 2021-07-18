@@ -37,10 +37,11 @@ body {
 }
 .section {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
 }
 .main-sect{
     padding-top: 5rem;
+    padding-bottom: 5rem;
     width: 100%;
 }
 .section-title {
@@ -65,6 +66,9 @@ a {
 /***************************** 
 ******** Login Screen ********
 ******************************/
+.login-sect {
+    height: 100vh;
+}
 .loginElements-center {
     height: 100%;
     width: 100%;
@@ -111,13 +115,12 @@ a {
 }
 .login-singleInput > input {
     outline: 0;
-    border-width: 0 0 1px;
-    border-color: var(--ColorGrey);
+    border-width: 0 0 1.5px;
+    border-color: var(--ColorPink);
     font-size: 1.2rem;
     cursor: pointer;
     margin-left: 1rem;
 }
-
 .login-singleInput > input:focus {
     border-color: var(--ColorBlue);
 }
@@ -269,7 +272,7 @@ a {
 .res-formContainer{
     display: grid;
     place-items: center;
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 .res-formContainer > form {
     background: var(--ColorWhite);
@@ -278,11 +281,10 @@ a {
     width: 50rem;
 }
 .res-formCenter {
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
-    padding: 4rem 0rem;
+    padding: 2.5rem 0rem;
 }
-
 .res-formTitle {
     color: var(--FontColorDark);
     font-size: 1.2rem;
@@ -290,5 +292,60 @@ a {
     text-align: center;
     margin-bottom: 1rem;
 }
+.res-formTitle > p {
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    margin-top: 0.15rem;
+    color: var(--FontColorLight);
+}
+.res-formSection{
+    margin-bottom: 2.5rem;
+}
+.res-formInputsContainer{
+    width: 75%;
+    margin: 0 auto;
+    padding-top: 1rem;
+}
+.res-facturacionContainer {
+    width: 55%;    
+}
+.res-singleInput {
+    font-size: 1.5rem; 
+    position: relative;
+}
+.res-factSingleInput{
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.res-factSingleInput > input {
+    outline: 0;
+    border-width: 0 0 1.5px;
+    border-color: var(--ColorPink);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
 
+.res-factSingleInput > input:focus{
+    border-color: var(--ColorBlue);
+}
 
+/*Hab TOP*/
+.res-formInputsTop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.res-fechasContainer{
+    text-align: center;
+    font-size: 1.5rem;    
+}
+.res-formBtnContainer {
+    margin-top: 2rem;
+    text-align: center;
+}
