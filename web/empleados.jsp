@@ -67,7 +67,77 @@
                     </h1>
                 </div>
                 <div class="emp-addEmpContainer">
-                    <input type="submit" class="emp-addEmp formBtn" value="Nuevo Empleado" />
+                    <input type="submit" class="emp-addEmp formBtn" value="Nuevo Empleado" id="displayAddEmpForm"  onclick="showForm();" />
+                </div>
+                    
+                <!--*** Add Empleado ***-->
+                <div class="emp-addEmpHiddenForm" id="empForm">
+                    <form class="emp-addEmpForm" action="" method="POST">
+                        <div class="res-formCenter">
+                            <div class="res-formSection">
+                                <div class="res-formTitle">
+                                    <h3>
+                                        Nuevo Empleado
+                                    </h3>
+                                    <p>Ingresar los datos del nuevo empleado.</p>
+                                </div> 
+                                <div class="res-formInputsContainer res-facturacionContainer">
+                                    <div class="res-factSingleInput">
+                                        <label for="empUsername">
+                                            Usuario:
+                                        </label>
+                                        <input type="text" name="empUsername" />
+                                    </div>
+                                    <div class="res-factSingleInput">
+                                        <label for="empPassword">
+                                            Contraseña:
+                                        </label>
+                                        <input type="text" name="empPassword" />
+                                    </div>
+                                    <div class="res-factSingleInput">
+                                        <label for="empDni">
+                                            DNI:
+                                        </label>
+                                        <input type="text" name="empDNI" />
+                                    </div>
+                                    <div class="res-factSingleInput">
+                                        <label for="empNombre">
+                                            Nombre:
+                                        </label>
+                                        <input type="text" name="empNombre" />
+                                    </div>
+                                    <div class="res-factSingleInput">
+                                        <label for="empApellido">
+                                            Apellido:
+                                        </label>
+                                        <input type="text" name="empApellido" />
+                                    </div>
+                                    <div class="res-factSingleInput">
+                                        <label for="empFechaNac">
+                                            Fecha Nac:
+                                        </label>
+                                        <input type="text" name="empFechaNac" />
+                                    </div>
+                                    <div class="res-factSingleInput">
+                                        <label for="empDireccion">
+                                            Direccion:
+                                        </label>
+                                        <input type="text" name="empDireccion" />
+                                    </div>
+                                    <div class="res-factSingleInput">
+                                        <label for="empCargo">
+                                            Cargo:
+                                        </label>
+                                        <input type="text" name="empCargo" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="emp-addEmpFormBtns">
+                                <input type="submit" value="Agregar" class="formBtn" />
+                                <input type="submit" value="Anular" class="formBtn cancelBtn" onclick="preventDefault(); hideForm();" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
                     
                 <!--*** Table ***-->
@@ -126,14 +196,26 @@
                                 <td>Jefe</td>
                                 <td class="emp-tableIconsContainer">
                                     <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
-                                    <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado"/>
+                                    <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado" />
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                    
             </div>
         </section>
+        <script>
+            const displayAddEmpForm = document.getElementById("displayAddEmpForm");
+            const hideAddEmpForm = document.getElementById("hideAddEmpForm");
+            const empForm = document.getElementById("empForm");
+            
+            function showForm() {
+                empForm.style.display = "grid";                
+            }            
+            function hideForm() {
+                empForm.
+                empForm.style.display = "none";
+            }           
+        </script>
     </body>
 </html>
