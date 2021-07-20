@@ -72,7 +72,7 @@
                     
                 <!--*** Add Empleado ***-->
                 <div class="emp-addEmpHiddenForm" id="empForm">
-                    <form class="emp-addEmpForm" action="" method="POST">
+                    <form class="emp-addEmpForm" action="" method="POST" id="myEmpForm" >
                         <div class="res-formCenter">
                             <div class="res-formSection">
                                 <div class="res-formTitle">
@@ -134,7 +134,7 @@
                             </div>
                             <div class="emp-addEmpFormBtns">
                                 <input type="submit" value="Agregar" class="formBtn" />
-                                <button type="button" class="formBtn cancelBtn" onclick="hideForm();" >Anular</button>
+                                <button type="button" class="formBtn cancelBtn" onclick="hideForm(); borrarCampos();" >Anular</button>
                             </div>
                         </div>
                     </form>
