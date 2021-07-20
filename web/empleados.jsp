@@ -86,55 +86,55 @@
                                         <label for="empUsername">
                                             Usuario:
                                         </label>
-                                        <input type="text" name="empUsername" />
+                                        <input type="text" name="empUsername" required="true" />
                                     </div>
                                     <div class="res-factSingleInput">
                                         <label for="empPassword">
                                             Contraseña:
                                         </label>
-                                        <input type="text" name="empPassword" />
+                                        <input type="text" name="empPassword" required="true" />
                                     </div>
                                     <div class="res-factSingleInput">
                                         <label for="empDni">
                                             DNI:
                                         </label>
-                                        <input type="text" name="empDNI" />
+                                        <input type="text" name="empDNI" required="true" />
                                     </div>
                                     <div class="res-factSingleInput">
                                         <label for="empNombre">
                                             Nombre:
                                         </label>
-                                        <input type="text" name="empNombre" />
+                                        <input type="text" name="empNombre" required="true" />
                                     </div>
                                     <div class="res-factSingleInput">
                                         <label for="empApellido">
                                             Apellido:
                                         </label>
-                                        <input type="text" name="empApellido" />
+                                        <input type="text" name="empApellido" required="true" />
                                     </div>
                                     <div class="res-factSingleInput">
                                         <label for="empFechaNac">
                                             Fecha Nac:
                                         </label>
-                                        <input type="text" name="empFechaNac" />
+                                        <input type="text" name="empFechaNac" required="true" />
                                     </div>
                                     <div class="res-factSingleInput">
                                         <label for="empDireccion">
                                             Direccion:
                                         </label>
-                                        <input type="text" name="empDireccion" />
+                                        <input type="text" name="empDireccion" required="true" />
                                     </div>
                                     <div class="res-factSingleInput">
                                         <label for="empCargo">
                                             Cargo:
                                         </label>
-                                        <input type="text" name="empCargo" />
+                                        <input type="text" name="empCargo" required="true" />
                                     </div>
                                 </div>
                             </div>
                             <div class="emp-addEmpFormBtns">
                                 <input type="submit" value="Agregar" class="formBtn" />
-                                <input type="submit" value="Anular" class="formBtn cancelBtn" onclick="preventDefault(); hideForm();" />
+                                <button type="button" class="formBtn cancelBtn" onclick="hideForm();" >Anular</button>
                             </div>
                         </div>
                     </form>
@@ -204,18 +204,6 @@
                 </div>
             </div>
         </section>
-        <script>
-            const displayAddEmpForm = document.getElementById("displayAddEmpForm");
-            const hideAddEmpForm = document.getElementById("hideAddEmpForm");
-            const empForm = document.getElementById("empForm");
-            
-            function showForm() {
-                empForm.style.display = "grid";                
-            }            
-            function hideForm() {
-                empForm.
-                empForm.style.display = "none";
-            }           
-        </script>
+    <script src="./assets/JS/main.js"></script>
     </body>
 </html>
