@@ -13,7 +13,7 @@
             <div class="loginElements-center">
                 <!-- *** Login Form *** -->
                 <div class="login-formContainer">  
-                    <form action="SvIndex" method="POST">
+                    <form action="SvLogin" method="POST">
                         <div class="login-formTitle">
                             <h2>Mi Hotel</h2>
                         </div>

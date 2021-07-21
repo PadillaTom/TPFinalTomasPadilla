@@ -9,6 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
         <link rel="stylesheet" href="./assets/CSS/styles.css" type="text/css" />
         <title>Mi Hotel - Reservas</title>
     </head>
@@ -60,20 +62,20 @@
             
             <!--*** Formulario ***-->
             <div class="res-formContainer">
-                <form action="ResponseReserva.jsp" method="POST">
+                <form action="reservas.jsp" method="POST">
                     <div class="res-formCenter">
                         <div class="res-formSection">
                             <div class="res-formTitle">
                                 <h3>
                                     Habitacion 
                                 </h3>
-                                <p>Seleccionar el tipo de Habitacion, Cantidad de personas y Fechas solicitadas por el huesped.</p>
+                                <p>Seleccionar el Tipo de Habitacion y Cantidad de Huespedes.</p>
                             </div> 
                             <div class="res-formInputsContainer">
                                 <div class="res-formInputsTop">  
                                     <div class="res-singleInput">
                                         <label for="habitaciones">Habitacion </label>
-                                        <select class="res-select" name="habitaciones" id="res-habSelect" onchange="getHabitacion();">
+                                        <select class="res-select" name="habitaciones" id="res-habSelect" onchange="getHabitacion();" required="true">
                                             <option value="single">Single Room</option>
                                             <option value="double">Double Room</option>
                                             <option value="triple">Triple Room</option>
@@ -82,7 +84,7 @@
                                     </div>                                
                                     <div class="res-singleInput">
                                         <label for="cantPers">Cantidad de Personas </label>
-                                        <select class="res-select" name="cantPers">
+                                        <select class="res-select" name="cantPers" required="true">
                                             <option value="1per" id="1per">1</option>
                                             <option value="2pre" id="2per">2</option>
                                             <option value="3per" id="3per">3</option>
@@ -93,7 +95,16 @@
                                     </div>
                                 </div>
                                 <div class="res-fechasContainer">
-                                    <p>Fechas</p>
+                                    <div class="res-formTitle">
+                                        <h3>
+                                            Fechas 
+                                        </h3>
+                                        <p>Ingresar fechas de Check-in y Check-out.</p>
+                                    </div> 
+                                    <div class="datePickerBtnsContainer">
+                                        <input id="datepickerDe" type="text" class="datePickerBtn" placeholder="De" name="resFechaDe" required="true">
+                                        <input id="datepickerHasta" type="text" class="datePickerBtn" placeholder="Hasta" name="resFechaHasta" required="true" >
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,31 +120,31 @@
                                     <label for="name">
                                         Nombre:
                                     </label>
-                                    <input type="text" name="name" />
+                                    <input type="text" name="name" required="true" />
                                 </div>
                                 <div class="res-factSingleInput">
                                     <label for="lastName">
                                         Apellido:
                                     </label>
-                                    <input type="text" name="lastName" />
+                                    <input type="text" name="lastName" required="true" />
                                 </div>
                                 <div class="res-factSingleInput">
                                     <label for="fechaNac">
                                         Fecha Nac:
                                     </label>
-                                    <input type="text" name="fechaNac" />
+                                    <input type="text" name="fechaNac" required="true" placeholder="DD/MM/YY" />
                                 </div>
                                 <div class="res-factSingleInput">
                                     <label for="direccion">
                                         Direccion:
                                     </label>
-                                    <input type="text" name="direccion" />
+                                    <input type="text" name="direccion" required="true"/>
                                 </div>
                                 <div class="res-factSingleInput">
                                     <label for="profesion">
                                         Profesion:
                                     </label>
-                                    <input type="text" name="profesion" />
+                                    <input type="text" name="profesion" required="true" />
                                 </div>
                             </div>
                         </div>
@@ -146,40 +157,63 @@
         </section>
         
         <!--*** JAVASCRIPT ***-->
+        <script src="./assets/JS/main.js"></script>
         <script>
-            function getHabitacion(){
-                var habitacionElegida = document.getElementById("res-habSelect").value;
-                
-                if(habitacionElegida === "single") {
-                    document.getElementById("2per").style.display = "none";
-                    document.getElementById("3per").style.display = "none";
-                    document.getElementById("4per").style.display = "none";
-                    document.getElementById("5per").style.display = "none";
-                    document.getElementById("6per").style.display = "none";
-                    
-                } else if (habitacionElegida === "double"){
-                    document.getElementById("2per").style.display = "block";
-                    document.getElementById("3per").style.display = "none";
-                    document.getElementById("4per").style.display = "none";
-                    document.getElementById("5per").style.display = "none";
-                    document.getElementById("6per").style.display = "none";
-                    
-                } else if (habitacionElegida === "triple") {
-                    document.getElementById("2per").style.display = "block";
-                    document.getElementById("3per").style.display = "block";
-                    document.getElementById("4per").style.display = "none";
-                    document.getElementById("5per").style.display = "none";
-                    document.getElementById("6per").style.display = "none";
-                    
-                } else if (habitacionElegida === "multiple") {
-                    document.getElementById("2per").style.display = "block";
-                    document.getElementById("3per").style.display = "block";
-                    document.getElementById("4per").style.display = "block";
-                    document.getElementById("5per").style.display = "block";
-                    document.getElementById("6per").style.display = "block";
-                }
-            };
-            getHabitacion();
+            // Date Picker DE:
+            const picker1 = MCDatepicker.create({
+                el: '#datepickerDe',
+                bodyType: 'inline',
+                dateFormat: 'dd-mmmm-yyyy',
+                minDate: new Date(),
+                customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                customMonths: [
+                  'Enero',
+                  'Febrero',
+                  'Marzo',
+                  'Abril',
+                  'Mayo',
+                  'Junio',
+                  'Julio',
+                  'Agosto',
+                  'Septiembre',
+                  'Octubre',
+                  'Noviembre',
+                  'Diciembre',
+                ],
+                customClearBTN: "Borrar",
+                customCancelBTN: "Anular",
+            });
+            let picker2;
+            picker1.onSelect((date)=> { 
+            var myMin = new Date(date);
+            myMin.setDate(date.getDate() + 1);
+            picker2 = MCDatepicker.create({
+                el: '#datepickerHasta',
+                bodyType: 'inline',
+                minDate: myMin,
+                dateFormat: 'dd-mmmm-yyyy',
+                customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                customMonths: [
+                  'Enero',
+                  'Febrero',
+                  'Marzo',
+                  'Abril',
+                  'Mayo',
+                  'Junio',
+                  'Julio',
+                  'Agosto',
+                  'Septiembre',
+                  'Octubre',
+                  'Noviembre',
+                  'Diciembre',
+                ],
+                customClearBTN: "Borrar",
+                customCancelBTN: "Anular",
+            })
+        });
+//            Tests
+            
+
         </script>
     </body>
 </html>
