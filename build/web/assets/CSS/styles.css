@@ -390,6 +390,7 @@ a {
 }
 .datePickerBtn::placeholder {
     text-align: center;
+    color: white;
 }
 
 
