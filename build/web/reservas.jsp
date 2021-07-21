@@ -62,7 +62,7 @@
             
             <!--*** Formulario ***-->
             <div class="res-formContainer">
-                <form action="reservas.jsp" method="POST">
+                <form action="reservas.jsp" method="POST" id="myResForm">
                     <div class="res-formCenter">
                         <div class="res-formSection">
                             <div class="res-formTitle">
@@ -150,6 +150,7 @@
                         </div>
                         <div class="res-formBtnContainer">
                             <input type="submit" value="Guardar" class="formBtn" />
+                            <button type="button" class="formBtn cancelBtn" onclick="borrarCampos(); selectedToDefault();" >Anular</button>
                         </div>
                     </div>
                 </form>
@@ -159,6 +160,12 @@
         <!--*** JAVASCRIPT ***-->
         <script src="./assets/JS/main.js"></script>
         <script>
+            // Disable HASTA, hasta seleccionar DE.
+            const hastaBtn = document.getElementById("datepickerHasta");
+            hastaBtn.disabled=true;
+            hastaBtn.style.background="lightgray";
+            hastaBtn.style.cursor="default";
+            
             // Date Picker DE:
             const picker1 = MCDatepicker.create({
                 el: '#datepickerDe',
@@ -184,8 +191,15 @@
             });
             let picker2;
             picker1.onSelect((date)=> { 
+                // Habilitar HASTA
+                hastaBtn.disabled = false;
+                hastaBtn.style.background="#96baec"; // ColorBlue
+                hastaBtn.style.cursor="pointer";
+                
+                // Settear Min Date:
                 var myMin = new Date(date);
                 myMin.setDate(date.getDate() + 1);
+                
                 // Date Picker HASTA:
                 picker2 = MCDatepicker.create({
                 el: '#datepickerHasta',

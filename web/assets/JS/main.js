@@ -25,8 +25,13 @@ document.addEventListener("DOMContentLoaded", function() {
 const displayAddEmpForm = document.getElementById("displayAddEmpForm");
 const hideAddEmpForm = document.getElementById("hideAddEmpForm");
 const empForm = document.getElementById("empForm");
+
+let formElements;
 if(document.getElementById("myEmpForm")){
-    var formElements = document.getElementById("myEmpForm").elements;
+   formElements = document.getElementById("myEmpForm").elements;
+}
+if(document.getElementById("myResForm")){
+   formElements = document.getElementById("myResForm").elements;
 }
 
 // Toggle Form:
@@ -47,6 +52,11 @@ function borrarCampos(){
         }
     }
 }   
+function selectedToDefault(){
+    const myParentElements = document.querySelectorAll("select");
+    myParentElements[0].firstElementChild.setAttribute("selected","selected");
+    myParentElements[1].firstElementChild.setAttribute("selected","selected");
+}
 
 //*********************
 //  RESERVAS JSP
