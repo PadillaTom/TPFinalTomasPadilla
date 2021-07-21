@@ -211,7 +211,7 @@
         //  Date Picker EMPFECHANAC:
         const picker3 = MCDatepicker.create({
                 el: '#datepickerEmpFechaNac',
-                dateFormat: 'dd-mmmm-yyyy',
+                dateFormat: 'dd-mm-yyyy',
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
                   'Enero',
@@ -222,10 +222,10 @@
                   'Junio',
                   'Julio',
                   'Agosto',
-                  'Septiembre',
-                  'Octubre',
-                  'Noviembre',
-                  'Diciembre',
+                  'Sept.',
+                  'Oct.',
+                  'Nov.',
+                  'Dic.',
                 ],
                 customClearBTN: "Borrar",
                 customCancelBTN: "Anular",

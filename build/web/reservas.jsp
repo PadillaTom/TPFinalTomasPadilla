@@ -169,7 +169,7 @@
             // Date Picker DE:
             const picker1 = MCDatepicker.create({
                 el: '#datepickerDe',
-                dateFormat: 'dd-mmmm-yyyy',
+                dateFormat: 'dd-mm-yyyy',
                 minDate: new Date(),
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
@@ -181,10 +181,10 @@
                   'Junio',
                   'Julio',
                   'Agosto',
-                  'Septiembre',
-                  'Octubre',
-                  'Noviembre',
-                  'Diciembre',
+                  'Sept.',
+                  'Oct.',
+                  'Nov.',
+                  'Dic.',
                 ],
                 customClearBTN: "Borrar",
                 customCancelBTN: "Anular",
@@ -204,7 +204,7 @@
                 picker2 = MCDatepicker.create({
                 el: '#datepickerHasta',
                 minDate: myMin,
-                dateFormat: 'dd-mmmm-yyyy',
+                dateFormat: 'dd-mm-yyyy',
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
                       'Enero',
@@ -215,10 +215,10 @@
                       'Junio',
                       'Julio',
                       'Agosto',
-                      'Septiembre',
-                      'Octubre',
-                      'Noviembre',
-                      'Diciembre',
+                      'Sep.',
+                      'Oct.',
+                      'Nov.',
+                      'Dic.',
                     ],
                 customClearBTN: "Borrar",
                 customCancelBTN: "Anular",
@@ -227,7 +227,7 @@
         //  Date Picker FECHANAC:
         const picker3 = MCDatepicker.create({
                 el: '#datepickerFechaNac',
-                dateFormat: 'dd-mmmm-yyyy',
+                dateFormat: 'dd-mm-yyyy',
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
                   'Enero',
@@ -238,10 +238,10 @@
                   'Junio',
                   'Julio',
                   'Agosto',
-                  'Septiembre',
-                  'Octubre',
-                  'Noviembre',
-                  'Diciembre',
+                  'Sept.',
+                  'Oct.',
+                  'Nov.',
+                  'Dic.',
                 ],
                 customClearBTN: "Borrar",
                 customCancelBTN: "Anular",
