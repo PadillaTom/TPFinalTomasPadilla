@@ -315,7 +315,7 @@ a {
     margin-bottom: 2.5rem;
 }
 .res-formInputsContainer{
-    width: 75%;
+    width: 80%;
     margin: 0 auto;
     padding-top: 1rem;
 }
@@ -329,7 +329,7 @@ a {
 .res-factSingleInput{
     font-size: 1.5rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
@@ -347,9 +347,9 @@ a {
 }
 .res-factSingleInput > input::placeholder {
     color: lightgray;
-    letter-spacing: 1.3px;
-    font-size: 1.1rem;
-    padding-left: 0.4rem;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    text-align: center;
 }
 
 /* Hab TOP */

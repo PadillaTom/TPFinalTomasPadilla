@@ -9,6 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
         <link rel="stylesheet" href="./assets/CSS/styles.css" type="text/css" />
         <title>Mi Hotel - Empleados</title>
     </head>
@@ -116,7 +118,7 @@
                                         <label for="empFechaNac">
                                             Fecha Nac:
                                         </label>
-                                        <input type="text" name="empFechaNac" required="true" />
+                                        <input type="text" name="empFechaNac" required="true" id="datepickerEmpFechaNac" placeholder="Seleccionar Fecha" />
                                     </div>
                                     <div class="res-factSingleInput">
                                         <label for="empDireccion">
@@ -205,5 +207,29 @@
             </div>
         </section>
     <script src="./assets/JS/main.js"></script>
+    <script>
+        //  Date Picker EMPFECHANAC:
+        const picker3 = MCDatepicker.create({
+                el: '#datepickerEmpFechaNac',
+                dateFormat: 'dd-mmmm-yyyy',
+                customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                customMonths: [
+                  'Enero',
+                  'Febrero',
+                  'Marzo',
+                  'Abril',
+                  'Mayo',
+                  'Junio',
+                  'Julio',
+                  'Agosto',
+                  'Septiembre',
+                  'Octubre',
+                  'Noviembre',
+                  'Diciembre',
+                ],
+                customClearBTN: "Borrar",
+                customCancelBTN: "Anular",
+            });
+    </script>
     </body>
 </html>

@@ -132,7 +132,7 @@
                                     <label for="fechaNac">
                                         Fecha Nac:
                                     </label>
-                                    <input type="text" name="fechaNac" required="true" placeholder="DD/MM/YY" />
+                                    <input type="text" name="fechaNac" id="datepickerFechaNac" required="true" placeholder="Seleccionar Fecha" />
                                 </div>
                                 <div class="res-factSingleInput">
                                     <label for="direccion">
@@ -162,7 +162,6 @@
             // Date Picker DE:
             const picker1 = MCDatepicker.create({
                 el: '#datepickerDe',
-                bodyType: 'inline',
                 dateFormat: 'dd-mmmm-yyyy',
                 minDate: new Date(),
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
@@ -185,12 +184,35 @@
             });
             let picker2;
             picker1.onSelect((date)=> { 
-            var myMin = new Date(date);
-            myMin.setDate(date.getDate() + 1);
-            picker2 = MCDatepicker.create({
+                var myMin = new Date(date);
+                myMin.setDate(date.getDate() + 1);
+                // Date Picker HASTA:
+                picker2 = MCDatepicker.create({
                 el: '#datepickerHasta',
-                bodyType: 'inline',
                 minDate: myMin,
+                dateFormat: 'dd-mmmm-yyyy',
+                customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                customMonths: [
+                      'Enero',
+                      'Febrero',
+                      'Marzo',
+                      'Abril',
+                      'Mayo',
+                      'Junio',
+                      'Julio',
+                      'Agosto',
+                      'Septiembre',
+                      'Octubre',
+                      'Noviembre',
+                      'Diciembre',
+                    ],
+                customClearBTN: "Borrar",
+                customCancelBTN: "Anular",
+            })
+        });
+        //  Date Picker FECHANAC:
+        const picker3 = MCDatepicker.create({
+                el: '#datepickerFechaNac',
                 dateFormat: 'dd-mmmm-yyyy',
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
@@ -209,10 +231,7 @@
                 ],
                 customClearBTN: "Borrar",
                 customCancelBTN: "Anular",
-            })
-        });
-//            Tests
-            
+            });
 
         </script>
     </body>
