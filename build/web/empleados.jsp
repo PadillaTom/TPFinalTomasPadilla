@@ -160,17 +160,19 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>TomasPadilla</td>
-                                <td>Password</td>
-                                <td>35161922</td>
-                                <td>Tomas</td>
-                                <td>Padilla</td>
-                                <td>26/09/1989</td>
-                                <td>288 Chemin de la Ramasse</td>
-                                <td>Jefe</td>
+                                <td>AdminHotel</td>
+                                <td>admin</td>
+                                <td>-</td>
+                                <td>Admin</td>
+                                <td>Hotel</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>Administrador Hotel</td>
                                 <td class="emp-tableIconsContainer">
+                                    <!-- 
                                     <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
                                     <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado"/>
+                                    -->
                                 </td>
                             </tr>
                             <tr>
