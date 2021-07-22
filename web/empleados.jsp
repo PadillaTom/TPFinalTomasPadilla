@@ -159,7 +159,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr style="background-color: #DCE9F9">
                                 <td>AdminHotel</td>
                                 <td>admin</td>
                                 <td>-</td>
