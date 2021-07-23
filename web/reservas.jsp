@@ -74,8 +74,8 @@
                             <div class="res-formInputsContainer">
                                 <div class="res-formInputsTop">  
                                     <div class="res-singleInput">
-                                        <label for="habitaciones">Habitacion </label>
-                                        <select class="res-select" name="habitaciones" id="res-habSelect" onchange="getHabitacion();" required="true">
+                                        <label for="res-habitacion">Habitacion </label>
+                                        <select class="res-select" name="res-habitacion" id="res-habSelect" onchange="getHabitacion();" required="true">
                                             <option value="single">Single Room</option>
                                             <option value="double">Double Room</option>
                                             <option value="triple">Triple Room</option>
@@ -84,7 +84,7 @@
                                     </div>                                
                                     <div class="res-singleInput">
                                         <label for="cantPers">Cantidad de Personas </label>
-                                        <select class="res-select" name="cantPers" required="true">
+                                        <select class="res-select" name="res-cantPers" required="true">
                                             <option value="1per" id="1per">1</option>
                                             <option value="2pre" id="2per">2</option>
                                             <option value="3per" id="3per">3</option>
@@ -102,8 +102,8 @@
                                         <p>Ingresar fechas de Check-in y Check-out.</p>
                                     </div> 
                                     <div class="datePickerBtnsContainer">
-                                        <input id="datepickerDe" type="text" class="datePickerBtn" placeholder="De" name="resFechaDe" required="true">
-                                        <input id="datepickerHasta" type="text" class="datePickerBtn" placeholder="Hasta" name="resFechaHasta" required="true" >
+                                        <input id="datepickerDe" type="text" class="datePickerBtn" placeholder="De" name="res-fechaDe" required="true">
+                                        <input id="datepickerHasta" type="text" class="datePickerBtn" placeholder="Hasta" name="res-fechaHasta" required="true" >
                                     </div>
                                 </div>
                             </div>
@@ -117,34 +117,40 @@
                             </div> 
                             <div class="res-formInputsContainer res-facturacionContainer">
                                 <div class="res-factSingleInput">
-                                    <label for="name">
+                                    <label for="hues-dni">
+                                        DNI:
+                                    </label>
+                                    <input type="text" name="hues-dni" required="true" />
+                                </div>
+                                <div class="res-factSingleInput">
+                                    <label for="hues-name">
                                         Nombre:
                                     </label>
-                                    <input type="text" name="name" required="true" />
+                                    <input type="text" name="hues-name" required="true" />
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="lastName">
+                                    <label for="hues-lastName">
                                         Apellido:
                                     </label>
-                                    <input type="text" name="lastName" required="true" />
+                                    <input type="text" name="hues-lastName" required="true" />
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="fechaNac">
+                                    <label for="hues-fechaNac">
                                         Fecha Nac:
                                     </label>
-                                    <input type="text" name="fechaNac" id="datepickerFechaNac" required="true" placeholder="Seleccionar Fecha" />
+                                    <input type="text" name="hues-fechaNac" id="datepickerFechaNac" required="true" placeholder="Seleccionar Fecha" />
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="direccion">
+                                    <label for="hues-direccion">
                                         Direccion:
                                     </label>
-                                    <input type="text" name="direccion" required="true"/>
+                                    <input type="text" name="hues-direccion" required="true"/>
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="profesion">
+                                    <label for="hues-profesion">
                                         Profesion:
                                     </label>
-                                    <input type="text" name="profesion" required="true" />
+                                    <input type="text" name="hues-profesion" required="true" />
                                 </div>
                             </div>
                         </div>
