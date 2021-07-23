@@ -487,3 +487,31 @@ a {
     cursor: pointer; 
 }
 
+/***************************** 
+**** Confirmacion Reserva ****
+******************************/
+.res-confirmacionInputsContainer{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -0.5rem;
+}
+.res-confSingleInput{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 57%;
+    font-size: 1.05rem;
+}
+.res-confSingleInput >label {
+    color: #282828;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+}
+.res-confSingleInput > span {
+    font-size: 1.1rem;
+    color: #000000;
+    letter-spacing: 0.5px;
+}
+
