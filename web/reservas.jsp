@@ -74,8 +74,8 @@
                             <div class="res-formInputsContainer">
                                 <div class="res-formInputsTop">  
                                     <div class="res-singleInput">
-                                        <label for="res-habitacion">Habitacion </label>
-                                        <select class="res-select" name="res-habitacion" id="res-habSelect" onchange="getHabitacion();" required="true">
+                                        <label for="res-tipoHabitacion">Habitacion </label>
+                                        <select class="res-select" name="res-tipoHabitacion" id="res-habSelect" onchange="getHabitacion();" required="true">
                                             <option value="single">Single Room</option>
                                             <option value="double">Double Room</option>
                                             <option value="triple">Triple Room</option>
