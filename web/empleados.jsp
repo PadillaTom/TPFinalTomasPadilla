@@ -74,7 +74,7 @@
                     
                 <!--*** Add Empleado ***-->
                 <div class="emp-addEmpHiddenForm" id="empForm">
-                    <form class="emp-addEmpForm" action="" method="POST" id="myEmpForm" >
+                    <form class="emp-addEmpForm" action="SvEmpleado" method="POST" id="myEmpForm" >
                         <div class="res-formCenter">
                             <div class="res-formSection">
                                 <div class="res-formTitle">
@@ -100,7 +100,7 @@
                                         <label for="empDni">
                                             DNI:
                                         </label>
-                                        <input type="text" name="empDNI" required="true" />
+                                        <input type="text" name="empDni" required="true" />
                                     </div>
                                     <div class="res-factSingleInput">
                                         <label for="empNombre">
@@ -190,14 +190,30 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>TomasPadilla</td>
-                                <td>Password</td>
-                                <td>35161922</td>
-                                <td>Tomas</td>
-                                <td>Padilla</td>
-                                <td>26/09/1989</td>
-                                <td>288 Chemin de la Ramasse</td>
-                                <td>Jefe</td>
+                                <td>
+                                    <%= session.getAttribute("empUsername") %>
+                                </td>
+                                <td>
+                                    <%= session.getAttribute("empPassword") %>
+                                </td>
+                                <td>
+                                    <%= session.getAttribute("empDni") %>
+                                </td>
+                                <td>
+                                    <%= session.getAttribute("empNombre") %>
+                                </td>
+                                <td>
+                                    <%= session.getAttribute("empApellido") %>
+                                </td>
+                                <td>
+                                    <%= session.getAttribute("empFechaNac") %>
+                                </td>
+                                <td>
+                                    <%= session.getAttribute("empDireccion") %>
+                                </td>
+                                <td>
+                                    <%= session.getAttribute("empCargo") %>
+                                </td>
                                 <td class="emp-tableIconsContainer">
                                     <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
                                     <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado" />

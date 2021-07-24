@@ -74,7 +74,7 @@
                                         Habitacion:
                                     </label>
                                     <span>
-                                        <%= "Habitacion Simple" %>
+                                        <%= session.getAttribute("resTipoHabitacion") %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -82,7 +82,7 @@
                                         Cant. Personas:
                                     </label>
                                     <span>
-                                        <%= "5 p." %>
+                                        <%= session.getAttribute("resCantPersonas") %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -90,7 +90,7 @@
                                         Check-In:
                                     </label>
                                     <span>
-                                        <%= "10/09/2021" %>
+                                        <%= session.getAttribute("resFechaDe") %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -98,7 +98,7 @@
                                         Check-Out:
                                     </label>
                                     <span>
-                                        <%= "15/09/2021" %>
+                                        <%= session.getAttribute("resFechaHasta") %>
                                     </span>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                         DNI:
                                     </label>
                                     <span>
-                                        <%= "35161922" %>
+                                        <%= session.getAttribute("huesDni") %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -124,7 +124,7 @@
                                         Nombre
                                     </label>
                                     <span>
-                                        <%= "Nom Hues" %>
+                                        <%= session.getAttribute("huesNombre") %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -132,7 +132,7 @@
                                         Apellido
                                     </label>
                                     <span>
-                                        <%= "Apellido Hues" %>
+                                        <%= session.getAttribute("huesApellido") %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -140,7 +140,7 @@
                                         Fecha Nac:
                                     </label>
                                     <span>
-                                        <%= "10/10/10" %>
+                                        <%= session.getAttribute("huesFechaNac") %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -148,7 +148,7 @@
                                         Direccion:
                                     </label>
                                     <span>
-                                        <%= "288 Chemin" %>
+                                        <%= session.getAttribute("huesDireccion") %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -156,7 +156,7 @@
                                         Profesion:
                                     </label>
                                     <span>
-                                        <%= "Profe" %>
+                                        <%= session.getAttribute("huesProfesion") %>
                                     </span>
                                 </div>
                             </div>

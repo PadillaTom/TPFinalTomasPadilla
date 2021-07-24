@@ -62,7 +62,7 @@
             
             <!--*** Formulario ***-->
             <div class="res-formContainer">
-                <form action="reservas.jsp" method="POST" id="myResForm">
+                <form action="SvReservas" method="POST" id="myResForm">
                     <div class="res-formCenter">
                         <div class="res-formSection">
                             <div class="res-formTitle">
@@ -83,14 +83,14 @@
                                         </select>
                                     </div>                                
                                     <div class="res-singleInput">
-                                        <label for="cantPers">Cantidad de Personas </label>
-                                        <select class="res-select" name="res-cantPers" required="true">
-                                            <option value="1per" id="1per">1</option>
-                                            <option value="2pre" id="2per">2</option>
-                                            <option value="3per" id="3per">3</option>
-                                            <option value="4per" id="4per">4</option>
-                                            <option value="5per" id="5per">5</option>
-                                            <option value="6per" id="6per">6</option>
+                                        <label for="res-cantPersonas">Cantidad de Personas </label>
+                                        <select class="res-select" name="res-cantPersonas" required="true">
+                                            <option value="1 p." id="1per">1</option>
+                                            <option value="2 p." id="2per">2</option>
+                                            <option value="3 p." id="3per">3</option>
+                                            <option value="4 p." id="4per">4</option>
+                                            <option value="5 p." id="5per">5</option>
+                                            <option value="6 p." id="6per">6</option>
                                         </select> 
                                     </div>
                                 </div>
@@ -123,16 +123,16 @@
                                     <input type="text" name="hues-dni" required="true" />
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="hues-name">
+                                    <label for="hues-nombre">
                                         Nombre:
                                     </label>
-                                    <input type="text" name="hues-name" required="true" />
+                                    <input type="text" name="hues-nombre" required="true" />
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="hues-lastName">
+                                    <label for="hues-apellido">
                                         Apellido:
                                     </label>
-                                    <input type="text" name="hues-lastName" required="true" />
+                                    <input type="text" name="hues-apellido" required="true" />
                                 </div>
                                 <div class="res-factSingleInput">
                                     <label for="hues-fechaNac">
