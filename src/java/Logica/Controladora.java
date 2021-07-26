@@ -5,7 +5,8 @@ public class Controladora {
 
     // ::: Habitaciones :::
         // =Crear Habitacion=
-            // Recibe de Servlet:
+            // Crear HC
+            // Recibe de Servlet: NADA
     
     // ::: Huespedes :::
         // =Buscar Huespedes=
@@ -32,4 +33,5 @@ public class Controladora {
             // Find Empleado por Inicio Sesion -> setEmpleado(Objeto);
     
         // =Buscar Reservas=
+    
 }

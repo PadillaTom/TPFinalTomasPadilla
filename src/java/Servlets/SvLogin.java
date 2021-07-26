@@ -28,8 +28,9 @@ public class SvLogin extends HttpServlet {
         
 //          *** REQ: User and Pass ***
             String username = request.getParameter("username");
-            String password = request.getParameter("password");            
-//          *** SET: Attributes de la request ***
+            String password = request.getParameter("password"); 
+            
+//          *** SET: HARDCODED ***
             request.getSession().setAttribute("username", username);
             request.getSession().setAttribute("password", password);
             

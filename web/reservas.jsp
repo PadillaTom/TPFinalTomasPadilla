@@ -76,10 +76,10 @@
                                     <div class="res-singleInput">
                                         <label for="res-tipoHabitacion">Habitacion </label>
                                         <select class="res-select" name="res-tipoHabitacion" id="res-habSelect" onchange="getHabitacion();" required="true">
-                                            <option value="single">Single Room</option>
-                                            <option value="double">Double Room</option>
-                                            <option value="triple">Triple Room</option>
-                                            <option value="multiple">Multiple Room</option>
+                                            <option value="single" >Single Room</option>
+                                            <option value="double" >Double Room</option>
+                                            <option value="triple" >Triple Room</option>
+                                            <option value="multiple" >Multiple Room</option>
                                         </select>
                                     </div>                                
                                     <div class="res-singleInput">

@@ -10,6 +10,9 @@ public class Empleado {
     Date fechaNacEmpleado;
     String direccionEmpleado;
     String cargoEmpleado;
+    
     // One Usuario;
+    
     // Many Reservas (ArrayList);
+    
 }

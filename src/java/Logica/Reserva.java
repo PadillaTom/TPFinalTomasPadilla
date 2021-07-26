@@ -8,7 +8,11 @@ public class Reserva {
     Date fechaHasta;
     int cantidadNoches;
     double precioTotal;
+    
     // One Huesped;
+    
     // One Empleado;
+    
     // Many Habitaciones (ArrayList);
+    
 }
