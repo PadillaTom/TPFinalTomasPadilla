@@ -1,5 +1,6 @@
 package Servlets;
 
+import Logica.Controladora;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,17 +36,9 @@ public class SvEmpleado extends HttpServlet {
         String empDireccion = request.getParameter("empDireccion");
         String empCargo = request.getParameter("empCargo");
         
-        // **** Set HC ****
-        request.getSession().setAttribute("empUsername", empUsername);
-        request.getSession().setAttribute("empPassword", empPassword);
-        request.getSession().setAttribute("empDni", empDni);
-        request.getSession().setAttribute("empNombre", empNombre);
-        request.getSession().setAttribute("empApellido", empApellido);
-        request.getSession().setAttribute("empFechaNac", empFechaNac);
-        request.getSession().setAttribute("empDireccion", empDireccion);
-        request.getSession().setAttribute("empCargo", empCargo);
-        
         // Controller:
+        Controladora myControladora = new Controladora();
+        myControladora.crearEmpleado(empUsername, empPassword, empDni, empNombre, empApellido, empFechaNac, empDireccion, empCargo);
         
         // Response:
         response.sendRedirect("empleados.jsp");

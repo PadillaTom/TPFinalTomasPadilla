@@ -1,10 +1,6 @@
-<%-- 
-    Document   : Empleados
-    Created on : 17 Jul 2021, 11:38:43
-    Author     : padillatom
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Logica.*, java.util.*, java.text.*" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -159,66 +155,76 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr style="background-color: #DCE9F9">
-                                <td>AdminHotel</td>
-                                <td>admin</td>
-                                <td>-</td>
-                                <td>Admin</td>
-                                <td>Hotel</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>Administrador Hotel</td>
-                                <td class="emp-tableIconsContainer">
-                                    <!-- 
-                                    <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
-                                    <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado"/>
-                                    -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>TomasPadilla</td>
-                                <td>Password</td>
-                                <td>35161922</td>
-                                <td>Tomas</td>
-                                <td>Padilla</td>
-                                <td>26/09/1989</td>
-                                <td>288 Chemin de la Ramasse</td>
-                                <td>Jefe</td>
-                                <td class="emp-tableIconsContainer">
-                                    <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
-                                    <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <%= session.getAttribute("empUsername") %>
-                                </td>
-                                <td>
-                                    <%= session.getAttribute("empPassword") %>
-                                </td>
-                                <td>
-                                    <%= session.getAttribute("empDni") %>
-                                </td>
-                                <td>
-                                    <%= session.getAttribute("empNombre") %>
-                                </td>
-                                <td>
-                                    <%= session.getAttribute("empApellido") %>
-                                </td>
-                                <td>
-                                    <%= session.getAttribute("empFechaNac") %>
-                                </td>
-                                <td>
-                                    <%= session.getAttribute("empDireccion") %>
-                                </td>
-                                <td>
-                                    <%= session.getAttribute("empCargo") %>
-                                </td>
-                                <td class="emp-tableIconsContainer">
-                                    <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
-                                    <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado" />
-                                </td>
-                            </tr>
+                            <!--*** CONSULTA EMPLEADOS ***-->
+                            <% 
+                                Controladora myContr = new Controladora();                                
+                                String datePattern = "dd/MM/yyyy";                                
+                                SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);                                 
+                                List<Empleado> empLista = myContr.traerEmpleados();
+                                for(Empleado emp : empLista) {
+                                    Date empDateBefore = emp.getFechaNacEmpleado();
+                                    String empDate = dateFormatter.format(empDateBefore);
+                                    if(emp.getId_empleado() == 1){                                        
+                            %>
+                                <tr style="background-color: #DCE9F9">
+                                    <td>
+                                        <%= emp.getEmpUsuario().getUsername() %>
+                                    </td>
+                                    <td>
+                                        <%= emp.getEmpUsuario().getPassword() %>
+                                    </td>
+                                    <td>
+                                        <%= emp.getDniEmpleado() %>
+                                    </td>
+                                    <td>
+                                        <%= emp.getNombreEmpleado() %>
+                                    </td>
+                                    <td>
+                                        <%= emp.getApellidoEmpleado() %>
+                                    </td>
+                                    <td>
+                                        <%= empDate %>
+                                    </td>
+                                    <td>
+                                        <%= emp.getDireccionEmpleado() %>
+                                    </td>
+                                    <td>
+                                        <%= emp.getCargoEmpleado() %>
+                                    </td>
+                                    <td class="emp-tableIconsContainer">
+                                    </td>
+                                </tr>
+                                <% } else {%>
+                                    <tr>
+                                        <td>
+                                            <%= emp.getEmpUsuario().getUsername() %>
+                                        </td>
+                                        <td>
+                                            <%= emp.getEmpUsuario().getPassword() %>
+                                        </td>
+                                        <td><%= emp.getDniEmpleado() %></td>
+                                        <td>
+                                            <%= emp.getNombreEmpleado() %>
+                                        </td>
+                                        <td>
+                                            <%= emp.getApellidoEmpleado() %>
+                                        </td>
+                                        <td>
+                                            <%= empDate %>
+                                        </td>
+                                        <td>
+                                            <%= emp.getDireccionEmpleado() %>
+                                        </td>
+                                        <td>
+                                            <%= emp.getCargoEmpleado() %>
+                                        </td>
+                                        <td class="emp-tableIconsContainer">
+                                            <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
+                                            <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado"/>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
