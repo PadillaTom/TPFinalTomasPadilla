@@ -29,6 +29,9 @@ public class ControladoraPersistencia {
         empJPA.create(emp);
     }
     // Find:
+    public Empleado primerEmppleado(){
+        return empJPA.findEmpleado(1);
+    }
     public List<Empleado> traerEmpleados(){
         return empJPA.findEmpleadoEntities();
     }
@@ -75,8 +78,7 @@ public class ControladoraPersistencia {
     // Alta:
     public void altaUsuario(Usuario usu){
         usuJPA.create(usu);
-    }
-    
+    }  
     
     
 }

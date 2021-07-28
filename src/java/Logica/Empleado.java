@@ -34,7 +34,7 @@ public class Empleado implements Serializable {
     String cargoEmpleado;
     
     // One Usuario:
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     Usuario empUsuario;
     
     // Tiene Many Reservas (ArrayList):

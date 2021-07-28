@@ -515,3 +515,16 @@ a {
     letter-spacing: 0.5px;
 }
 
+/***************************** 
+******** Consultas  ********
+******************************/
+.cons-filterMenu{
+    width: 90%;
+    margin: 0 auto;
+    color: red;
+}
+.cons-filterMenu > ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

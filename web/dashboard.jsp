@@ -1,10 +1,5 @@
-<%-- 
-    Document   : pagina2
-    Created on : 16 Jul 2021, 11:42:16
-    Author     : padillatom
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Logica.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,7 +53,7 @@
             <!--*** Welcome Section ***-->
             <div class="hab-welcomeSect">
                 <h1>
-                    Bienvenido: <span> <%= session.getAttribute("username") %> </span>
+                    Bienvenido: <span>  <%= session.getAttribute("usuUsername") %> </span>
                 </h1>
             </div>
             

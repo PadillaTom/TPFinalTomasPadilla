@@ -23,6 +23,8 @@ public class Reserva implements Serializable {
     Date fechaDe;
     @Temporal(javax.persistence.TemporalType.DATE)
     Date fechaHasta;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date fechaDeCarga;
     int cantidadNoches;
     double precioTotal;
     

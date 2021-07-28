@@ -18,7 +18,10 @@ public class Usuario implements Serializable {
     String username;
     String password;
 
+    
+    
     public Usuario() {
+        
     }
 
     public Usuario(int id_usuario, String username, String password) {

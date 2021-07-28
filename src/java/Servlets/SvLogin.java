@@ -1,5 +1,6 @@
 package Servlets;
 
+import Logica.Controladora;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,16 +27,18 @@ public class SvLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException { 
         
-//          *** REQ: User and Pass ***
-            String username = request.getParameter("username");
-            String password = request.getParameter("password"); 
+            // Tomar Data:
+            String usuUsername = request.getParameter("username");
+            String usuPassword = request.getParameter("password"); 
             
-//          *** SET: HARDCODED ***
-            request.getSession().setAttribute("username", username);
-            request.getSession().setAttribute("password", password);
+            // Send to Dashboard:
+            request.getSession().setAttribute("usuUsername", usuUsername);
+            
+            // Controladora:
+            Controladora myContr = new Controladora();
             
 //          *** Redirect ***
-            response.sendRedirect("dashboard.jsp");   
+            response.sendRedirect("dashboard.jsp");  
             
     }
     

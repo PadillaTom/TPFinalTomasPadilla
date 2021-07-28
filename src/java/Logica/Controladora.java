@@ -35,6 +35,13 @@ public class Controladora {
     }
     
     //::::::::::::::::::::::::
+    //::::::: Usuario ::::::
+    //::::::::::::::::::::::::
+    
+    // =Find Usuario by Username=
+     // Find all Usuarios, Tratarlos como LIST para getUsername() y compararlos. if Match  .getId_Usuario();
+    
+    //::::::::::::::::::::::::
     //:::::: Huespedes :::::::
     //::::::::::::::::::::::::
         // =Buscar Huespedes=
@@ -98,7 +105,10 @@ public class Controladora {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    // =Traer Primer Empleado=
+    public Empleado primerEmpleado(){
+        return myCP.primerEmppleado();
+    }
     // =Traer Empleados=
     public List<Empleado> traerEmpleados(){
         return myCP.traerEmpleados();

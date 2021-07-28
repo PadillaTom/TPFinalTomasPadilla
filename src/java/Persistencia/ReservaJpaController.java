@@ -21,11 +21,11 @@ public class ReservaJpaController implements Serializable {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-    
+
+   
     public ReservaJpaController() {
         emf = Persistence.createEntityManagerFactory("TPFinalTomasPadillaPU");
     }
-
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }

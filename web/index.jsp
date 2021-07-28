@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Logica.*, java.util.*" %>
+<%@page import="Logica.*, java.util.*, java.sql.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,17 +36,14 @@
                 
             </div>
         </section>
-    <%
+        <%
             Controladora myContr = new Controladora();
-            List<Habitacion> habLista = myContr.traerHabitaciones();
-            
-            if(habLista.size() == 4){
-                return;
-            } else {
-                myContr.crearHabitaciones();
+            if(myContr.primerEmpleado() == null) {
                 myContr.altaPrimerEmpleado();
+                myContr.crearHabitaciones();
+            } else {
+                return;
             }
-            
-    %>
+        %>
     </body>
 </html>

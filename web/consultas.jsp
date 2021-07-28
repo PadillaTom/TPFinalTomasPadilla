@@ -57,6 +57,22 @@
             <h1 class="section-title">
                 Consultas
             </h1>
+            <div class="cons-filterMenu">
+                <ul>
+                    <li>
+                        Res. por Fecha
+                    </li>
+                    <li>
+                        Res. por Empleado
+                    </li>
+                    <li>
+                        Lista Huespedes
+                    </li>
+                    <li>
+                        Res. por Huesped y Fechas
+                    </li>
+                </ul>
+            </div>
         </section>
     </body>
 </html>
