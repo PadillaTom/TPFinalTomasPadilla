@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SvEmpleado", urlPatterns = {"/SvEmpleado"})
-public class SvEmpleado extends HttpServlet {
+@WebServlet(name = "SvUsuario", urlPatterns = {"/SvUsuario"})
+public class SvUsuario extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,7 +38,7 @@ public class SvEmpleado extends HttpServlet {
         
         // Controller:
         Controladora myControladora = new Controladora();
-        myControladora.crearEmpleado(empUsername, empPassword, empDni, empNombre, empApellido, empFechaNac, empDireccion, empCargo);
+        myControladora.altaUsuario(empUsername, empPassword, empDni, empNombre, empApellido, empFechaNac, empDireccion, empCargo);
         
         // Response:
         response.sendRedirect("empleados.jsp");

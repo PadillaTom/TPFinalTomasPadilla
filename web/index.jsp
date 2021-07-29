@@ -11,8 +11,8 @@
     <body>
                 <%
             Controladora myContr = new Controladora();
-            if(myContr.primerEmpleado() == null) {
-                myContr.altaPrimerEmpleado();
+            if(myContr.primerUsuario() == null) {
+                myContr.altaPrimerUsuario();
                 myContr.crearHabitaciones();
             } 
         %>

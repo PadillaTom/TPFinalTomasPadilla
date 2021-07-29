@@ -14,8 +14,7 @@ public class Controladora {
     
     //::::::::::::::::::::::::
     //:::::::: Log In ::::::::
-    //::::::::::::::::::::::::
-    
+    //::::::::::::::::::::::::    
     public boolean verificarLogin(String usuUsuario, String usuPassword){
         List<Usuario> listaUsuarios = myCP.traerUsuarios();
         if(listaUsuarios != null) {
@@ -30,7 +29,7 @@ public class Controladora {
     
     //::::::::::::::::::::::::
     //::::: Habitaciones :::::
-    //::::::::::::::::::::::::
+    //::::::::::::::::::::::::   
     
     // =Crear Habitacion=
     public void crearHabitaciones() {
@@ -43,8 +42,7 @@ public class Controladora {
         myCP.altaHabitacion(myHab2);
         myCP.altaHabitacion(myHab3);
         myCP.altaHabitacion(myHab4);
-    }
-    
+    }    
     // =Traer Habitacion=
     public List<Habitacion> traerHabitaciones(){
         return myCP.traerHabitaciones();
@@ -54,6 +52,71 @@ public class Controladora {
     //::::::: Usuario ::::::
     //::::::::::::::::::::::::
     
+    // =Crear Primer Usuario=
+    public void altaPrimerUsuario(){       
+        try {
+            Empleado myEmp = new Empleado();
+            Usuario myUsu = new Usuario();
+            
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date empFecha = formatter.parse("01-01-2021");
+            
+            myEmp.setId_empleado(1);
+            myEmp.setDniEmpleado("-");
+            myEmp.setNombreEmpleado("Admin Hotel");
+            myEmp.setApellidoEmpleado("Admin Hotel");
+            myEmp.setFechaNacEmpleado(empFecha);
+            myEmp.setDireccionEmpleado("-");
+            myEmp.setCargoEmpleado("Admin App");
+            
+            myUsu.setId_usuario(1);
+            myUsu.setUsername("AdminHotel");
+            myUsu.setPassword("admin");
+            myUsu.setUsuEmpleado(myEmp);
+            
+            myCP.altaUsuario(myUsu);
+        } catch (ParseException ex) {
+            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }  
+    
+    public void altaUsuario(String empUsername, String empPassword, String empDni, String empNombre, String empApellido, String empFechaNac, String empDireccion, String empCargo){
+        try {
+            // Instanciamos:
+            Empleado myEmp = new Empleado();
+            Usuario myUsu = new Usuario();
+            
+            // String to Date:
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+            Date empFecha = formatter.parse(empFechaNac);
+            
+            // Creamos:
+            
+            myEmp.setDniEmpleado(empDni);
+            myEmp.setNombreEmpleado(empNombre);
+            myEmp.setApellidoEmpleado(empApellido);
+            myEmp.setFechaNacEmpleado(empFecha);
+            myEmp.setDireccionEmpleado(empDireccion);
+            myEmp.setCargoEmpleado(empCargo);
+            
+            myUsu.setUsername(empUsername);
+            myUsu.setPassword(empPassword);
+            myUsu.setUsuEmpleado(myEmp);
+            
+            // Metodos:
+            myCP.altaUsuario(myUsu);
+        } catch (ParseException ex) {
+            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    // Find:
+    public Usuario primerUsuario(){
+        return myCP.primerUsuario();
+    }
+    public List<Usuario> traerUsuarios(){
+        return myCP.traerUsuarios();
+    }
+
     // =Find Usuario by Username=
      // Find all Usuarios, Tratarlos como LIST para getUsername() y compararlos. if Match  .getId_Usuario();
     
@@ -66,65 +129,6 @@ public class Controladora {
     //::::::: Empleados ::::::
     //::::::::::::::::::::::::
     
-    // =Crear Empleado=
-    public void altaPrimerEmpleado() {
-        try {
-            Empleado myEmp = new Empleado();
-            Usuario myUsu = new Usuario();
-            
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            Date empFecha = formatter.parse("01-01-2021");
-            
-            myUsu.setId_usuario(1);
-            myUsu.setUsername("AdminHotel");
-            myUsu.setPassword("admin");
-            myEmp.setId_empleado(1);
-            myEmp.setDniEmpleado("-");
-            myEmp.setNombreEmpleado("Admin Hotel");
-            myEmp.setApellidoEmpleado("Admin Hotel");
-            myEmp.setFechaNacEmpleado(empFecha);
-            myEmp.setDireccionEmpleado("-");
-            myEmp.setCargoEmpleado("Admin App");
-            myEmp.setEmpUsuario(myUsu);
-            
-            myCP.altaEmpleado(myEmp);
-        } catch (ParseException ex) {
-            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    public void crearEmpleado(String empUsername, String empPassword, String empDni, String empNombre, String empApellido, String empFechaNac, String empDireccion, String empCargo){
-        try {
-            // Instanciamos:
-            Empleado myEmp = new Empleado();
-            Usuario myUsu = new Usuario();
-            
-            // String to Date:
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
-            Date empFecha = formatter.parse(empFechaNac);
-            
-            // Creamos:
-            myUsu.setUsername(empUsername);
-            myUsu.setPassword(empPassword);
-            myEmp.setDniEmpleado(empDni);
-            myEmp.setNombreEmpleado(empNombre);
-            myEmp.setApellidoEmpleado(empApellido);
-            myEmp.setFechaNacEmpleado(empFecha);
-            myEmp.setDireccionEmpleado(empDireccion);
-            myEmp.setCargoEmpleado(empCargo);
-            myEmp.setEmpUsuario(myUsu);
-            
-            // Metodos:
-            myCP.altaEmpleado(myEmp);
-        } catch (ParseException ex) {
-            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    // =Traer Primer Empleado=
-    public Empleado primerEmpleado(){
-        return myCP.primerEmppleado();
-    }
     // =Traer Empleados=
     public List<Empleado> traerEmpleados(){
         return myCP.traerEmpleados();
@@ -133,29 +137,29 @@ public class Controladora {
     //::::::::::::::::::::::::
     //::::::: Reservas :::::::
     //::::::::::::::::::::::::
-        public void crearReserva(String resTipoHabitacion, String resCantPersonas, String resFechaDe, String resFechaHasta, String huesDni, String huesNombre, String huesApellido, String huesFechaNac, String huesDireccion, String huesProfesion){
+    public void crearReserva(String resTipoHabitacion, String resCantPersonas, String resFechaDe, String resFechaHasta, String huesDni, String huesNombre, String huesApellido, String huesFechaNac, String huesDireccion, String huesProfesion){
         try {
             // Instancias:
             Reserva myRes = new Reserva();
             Huesped myHues = new Huesped();
-            
+
             // String to Date:
             SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
             Date resCheckin = formatter.parse(resFechaDe);
             Date resCheckout = formatter.parse(resFechaHasta);
             Date huesFecha = formatter.parse(huesFechaNac);
             Date resFechaAlta = new Date();
-            
+
             // Cantidad Noches:
             long nochesTime = resCheckout.getTime() - resCheckin.getTime();
             int cantidadNoches = (int) Math.floor(nochesTime / (1000*60*60*24));
-            
+
             // Find Habitacion por ID y Precio Total:
             int myHabId = Integer.parseInt(resTipoHabitacion);
             Habitacion myHab = myCP.traerHabitacionPorId(myHabId);
             double myHabPrecio = myHab.getPrecioPorNoche();
             double precioTotal = myHabPrecio * cantidadNoches;
-            
+
             // Find Huesped o Crearlo:
             myHues.setDniHuesped(huesDni);
             myHues.setNombreHuesped(huesNombre);
@@ -164,10 +168,10 @@ public class Controladora {
             myHues.setDireccionHuesped(huesDireccion);
             myHues.setProfesionHuesped(huesProfesion);
             myCP.altaHuesped(myHues);
-            
+
             // Find Usuario :
             Usuario myUsu = myCP.traerUsuarioPorId(1);
-            
+
             // Creamos Reserva:
             myRes.setResHuesped(myHues);
             myRes.setCantidadNoches(cantidadNoches);
@@ -177,15 +181,14 @@ public class Controladora {
             myRes.setPrecioTotal(precioTotal);
             myRes.setResHabitacion(myHab);
             myRes.setResUsuario(myUsu);
-            
-            
+
+
             myCP.altaReserva(myRes);
-            
+
         } catch (ParseException ex) {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        }
-        // =Buscar Reservas=
+    }
+    // =Buscar Reservas=
     
 }

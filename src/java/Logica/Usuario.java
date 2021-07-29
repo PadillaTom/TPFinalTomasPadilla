@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Usuario implements Serializable {
@@ -21,6 +23,9 @@ public class Usuario implements Serializable {
     String username;
     String password;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    Empleado usuEmpleado;
+    
     @OneToMany
     List<Reserva> usuReserva = new ArrayList<>();
     
@@ -28,10 +33,11 @@ public class Usuario implements Serializable {
         
     }
 
-    public Usuario(int id_usuario, String username, String password) {
+    public Usuario(int id_usuario, String username, String password, Empleado usuEmpleado) {
         this.id_usuario = id_usuario;
         this.username = username;
         this.password = password;
+        this.usuEmpleado = usuEmpleado;
     }
 
     public int getId_usuario() {
@@ -64,6 +70,14 @@ public class Usuario implements Serializable {
 
     public void setUsuReserva(List<Reserva> usuReserva) {
         this.usuReserva = usuReserva;
+    }
+
+    public Empleado getUsuEmpleado() {
+        return usuEmpleado;
+    }
+
+    public void setUsuEmpleado(Empleado usuEmpleado) {
+        this.usuEmpleado = usuEmpleado;
     }
     
     

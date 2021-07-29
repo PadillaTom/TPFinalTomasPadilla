@@ -77,7 +77,7 @@
                     
                 <!--*** Add Empleado ***-->
                 <div class="emp-addEmpHiddenForm" id="empForm">
-                    <form class="emp-addEmpForm" action="SvEmpleado" method="POST" id="myEmpForm" >
+                    <form class="emp-addEmpForm" action="SvUsuario" method="POST" id="myEmpForm" >
                         <div class="res-formCenter">
                             <div class="res-formSection">
                                 <div class="res-formTitle">
@@ -167,36 +167,36 @@
                                 Controladora myContr = new Controladora();                                
                                 String datePattern = "dd/MM/yyyy";                                
                                 SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);                                 
-                                List<Empleado> empLista = myContr.traerEmpleados();
-                                for(Empleado emp : empLista) {
-                                    Date empDateBefore = emp.getFechaNacEmpleado();
-                                    String empDate = dateFormatter.format(empDateBefore);
-                                    if(emp.getId_empleado() == 1){                                        
+                                List<Usuario> usuLista = myContr.traerUsuarios();
+                                for(Usuario usu : usuLista) {
+                                    Date usuDateBefore = usu.getUsuEmpleado().getFechaNacEmpleado();
+                                    String usuDate = dateFormatter.format(usuDateBefore);
+                                    if(usu.getId_usuario() == 1){                                        
                             %>
                                 <tr style="background-color: #DCE9F9">
                                     <td>
-                                        <%= emp.getEmpUsuario().getUsername() %>
+                                        <%= usu.getUsername() %>
                                     </td>
                                     <td>
-                                        <%= emp.getEmpUsuario().getPassword() %>
+                                        <%= usu.getPassword() %>
                                     </td>
                                     <td>
-                                        <%= emp.getDniEmpleado() %>
+                                        <%= usu.getUsuEmpleado().getDniEmpleado() %>
                                     </td>
                                     <td>
-                                        <%= emp.getNombreEmpleado() %>
+                                        <%= usu.getUsuEmpleado().getNombreEmpleado() %>
                                     </td>
                                     <td>
-                                        <%= emp.getApellidoEmpleado() %>
+                                        <%= usu.getUsuEmpleado().getApellidoEmpleado() %>
                                     </td>
                                     <td>
-                                        <%= empDate %>
+                                        <%= usuDate %>
                                     </td>
                                     <td>
-                                        <%= emp.getDireccionEmpleado() %>
+                                        <%= usu.getUsuEmpleado().getDireccionEmpleado() %>
                                     </td>
                                     <td>
-                                        <%= emp.getCargoEmpleado() %>
+                                        <%= usu.getUsuEmpleado().getCargoEmpleado() %>
                                     </td>
                                     <td class="emp-tableIconsContainer">
                                     </td>
@@ -204,26 +204,26 @@
                                 <% } else {%>
                                     <tr>
                                         <td>
-                                            <%= emp.getEmpUsuario().getUsername() %>
+                                            <%= usu.getUsername() %>
                                         </td>
                                         <td>
-                                            <%= emp.getEmpUsuario().getPassword() %>
+                                            <%= usu.getPassword() %>
                                         </td>
-                                        <td><%= emp.getDniEmpleado() %></td>
+                                        <td><%= usu.getUsuEmpleado().getDniEmpleado() %></td>
                                         <td>
-                                            <%= emp.getNombreEmpleado() %>
-                                        </td>
-                                        <td>
-                                            <%= emp.getApellidoEmpleado() %>
+                                            <%= usu.getUsuEmpleado().getNombreEmpleado() %>
                                         </td>
                                         <td>
-                                            <%= empDate %>
+                                            <%= usu.getUsuEmpleado().getApellidoEmpleado() %>
                                         </td>
                                         <td>
-                                            <%= emp.getDireccionEmpleado() %>
+                                            <%= usuDate %>
                                         </td>
                                         <td>
-                                            <%= emp.getCargoEmpleado() %>
+                                            <%= usu.getUsuEmpleado().getDireccionEmpleado() %>
+                                        </td>
+                                        <td>
+                                            <%= usu.getUsuEmpleado().getCargoEmpleado() %>
                                         </td>
                                         <td class="emp-tableIconsContainer">
                                             <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>

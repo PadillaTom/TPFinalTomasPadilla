@@ -3,12 +3,10 @@ package Logica;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 @Entity
@@ -30,15 +28,12 @@ public class Empleado implements Serializable {
     String direccionEmpleado;
     String cargoEmpleado;
     
-    // One Usuario:
-    @OneToOne(cascade = CascadeType.ALL)
-    Usuario empUsuario;
-    
+      
 
     public Empleado() {
     }
 
-    public Empleado(int id_empleado, String dniEmpleado, String nombreEmpleado, String apellidoEmpleado, Date fechaNacEmpleado, String direccionEmpleado, String cargoEmpleado, Usuario empUsuario) {
+    public Empleado(int id_empleado, String dniEmpleado, String nombreEmpleado, String apellidoEmpleado, Date fechaNacEmpleado, String direccionEmpleado, String cargoEmpleado) {
         this.id_empleado = id_empleado;
         this.dniEmpleado = dniEmpleado;
         this.nombreEmpleado = nombreEmpleado;
@@ -46,7 +41,6 @@ public class Empleado implements Serializable {
         this.fechaNacEmpleado = fechaNacEmpleado;
         this.direccionEmpleado = direccionEmpleado;
         this.cargoEmpleado = cargoEmpleado;
-        this.empUsuario = empUsuario;
     }
 
     public int getId_empleado() {
@@ -103,14 +97,6 @@ public class Empleado implements Serializable {
 
     public void setCargoEmpleado(String cargoEmpleado) {
         this.cargoEmpleado = cargoEmpleado;
-    }
-
-    public Usuario getEmpUsuario() {
-        return empUsuario;
-    }
-
-    public void setEmpUsuario(Usuario empUsuario) {
-        this.empUsuario = empUsuario;
     }
 
 }
