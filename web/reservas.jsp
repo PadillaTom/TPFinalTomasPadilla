@@ -45,8 +45,8 @@
                                 Empleados
                             </a>
                         </li>
-                        <li class="nav-singleLink">
-                            <a href="index.jsp">
+                        <li class="nav-singleLink singleLink-logout">
+                            <a href="SvLogout">
                                 Cerrar Sesión
                             </a>
                         </li>

@@ -32,16 +32,16 @@
                             </div>
                         </div>
                     </form>
+                    <div class="login-errorMsg">
                     <%
                         String msg = (String) session.getAttribute("errorMsg");
                         if(msg != null){
                     %>
-                    <div class="login-errorMsg">
                         <%= msg %>
-                    </div>
                      <%
                          }
                      %>
+                    </div>
                 </div>
             </div>
         </section>

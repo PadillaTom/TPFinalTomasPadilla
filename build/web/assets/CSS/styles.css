@@ -102,7 +102,7 @@ a {
 .login-errorMsg {
     color: red;
     letter-spacing: 1px;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     text-align: center;
 }
 .login-formContainer > form {
@@ -191,6 +191,11 @@ a {
 .nav-singleLink {
     margin-left: 1rem;
     letter-spacing: 0.85px;
+    font-size: 1rem;
+}
+.singleLink-logout{
+    color: black;
+    font-weight: bold;
 }
 .nav-linkActivo {
     color: var(--ColorBlue);
@@ -203,8 +208,8 @@ a {
 .hab-welcomeSect {
     text-align: center;
     font-size: 0.85rem;
-    padding-top: 1rem;    
-    margin-bottom: 4rem;
+    padding-top: 2rem;    
+    margin-bottom: 2rem;
     letter-spacing: 1.1px;
 }
 .hab-welcomeSect > h1 > span {
@@ -413,8 +418,8 @@ a {
 .emp-currentSession{
     text-align: center;
     font-size: 0.85rem;
-    padding-top: 1rem;    
-    margin-bottom: 1rem;
+    padding-top: 1.5rem;    
+    margin-bottom: 2rem;
     letter-spacing: 1.1px;
 }
 .emp-currentSession > h1 > span {

@@ -44,8 +44,8 @@
                                 Empleados
                             </a>
                         </li>
-                        <li class="nav-singleLink">
-                            <a href="index.jsp">
+                        <li class="nav-singleLink singleLink-logout">
+                            <a href="SvLogout">
                                 Cerrar Sesión
                             </a>
                         </li>
@@ -63,8 +63,8 @@
                     Bienvenido: <span>  <%= myUsu %> </span>
                 </h1>
             </div>
+            <div class="section-title-underline"></div>
             
-                
             <!--*** Titulo ***-->
             <h1 class="section-title">
                 Habitaciones
