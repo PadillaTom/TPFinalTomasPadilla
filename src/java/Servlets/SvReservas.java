@@ -1,7 +1,7 @@
 package Servlets;
 
+import Logica.Controladora;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -39,7 +39,7 @@ public class SvReservas extends HttpServlet {
         String huesProfesion = request.getParameter("hues-profesion");
         
         //  **** Mandarla a Confirm: HARDCODED ****
-        request.getSession().setAttribute("resTipoHabitacion", resTipoHabitacion.substring(0, 1).toUpperCase()+ resTipoHabitacion.substring(1));
+        request.getSession().setAttribute("resTipoHabitacion", resTipoHabitacion);
         request.getSession().setAttribute("resCantPersonas", resCantPersonas);
         request.getSession().setAttribute("resFechaDe", resFechaDe);
         request.getSession().setAttribute("resFechaHasta", resFechaHasta);
@@ -51,6 +51,9 @@ public class SvReservas extends HttpServlet {
         request.getSession().setAttribute("huesProfesion", huesProfesion.substring(0, 1).toUpperCase()+ huesProfesion.substring(1));       
         
         // Controladora:
+        Controladora myContr = new Controladora();
+        myContr.crearReserva(resTipoHabitacion, resCantPersonas, resFechaDe, resFechaHasta, huesDni, huesNombre, huesApellido, huesFechaNac, huesDireccion, huesProfesion);
+        
         
         // Response:
         response.sendRedirect("confirmacionReserva.jsp");

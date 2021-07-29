@@ -3,6 +3,7 @@ package Logica;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,11 +26,12 @@ public class Reserva implements Serializable {
     Date fechaHasta;
     @Temporal(javax.persistence.TemporalType.DATE)
     Date fechaDeCarga;
+    int cantidadPersonas;
     int cantidadNoches;
     double precioTotal;
     
     // One Huesped:
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     Huesped resHuesped;
     
     // ManyToOne Empleados:
@@ -43,17 +45,20 @@ public class Reserva implements Serializable {
     public Reserva() {
     }
 
-    public Reserva(int id_reserva, Date fechaDe, Date fechaHasta, Date fechaDeCarga, int cantidadNoches, double precioTotal, Huesped resHuesped, Usuario resUsuario, Habitacion resHabitacion) {
+    public Reserva(int id_reserva, Date fechaDe, Date fechaHasta, Date fechaDeCarga, int cantidadPersonas, int cantidadNoches, double precioTotal, Huesped resHuesped, Usuario resUsuario, Habitacion resHabitacion) {
         this.id_reserva = id_reserva;
         this.fechaDe = fechaDe;
         this.fechaHasta = fechaHasta;
         this.fechaDeCarga = fechaDeCarga;
+        this.cantidadPersonas = cantidadPersonas;
         this.cantidadNoches = cantidadNoches;
         this.precioTotal = precioTotal;
         this.resHuesped = resHuesped;
         this.resUsuario = resUsuario;
         this.resHabitacion = resHabitacion;
     }
+
+
 
 
 
@@ -128,5 +133,14 @@ public class Reserva implements Serializable {
     public void setResHabitacion(Habitacion resHabitacion) {
         this.resHabitacion = resHabitacion;
     }
+
+    public int getCantidadPersonas() {
+        return cantidadPersonas;
+    }
+
+    public void setCantidadPersonas(int cantidadPersonas) {
+        this.cantidadPersonas = cantidadPersonas;
+    }
+    
     
 }

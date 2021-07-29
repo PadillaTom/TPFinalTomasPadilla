@@ -9,6 +9,13 @@
     </head>
     
     <body>
+                <%
+            Controladora myContr = new Controladora();
+            if(myContr.primerEmpleado() == null) {
+                myContr.altaPrimerEmpleado();
+                myContr.crearHabitaciones();
+            } 
+        %>
         <!--*** HOMEPAGE ***-->
         <section class="section login-sect">
             <div class="loginElements-center">
@@ -45,14 +52,6 @@
                 </div>
             </div>
         </section>
-        <%
-            Controladora myContr = new Controladora();
-            if(myContr.primerEmpleado() == null) {
-                myContr.altaPrimerEmpleado();
-                myContr.crearHabitaciones();
-            } else {
-                return;
-            }
-        %>
+
     </body>
 </html>

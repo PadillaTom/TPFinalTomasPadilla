@@ -5,8 +5,8 @@
     <class>Logica.Habitacion</class>
     <class>Logica.Huesped</class>
     <class>Logica.Empleado</class>
-    <class>Logica.Reserva</class>
     <class>Logica.Usuario</class>
+    <class>Logica.Reserva</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:8889/tpfinal_db?serverTimezone=UTC"/>

@@ -133,16 +133,59 @@ public class Controladora {
     //::::::::::::::::::::::::
     //::::::: Reservas :::::::
     //::::::::::::::::::::::::
-        // =Crear Reservas=
-            // Recibe de Servlet: 
-                // res-tipoHabitacion, res-cantPersonas, res-fechaDe, res-fechaHasta
-                // hues-huesDni, hues-huesNombre, hues-huesApellido, hues-huesFechaNac, hues-huesDireccion, hues-huesProfesion
-            // String to Date
-            // Calcular Noches
-            // Find Habitacion por res-tipoHabitacion -> setHabitacion(Objeto);
-            // Find Huesped por hues-huesDni  IFNOT new Huesped() -> setHuesped(Objeto);
-            // Find Empleado por Inicio Sesion -> setEmpleado(Objeto);
-    
+        public void crearReserva(String resTipoHabitacion, String resCantPersonas, String resFechaDe, String resFechaHasta, String huesDni, String huesNombre, String huesApellido, String huesFechaNac, String huesDireccion, String huesProfesion){
+        try {
+            // Instancias:
+            Reserva myRes = new Reserva();
+            Huesped myHues = new Huesped();
+            
+            // String to Date:
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+            Date resCheckin = formatter.parse(resFechaDe);
+            Date resCheckout = formatter.parse(resFechaHasta);
+            Date huesFecha = formatter.parse(huesFechaNac);
+            Date resFechaAlta = new Date();
+            
+            // Cantidad Noches:
+            long nochesTime = resCheckout.getTime() - resCheckin.getTime();
+            int cantidadNoches = (int) Math.floor(nochesTime / (1000*60*60*24));
+            
+            // Find Habitacion por ID y Precio Total:
+            int myHabId = Integer.parseInt(resTipoHabitacion);
+            Habitacion myHab = myCP.traerHabitacionPorId(myHabId);
+            double myHabPrecio = myHab.getPrecioPorNoche();
+            double precioTotal = myHabPrecio * cantidadNoches;
+            
+            // Find Huesped o Crearlo:
+            myHues.setDniHuesped(huesDni);
+            myHues.setNombreHuesped(huesNombre);
+            myHues.setApellidoHuesped(huesApellido);
+            myHues.setFechaNacHuesped(huesFecha);
+            myHues.setDireccionHuesped(huesDireccion);
+            myHues.setProfesionHuesped(huesProfesion);
+            myCP.altaHuesped(myHues);
+            
+            // Find Usuario :
+            Usuario myUsu = myCP.traerUsuarioPorId(1);
+            
+            // Creamos Reserva:
+            myRes.setResHuesped(myHues);
+            myRes.setCantidadNoches(cantidadNoches);
+            myRes.setFechaDe(resCheckin);
+            myRes.setFechaHasta(resCheckout);
+            myRes.setFechaDeCarga(resFechaAlta);
+            myRes.setPrecioTotal(precioTotal);
+            myRes.setResHabitacion(myHab);
+            myRes.setResUsuario(myUsu);
+            
+            
+            myCP.altaReserva(myRes);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        }
         // =Buscar Reservas=
     
 }

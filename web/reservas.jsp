@@ -14,7 +14,7 @@
         String myUsu = (String)mySess.getAttribute("usuUsername");
         if(myUsu == null){
             response.sendRedirect("index.jsp");
-        } else {
+        } 
     %>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">
@@ -77,21 +77,21 @@
                                     <div class="res-singleInput">
                                         <label for="res-tipoHabitacion">Habitacion </label>
                                         <select class="res-select" name="res-tipoHabitacion" id="res-habSelect" onchange="getHabitacion();" required="true">
-                                            <option value="single" >Single Room</option>
-                                            <option value="double" >Double Room</option>
-                                            <option value="triple" >Triple Room</option>
-                                            <option value="multiple" >Multiple Room</option>
+                                            <option value="1" >Single Room</option>
+                                            <option value="2" >Double Room</option>
+                                            <option value="3" >Triple Room</option>
+                                            <option value="4" >Multiple Room</option>
                                         </select>
                                     </div>                                
                                     <div class="res-singleInput">
                                         <label for="res-cantPersonas">Cantidad de Personas </label>
                                         <select class="res-select" name="res-cantPersonas" required="true">
-                                            <option value="1 p." id="1per">1</option>
-                                            <option value="2 p." id="2per">2</option>
-                                            <option value="3 p." id="3per">3</option>
-                                            <option value="4 p." id="4per">4</option>
-                                            <option value="5 p." id="5per">5</option>
-                                            <option value="6 p." id="6per">6</option>
+                                            <option value="1" id="1per">1</option>
+                                            <option value="2" id="2per">2</option>
+                                            <option value="3" id="3per">3</option>
+                                            <option value="4" id="4per">4</option>
+                                            <option value="5" id="5per">5</option>
+                                            <option value="6" id="6per">6</option>
                                         </select> 
                                     </div>
                                 </div>
@@ -172,6 +172,42 @@
             hastaBtn.disabled=true;
             hastaBtn.style.background="lightgray";
             hastaBtn.style.cursor="default";
+            
+            // Cantidad Personas:
+            function getHabitacion(){
+                var habitacionElegida = document.getElementById("res-habSelect").value;
+
+                if(habitacionElegida === "1") {
+                    document.getElementById("2per").style.display = "none";
+                    document.getElementById("3per").style.display = "none";
+                    document.getElementById("4per").style.display = "none";
+                    document.getElementById("5per").style.display = "none";
+                    document.getElementById("6per").style.display = "none";
+
+                } else if (habitacionElegida === "2"){
+                    document.getElementById("2per").style.display = "block";
+                    document.getElementById("3per").style.display = "none";
+                    document.getElementById("4per").style.display = "none";
+                    document.getElementById("5per").style.display = "none";
+                    document.getElementById("6per").style.display = "none";
+
+                } else if (habitacionElegida === "3") {
+                    document.getElementById("2per").style.display = "block";
+                    document.getElementById("3per").style.display = "block";
+                    document.getElementById("4per").style.display = "none";
+                    document.getElementById("5per").style.display = "none";
+                    document.getElementById("6per").style.display = "none";
+
+                } else if (habitacionElegida === "4") {
+                    document.getElementById("2per").style.display = "block";
+                    document.getElementById("3per").style.display = "block";
+                    document.getElementById("4per").style.display = "block";
+                    document.getElementById("5per").style.display = "block";
+                    document.getElementById("6per").style.display = "block";
+                }
+            };
+
+            getHabitacion();
             
             // Date Picker DE:
             const picker1 = MCDatepicker.create({
@@ -255,6 +291,6 @@
             });
 
         </script>
-    <%}%>
+    
     </body>
 </html>

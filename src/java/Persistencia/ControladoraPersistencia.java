@@ -52,6 +52,9 @@ public class ControladoraPersistencia {
     public List<Habitacion> traerHabitaciones(){
         return habJPA.findHabitacionEntities();
     }
+    public Habitacion traerHabitacionPorId(int habId){
+        return habJPA.findHabitacion(habId);
+    }
     
     //::::::::::::::::::::::::
     //::::: Huesped :::::
@@ -61,6 +64,8 @@ public class ControladoraPersistencia {
     public void altaHuesped(Huesped hues){
         huesJPA.create(hues);
     }
+    // Find:
+    
     
     //::::::::::::::::::::::::
     //::::: Reserva :::::
@@ -83,6 +88,9 @@ public class ControladoraPersistencia {
     // Find:
     public List<Usuario> traerUsuarios(){
         return usuJPA.findUsuarioEntities();
+    }
+    public Usuario traerUsuarioPorId(int usuId){
+        return usuJPA.findUsuario(usuId);
     }
     
     
