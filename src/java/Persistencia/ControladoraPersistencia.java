@@ -59,6 +59,14 @@ public class ControladoraPersistencia {
         huesJPA.create(hues);
     }
     // Find:
+    public Huesped traerHuespedPorDni(String huesDni){
+        List<Huesped> myList = huesJPA.findHuespedEntities();
+            for (Huesped hues : myList){
+                if(hues.getDniHuesped().equals(huesDni)){
+                    return hues;
+                }     
+        } return null;
+    }
     
     
     //::::::::::::::::::::::::
@@ -83,12 +91,19 @@ public class ControladoraPersistencia {
     public Usuario primerUsuario(){
         return usuJPA.findUsuario(1);
     }
+    
     public List<Usuario> traerUsuarios(){
         return usuJPA.findUsuarioEntities();
     }
     public Usuario traerUsuarioPorId(int usuId){
         return usuJPA.findUsuario(usuId);
-    }
-    
-    
+    }    
+    public Usuario traerUsuarioPorUsername(String usuUsername){
+        List<Usuario> myList = usuJPA.findUsuarioEntities();
+            for (Usuario usu : myList){
+                if(usu.getUsername().equals(usuUsername)){
+                    return usu;
+                }     
+        } return null;
+    }    
 }

@@ -37,8 +37,9 @@ public class SvReservas extends HttpServlet {
         String huesFechaNac = request.getParameter("hues-fechaNac");
         String huesDireccion = request.getParameter("hues-direccion");
         String huesProfesion = request.getParameter("hues-profesion");
+        String usuUsername = (String) request.getSession().getAttribute("usuUsername");
         
-        //  **** Mandarla a Confirm: HARDCODED ****
+        //  **** Mandarla a Confirm: HARDCODED ****        
         request.getSession().setAttribute("resTipoHabitacion", resTipoHabitacion);
         request.getSession().setAttribute("resCantPersonas", resCantPersonas);
         request.getSession().setAttribute("resFechaDe", resFechaDe);
@@ -52,7 +53,7 @@ public class SvReservas extends HttpServlet {
         
         // Controladora:
         Controladora myContr = new Controladora();
-        myContr.crearReserva(resTipoHabitacion, resCantPersonas, resFechaDe, resFechaHasta, huesDni, huesNombre, huesApellido, huesFechaNac, huesDireccion, huesProfesion);
+        myContr.crearReserva(resTipoHabitacion, resCantPersonas, resFechaDe, resFechaHasta, huesDni, huesNombre, huesApellido, huesFechaNac, huesDireccion, huesProfesion, usuUsername);
         
         
         // Response:

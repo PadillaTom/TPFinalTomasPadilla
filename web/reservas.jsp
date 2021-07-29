@@ -15,6 +15,7 @@
         if(myUsu == null){
             response.sendRedirect("index.jsp");
         } 
+
     %>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">

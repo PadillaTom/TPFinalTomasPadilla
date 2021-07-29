@@ -9,13 +9,13 @@
     </head>
     
     <body>
-                <%
-            Controladora myContr = new Controladora();
-            if(myContr.primerUsuario() == null) {
-                myContr.altaPrimerUsuario();
-                myContr.crearHabitaciones();
-            } 
-        %>
+    <%
+        Controladora myContr = new Controladora();
+        if(myContr.primerUsuario("AdminHotel") == null) {
+            myContr.altaPrimerUsuario();
+            myContr.crearHabitaciones();
+        } 
+    %>
         <!--*** HOMEPAGE ***-->
         <section class="section login-sect">
             <div class="loginElements-center">

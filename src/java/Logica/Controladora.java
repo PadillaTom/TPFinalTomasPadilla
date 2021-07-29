@@ -49,10 +49,8 @@ public class Controladora {
     }
     
     //::::::::::::::::::::::::
-    //::::::: Usuario ::::::
+    //::::::: Usuario ::::::::
     //::::::::::::::::::::::::
-    
-    // =Crear Primer Usuario=
     public void altaPrimerUsuario(){       
         try {
             Empleado myEmp = new Empleado();
@@ -60,16 +58,14 @@ public class Controladora {
             
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date empFecha = formatter.parse("01-01-2021");
-            
-            myEmp.setId_empleado(1);
+                       
             myEmp.setDniEmpleado("-");
             myEmp.setNombreEmpleado("Admin Hotel");
             myEmp.setApellidoEmpleado("Admin Hotel");
             myEmp.setFechaNacEmpleado(empFecha);
             myEmp.setDireccionEmpleado("-");
             myEmp.setCargoEmpleado("Admin App");
-            
-            myUsu.setId_usuario(1);
+                        
             myUsu.setUsername("AdminHotel");
             myUsu.setPassword("admin");
             myUsu.setUsuEmpleado(myEmp);
@@ -90,8 +86,7 @@ public class Controladora {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
             Date empFecha = formatter.parse(empFechaNac);
             
-            // Creamos:
-            
+            // Creamos:            
             myEmp.setDniEmpleado(empDni);
             myEmp.setNombreEmpleado(empNombre);
             myEmp.setApellidoEmpleado(empApellido);
@@ -103,22 +98,20 @@ public class Controladora {
             myUsu.setPassword(empPassword);
             myUsu.setUsuEmpleado(myEmp);
             
-            // Metodos:
             myCP.altaUsuario(myUsu);
+            
         } catch (ParseException ex) {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    // Find:
-    public Usuario primerUsuario(){
-        return myCP.primerUsuario();
+    
+    // Find: 
+    public Usuario primerUsuario(String usuUsername){
+        return myCP.traerUsuarioPorUsername(usuUsername);
     }
     public List<Usuario> traerUsuarios(){
         return myCP.traerUsuarios();
-    }
-
-    // =Find Usuario by Username=
-     // Find all Usuarios, Tratarlos como LIST para getUsername() y compararlos. if Match  .getId_Usuario();
+    }    
     
     //::::::::::::::::::::::::
     //:::::: Huespedes :::::::
@@ -127,9 +120,7 @@ public class Controladora {
     
     //::::::::::::::::::::::::
     //::::::: Empleados ::::::
-    //::::::::::::::::::::::::
-    
-    // =Traer Empleados=
+    //::::::::::::::::::::::::    
     public List<Empleado> traerEmpleados(){
         return myCP.traerEmpleados();
     }
@@ -137,7 +128,7 @@ public class Controladora {
     //::::::::::::::::::::::::
     //::::::: Reservas :::::::
     //::::::::::::::::::::::::
-    public void crearReserva(String resTipoHabitacion, String resCantPersonas, String resFechaDe, String resFechaHasta, String huesDni, String huesNombre, String huesApellido, String huesFechaNac, String huesDireccion, String huesProfesion){
+    public void crearReserva(String resTipoHabitacion, String resCantPersonas, String resFechaDe, String resFechaHasta, String huesDni, String huesNombre, String huesApellido, String huesFechaNac, String huesDireccion, String huesProfesion, String usuUsername){
         try {
             // Instancias:
             Reserva myRes = new Reserva();
@@ -166,29 +157,30 @@ public class Controladora {
             myHues.setApellidoHuesped(huesApellido);
             myHues.setFechaNacHuesped(huesFecha);
             myHues.setDireccionHuesped(huesDireccion);
-            myHues.setProfesionHuesped(huesProfesion);
-            myCP.altaHuesped(myHues);
-
-            // Find Usuario :
-            Usuario myUsu = myCP.traerUsuarioPorId(1);
-
-            // Creamos Reserva:
-            myRes.setResHuesped(myHues);
+            myHues.setProfesionHuesped(huesProfesion);            
+            Huesped myHuesEncontrado = myCP.traerHuespedPorDni(huesDni);
+            if(myHuesEncontrado != null){
+                myRes.setResHuesped(myHuesEncontrado);
+            } else {
+                myCP.altaHuesped(myHues);
+                myRes.setResHuesped(myHues);                
+            }
+            // Creamos Reserva: 
             myRes.setCantidadNoches(cantidadNoches);
             myRes.setFechaDe(resCheckin);
             myRes.setFechaHasta(resCheckout);
             myRes.setFechaDeCarga(resFechaAlta);
             myRes.setPrecioTotal(precioTotal);
-            myRes.setResHabitacion(myHab);
+            myRes.setResHabitacion(myHab);   
+            
+            // Find Usuario :
+            Usuario myUsu = myCP.traerUsuarioPorUsername(usuUsername);
             myRes.setResUsuario(myUsu);
-
-
-            myCP.altaReserva(myRes);
-
+            
+            myCP.altaReserva(myRes);   
+            
         } catch (ParseException ex) {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }    
     }
-    // =Buscar Reservas=
-    
 }
