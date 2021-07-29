@@ -34,7 +34,7 @@ public class Reserva implements Serializable {
     
     // ManyToOne Empleados:
     @ManyToOne
-    Empleado resEmpleado;
+    Usuario resUsuario;
     
     // ManyToOne Habitacion:
     @ManyToOne
@@ -43,16 +43,19 @@ public class Reserva implements Serializable {
     public Reserva() {
     }
 
-    public Reserva(int id_reserva, Date fechaDe, Date fechaHasta, int cantidadNoches, double precioTotal, Huesped resHuesped, Empleado resEmpleado, Habitacion resHabitacion) {
+    public Reserva(int id_reserva, Date fechaDe, Date fechaHasta, Date fechaDeCarga, int cantidadNoches, double precioTotal, Huesped resHuesped, Usuario resUsuario, Habitacion resHabitacion) {
         this.id_reserva = id_reserva;
         this.fechaDe = fechaDe;
         this.fechaHasta = fechaHasta;
+        this.fechaDeCarga = fechaDeCarga;
         this.cantidadNoches = cantidadNoches;
         this.precioTotal = precioTotal;
         this.resHuesped = resHuesped;
-        this.resEmpleado = resEmpleado;
+        this.resUsuario = resUsuario;
         this.resHabitacion = resHabitacion;
     }
+
+
 
     public int getId_reserva() {
         return id_reserva;
@@ -102,12 +105,20 @@ public class Reserva implements Serializable {
         this.resHuesped = resHuesped;
     }
 
-    public Empleado getResEmpleado() {
-        return resEmpleado;
+    public Date getFechaDeCarga() {
+        return fechaDeCarga;
     }
 
-    public void setResEmpleado(Empleado resEmpleado) {
-        this.resEmpleado = resEmpleado;
+    public void setFechaDeCarga(Date fechaDeCarga) {
+        this.fechaDeCarga = fechaDeCarga;
+    }
+
+    public Usuario getResUsuario() {
+        return resUsuario;
+    }
+
+    public void setResUsuario(Usuario resUsuario) {
+        this.resUsuario = resUsuario;
     }
 
     public Habitacion getResHabitacion() {

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : reservas
-    Created on : 17 Jul 2021, 11:34:26
-    Author     : padillatom
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +7,13 @@
         <title>Mi Hotel - Form Enviado</title>
     </head>
     <body>
+    <%
+        HttpSession mySess = request.getSession();
+        String myUsu = (String)mySess.getAttribute("usuUsername");
+        if(myUsu == null){
+            response.sendRedirect("index.jsp");
+        } else {
+    %>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">
             <div class="navigationCenter">
@@ -201,5 +202,6 @@
                 </form>
             </div>
         </section>
+    <%}%>
     </body>
 </html>

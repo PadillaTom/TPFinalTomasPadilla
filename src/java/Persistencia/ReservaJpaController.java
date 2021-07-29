@@ -6,7 +6,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Logica.Huesped;
-import Logica.Empleado;
+import Logica.Usuario;
 import Logica.Habitacion;
 import Logica.Reserva;
 import Persistencia.exceptions.NonexistentEntityException;
@@ -21,11 +21,11 @@ public class ReservaJpaController implements Serializable {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-
-   
+    
     public ReservaJpaController() {
         emf = Persistence.createEntityManagerFactory("TPFinalTomasPadillaPU");
     }
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
@@ -40,10 +40,10 @@ public class ReservaJpaController implements Serializable {
                 resHuesped = em.getReference(resHuesped.getClass(), resHuesped.getId_huesped());
                 reserva.setResHuesped(resHuesped);
             }
-            Empleado resEmpleado = reserva.getResEmpleado();
-            if (resEmpleado != null) {
-                resEmpleado = em.getReference(resEmpleado.getClass(), resEmpleado.getId_empleado());
-                reserva.setResEmpleado(resEmpleado);
+            Usuario resUsuario = reserva.getResUsuario();
+            if (resUsuario != null) {
+                resUsuario = em.getReference(resUsuario.getClass(), resUsuario.getId_usuario());
+                reserva.setResUsuario(resUsuario);
             }
             Habitacion resHabitacion = reserva.getResHabitacion();
             if (resHabitacion != null) {
@@ -55,9 +55,9 @@ public class ReservaJpaController implements Serializable {
                 resHuesped.getHuesReserva().add(reserva);
                 resHuesped = em.merge(resHuesped);
             }
-            if (resEmpleado != null) {
-                resEmpleado.getEmpReservas().add(reserva);
-                resEmpleado = em.merge(resEmpleado);
+            if (resUsuario != null) {
+                resUsuario.getUsuReserva().add(reserva);
+                resUsuario = em.merge(resUsuario);
             }
             if (resHabitacion != null) {
                 resHabitacion.getHabReservas().add(reserva);
@@ -79,17 +79,17 @@ public class ReservaJpaController implements Serializable {
             Reserva persistentReserva = em.find(Reserva.class, reserva.getId_reserva());
             Huesped resHuespedOld = persistentReserva.getResHuesped();
             Huesped resHuespedNew = reserva.getResHuesped();
-            Empleado resEmpleadoOld = persistentReserva.getResEmpleado();
-            Empleado resEmpleadoNew = reserva.getResEmpleado();
+            Usuario resUsuarioOld = persistentReserva.getResUsuario();
+            Usuario resUsuarioNew = reserva.getResUsuario();
             Habitacion resHabitacionOld = persistentReserva.getResHabitacion();
             Habitacion resHabitacionNew = reserva.getResHabitacion();
             if (resHuespedNew != null) {
                 resHuespedNew = em.getReference(resHuespedNew.getClass(), resHuespedNew.getId_huesped());
                 reserva.setResHuesped(resHuespedNew);
             }
-            if (resEmpleadoNew != null) {
-                resEmpleadoNew = em.getReference(resEmpleadoNew.getClass(), resEmpleadoNew.getId_empleado());
-                reserva.setResEmpleado(resEmpleadoNew);
+            if (resUsuarioNew != null) {
+                resUsuarioNew = em.getReference(resUsuarioNew.getClass(), resUsuarioNew.getId_usuario());
+                reserva.setResUsuario(resUsuarioNew);
             }
             if (resHabitacionNew != null) {
                 resHabitacionNew = em.getReference(resHabitacionNew.getClass(), resHabitacionNew.getId_habitacion());
@@ -104,13 +104,13 @@ public class ReservaJpaController implements Serializable {
                 resHuespedNew.getHuesReserva().add(reserva);
                 resHuespedNew = em.merge(resHuespedNew);
             }
-            if (resEmpleadoOld != null && !resEmpleadoOld.equals(resEmpleadoNew)) {
-                resEmpleadoOld.getEmpReservas().remove(reserva);
-                resEmpleadoOld = em.merge(resEmpleadoOld);
+            if (resUsuarioOld != null && !resUsuarioOld.equals(resUsuarioNew)) {
+                resUsuarioOld.getUsuReserva().remove(reserva);
+                resUsuarioOld = em.merge(resUsuarioOld);
             }
-            if (resEmpleadoNew != null && !resEmpleadoNew.equals(resEmpleadoOld)) {
-                resEmpleadoNew.getEmpReservas().add(reserva);
-                resEmpleadoNew = em.merge(resEmpleadoNew);
+            if (resUsuarioNew != null && !resUsuarioNew.equals(resUsuarioOld)) {
+                resUsuarioNew.getUsuReserva().add(reserva);
+                resUsuarioNew = em.merge(resUsuarioNew);
             }
             if (resHabitacionOld != null && !resHabitacionOld.equals(resHabitacionNew)) {
                 resHabitacionOld.getHabReservas().remove(reserva);
@@ -154,10 +154,10 @@ public class ReservaJpaController implements Serializable {
                 resHuesped.getHuesReserva().remove(reserva);
                 resHuesped = em.merge(resHuesped);
             }
-            Empleado resEmpleado = reserva.getResEmpleado();
-            if (resEmpleado != null) {
-                resEmpleado.getEmpReservas().remove(reserva);
-                resEmpleado = em.merge(resEmpleado);
+            Usuario resUsuario = reserva.getResUsuario();
+            if (resUsuario != null) {
+                resUsuario.getUsuReserva().remove(reserva);
+                resUsuario = em.merge(resUsuario);
             }
             Habitacion resHabitacion = reserva.getResHabitacion();
             if (resHabitacion != null) {

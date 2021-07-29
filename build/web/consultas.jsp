@@ -1,9 +1,3 @@
-<%-- 
-    Document   : consultas
-    Created on : 17 Jul 2021, 11:35:17
-    Author     : padillatom
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +7,13 @@
         <title>Mi Hotel - Consultas</title>
     </head>
     <body>
+    <%
+        HttpSession mySess = request.getSession();
+        String myUsu = (String)mySess.getAttribute("usuUsername");
+        if(myUsu == null){
+            response.sendRedirect("index.jsp");
+        } else {
+    %>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">
             <div class="navigationCenter">
@@ -74,5 +75,6 @@
                 </ul>
             </div>
         </section>
+    <%}%>
     </body>
 </html>

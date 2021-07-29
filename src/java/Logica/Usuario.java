@@ -1,11 +1,14 @@
 package Logica;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable {
@@ -18,7 +21,8 @@ public class Usuario implements Serializable {
     String username;
     String password;
 
-    
+    @OneToMany
+    List<Reserva> usuReserva = new ArrayList<>();
     
     public Usuario() {
         
@@ -52,6 +56,14 @@ public class Usuario implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public List<Reserva> getUsuReserva() {
+        return usuReserva;
+    }
+
+    public void setUsuReserva(List<Reserva> usuReserva) {
+        this.usuReserva = usuReserva;
     }
     
     

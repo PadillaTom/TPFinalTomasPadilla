@@ -18,7 +18,7 @@ public class ControladoraPersistencia {
     UsuarioJpaController usuJPA = new UsuarioJpaController();
     
     //::::::::::::::::::::::::
-    //::::: Empleado :::::
+    //::::::: Empleado :::::::
     //::::::::::::::::::::::::
     
     // Alta:
@@ -79,6 +79,11 @@ public class ControladoraPersistencia {
     public void altaUsuario(Usuario usu){
         usuJPA.create(usu);
     }  
+    
+    // Find:
+    public List<Usuario> traerUsuarios(){
+        return usuJPA.findUsuarioEntities();
+    }
     
     
 }

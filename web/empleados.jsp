@@ -11,6 +11,13 @@
         <title>Mi Hotel - Empleados</title>
     </head>
     <body>
+    <%
+        HttpSession mySess = request.getSession();
+        String myUsu = (String)mySess.getAttribute("usuUsername");
+        if(myUsu == null){
+            response.sendRedirect("index.jsp");
+        } else {
+    %>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">
             <div class="navigationCenter">
@@ -61,7 +68,7 @@
                 <!--*** Add Empleado ***-->
                 <div class="emp-currentSession">
                     <h1>
-                        Usuario Actual: <span> <%= session.getAttribute("username") %> </span>
+                        Usuario Actual: <span> <%= myUsu %> </span>
                     </h1>
                 </div>
                 <div class="emp-addEmpContainer">
@@ -255,5 +262,6 @@
                 customCancelBTN: "Anular",
             });
     </script>
+    <%}%>
     </body>
 </html>

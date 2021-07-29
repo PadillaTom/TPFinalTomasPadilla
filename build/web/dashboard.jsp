@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="Logica.*" %>
 <!DOCTYPE html>
 <html>
@@ -8,6 +8,13 @@
         <title>Mi Hotel - Dashboard</title>
     </head>
     <body>
+    <%
+        HttpSession mySess = request.getSession();
+        String myUsu = (String)mySess.getAttribute("usuUsername");
+        if(myUsu == null){
+            response.sendRedirect("index.jsp");
+        } else {
+    %>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">
             <div class="navigationCenter">
@@ -53,7 +60,7 @@
             <!--*** Welcome Section ***-->
             <div class="hab-welcomeSect">
                 <h1>
-                    Bienvenido: <span>  <%= session.getAttribute("usuUsername") %> </span>
+                    Bienvenido: <span>  <%= myUsu %> </span>
                 </h1>
             </div>
             
@@ -186,5 +193,6 @@
                 </article>
             </div>
         </section>
+    <% } %>
     </body>
 </html>

@@ -99,6 +99,12 @@ a {
     display: grid;
     place-items: center;
 }
+.login-errorMsg {
+    color: red;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+    text-align: center;
+}
 .login-formContainer > form {
     background: var(--ColorWhite);
     box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
@@ -519,12 +525,17 @@ a {
 ******** Consultas  ********
 ******************************/
 .cons-filterMenu{
-    width: 90%;
-    margin: 0 auto;
-    color: red;
+    width: 75%;
+    margin: 0 auto;  
+    margin-top: 2rem;
 }
 .cons-filterMenu > ul{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.cons-filterMenu > ul > li {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    cursor: pointer;
 }

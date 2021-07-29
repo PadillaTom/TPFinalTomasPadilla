@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "SvLogin", urlPatterns = {"/SvLogin"})
 public class SvLogin extends HttpServlet {
@@ -31,14 +32,22 @@ public class SvLogin extends HttpServlet {
             String usuUsername = request.getParameter("username");
             String usuPassword = request.getParameter("password"); 
             
-            // Send to Dashboard:
-            request.getSession().setAttribute("usuUsername", usuUsername);
-            
             // Controladora:
             Controladora myContr = new Controladora();
+            boolean isAutorizado = myContr.verificarLogin(usuUsername, usuPassword);
             
-//          *** Redirect ***
-            response.sendRedirect("dashboard.jsp");  
+//          *** Session y Redirect ***
+            if(isAutorizado == true) {
+                HttpSession mySess = request.getSession(true);
+                mySess.setAttribute("usuUsername", usuUsername);
+                mySess.setAttribute("usuPassword", usuPassword);
+                
+                response.sendRedirect("dashboard.jsp");  
+            } else {
+                String errorMsg = "Ingreso Fallido, verificar Usuario y Contraseña";
+                request.getSession().setAttribute("errorMsg", errorMsg);
+                response.sendRedirect("index.jsp");
+            }
             
     }
     

@@ -13,6 +13,22 @@ public class Controladora {
     ControladoraPersistencia myCP = new ControladoraPersistencia();
     
     //::::::::::::::::::::::::
+    //:::::::: Log In ::::::::
+    //::::::::::::::::::::::::
+    
+    public boolean verificarLogin(String usuUsuario, String usuPassword){
+        List<Usuario> listaUsuarios = myCP.traerUsuarios();
+        if(listaUsuarios != null) {
+            for (Usuario usu : listaUsuarios){
+                if(usu.getUsername().equals(usuUsuario) && usu.getPassword().equals(usuPassword)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    //::::::::::::::::::::::::
     //::::: Habitaciones :::::
     //::::::::::::::::::::::::
     
