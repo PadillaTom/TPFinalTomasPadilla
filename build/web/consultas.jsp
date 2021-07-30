@@ -64,18 +64,18 @@
             </h1>
             
             <!--*** Menu ***-->
-            <div class="cons-filterMenu">
+            <div class="cons-filterMenu" >
                 <ul>
-                    <li>
+                    <li id="porFecha" class="link cons-active" onclick="activeLink(this);">
                         Res. por Fecha
                     </li>
-                    <li>
+                    <li id="porEmp" class="link" onclick="activeLink(this);">
                         Res. por Empleado
-                    </li>
-                    <li>
+                    </li id="porFecha">
+                    <li id="listaHues" class="link" onclick="activeLink(this);">
                         Lista Huespedes
                     </li>
-                    <li>
+                    <li id="porHyF" class="link" onclick="activeLink(this);">
                         Res. por Huesped y Fechas
                     </li>
                 </ul>
@@ -108,55 +108,63 @@
                         <h2>Resultados</h2>
                         
                         <div class="emp-tableContainer">
+                            <% 
+                                    String datePattern = "dd/MM/yyyy";                                
+                                    SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern); 
+                                    
+                                    List<Reserva> misReservas = (List) mySess.getAttribute("reservasPorFecha");
+                                    if(misReservas != null){
+                                        if (misReservas.size() > 1){
+                            %>
                             <table>
                                 <thead>
                                     <tr>
-                                      <th>ID Reserva</th>
+                                      <th>N° Res</th>
                                       <th>Check-in</th>
                                       <th>Check-out</th>
                                       <th>Habitacion</th>
                                       <th>N° Huespedes</th>
                                       <th>Huesped Dni</th>
                                       <th>Huesped</th>
+                                      <th>Empleado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% 
-                                    String datePattern = "dd/MM/yyyy";                                
-                                    SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern); 
-                                    List<Reserva> misReservas = (List) mySess.getAttribute("listaResPorFecha");
-                                    if (misReservas != null){
-                                    System.out.println(misReservas);
+                                    <%
                                         for(Reserva res : misReservas) {
-                                            Date dateString = res.getFechaDeCarga();
-                                            String resDate = dateFormatter.format(dateString);
+                                            String resIn = dateFormatter.format(res.getFechaDe());
+                                            String resOut = dateFormatter.format(res.getFechaHasta());
                                     %>
                                     <tr>
                                         <td>
                                            <%= res.getId_reserva() %>
                                         </td>
                                         <td>
-                                            asd
+                                            <%= resIn %>
                                         </td>
                                         <td>
-                                            asd
+                                            <%= resOut %>
                                         </td>
                                         <td>
-                                            asd
+                                            <%= res.getResHabitacion().getTipo() %>
                                         </td>
                                         <td>
-                                            asd
+                                            <%= res.getCantidadPersonas() %>
                                         </td>
                                         <td>
-                                            asd
+                                            <%= res.getResHuesped().getDniHuesped() %>
                                         </td>
                                         <td>
-                                            asd
+                                            <%= res.getResHuesped().getNombreCompletoHuesped() %>
+                                        </td>
+                                        <td>
+                                            <%= res.getResUsuario().getUsuEmpleado().getNombreEmpleado() %>
                                         </td>
                                     </tr>
-                                    <% 
-                                        }}
-                                    %>
+                                    <% } %>                                    
+                                    <% } else { %> 
+                                    <h3 class="buscador-notFound">No se encuentran Reservas para la fecha seleccionada.</h2>
+                                    <% } } %>
                                 </tbody>
                             </table>
                         </div>
@@ -184,7 +192,7 @@
             // Date Picker DE:
             const picker1 = MCDatepicker.create({
                 el: '#datepicker',
-                dateFormat: 'dd-mm-yyyy',
+                dateFormat: 'dd-MM-yyyy',
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
                   'Enero',
@@ -203,6 +211,19 @@
                 customClearBTN: "Borrar",
                 customCancelBTN: "Anular",
             });
+            
+            // Active Menu:
+            function activeLink(id){
+                const allLinks = document.getElementsByClassName("link");                
+                let myLink = document.getElementById(id.id);
+                
+                for(i = 0 ; i < allLinks.length; i++){
+                    if(allLinks[i].id !== myLink.id){
+                        allLinks[i].classList.remove("cons-active");
+                    } else myLink.classList.add("cons-active");
+                }                
+            }    
+            // Mostrar BUSCADOR PARA EL ACTIVE
         </script>
     </body>
 </html>

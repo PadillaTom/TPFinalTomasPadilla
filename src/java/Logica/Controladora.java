@@ -177,7 +177,25 @@ public class Controladora {
     }
     
     // Find:
-
+    public List<Reserva> reservasPorFecha (String fechaIngresada){
+        // Instancias:
+        List<Reserva> resAll = myCP.traerTodasLasReservas();
+        List <Reserva> listaFinal = new ArrayList<>();
+        
+        // All Dates to String and Compare:
+        if(resAll != null) {
+            for (Reserva res : resAll){
+                Date fechaDate = res.getFechaDeCarga();
+                String datePattern = "dd-MM-yyyy";                                
+                SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern); 
+                String fechaRes = dateFormatter.format(fechaDate);
+                if(fechaIngresada.equals(fechaRes)){
+                    listaFinal.add(res);
+                }
+            }
+        }
+        return listaFinal;
+    }
        
     //::::::::::::::::::::::::
     //:::::: Huespedes :::::::

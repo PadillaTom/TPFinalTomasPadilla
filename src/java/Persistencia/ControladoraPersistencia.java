@@ -4,9 +4,6 @@ import Logica.Habitacion;
 import Logica.Huesped;
 import Logica.Reserva;
 import Logica.Usuario;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,7 +71,9 @@ public class ControladoraPersistencia {
         resJPA.create(res);
     }       
     // Find:
-
+    public List<Reserva> traerTodasLasReservas(){
+        return resJPA.findReservaEntities();
+    }
     
     //::::::::::::::::::::::::
     //::::: Usuario :::::

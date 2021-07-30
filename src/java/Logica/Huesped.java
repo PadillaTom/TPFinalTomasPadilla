@@ -111,4 +111,9 @@ public class Huesped implements Serializable {
         this.huesReserva = huesReserva;
     }
     
+    // Metodos:
+    public String getNombreCompletoHuesped(){
+        return this.nombreHuesped + " " + this.apellidoHuesped;
+    }
+    
 }
