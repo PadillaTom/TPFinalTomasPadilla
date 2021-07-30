@@ -24,8 +24,7 @@ public class SvReservas extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException {        
         // Get Data:
         String resTipoHabitacion = request.getParameter("res-tipoHabitacion");
         String resCantPersonas = request.getParameter("res-cantPersonas");
@@ -54,7 +53,6 @@ public class SvReservas extends HttpServlet {
         // Controladora:
         Controladora myContr = new Controladora();
         myContr.crearReserva(resTipoHabitacion, resCantPersonas, resFechaDe, resFechaHasta, huesDni, huesNombre, huesApellido, huesFechaNac, huesDireccion, huesProfesion, usuUsername);
-        
         
         // Response:
         response.sendRedirect("confirmacionReserva.jsp");

@@ -3,6 +3,7 @@ package Logica;
 import Persistencia.ControladoraPersistencia;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,8 +31,6 @@ public class Controladora {
     //::::::::::::::::::::::::
     //::::: Habitaciones :::::
     //::::::::::::::::::::::::   
-    
-    // =Crear Habitacion=
     public void crearHabitaciones() {
         Habitacion myHab1 = new Habitacion(1, 1, "Habitacion Simple", "Single Room",150);
         Habitacion myHab2 = new Habitacion(2, 2, "Habitacion Doble", "Double Room",250);
@@ -42,11 +41,7 @@ public class Controladora {
         myCP.altaHabitacion(myHab2);
         myCP.altaHabitacion(myHab3);
         myCP.altaHabitacion(myHab4);
-    }    
-    // =Traer Habitacion=
-    public List<Habitacion> traerHabitaciones(){
-        return myCP.traerHabitaciones();
-    }
+    }  
     
     //::::::::::::::::::::::::
     //::::::: Usuario ::::::::
@@ -109,24 +104,12 @@ public class Controladora {
     public Usuario primerUsuario(String usuUsername){
         return myCP.traerUsuarioPorUsername(usuUsername);
     }
-    public Usuario usuarioPorSession(String usuUsername){
-        return myCP.traerUsuarioPorUsername(usuUsername);
-    }
     public List<Usuario> traerUsuarios(){
         return myCP.traerUsuarios();
-    }    
-    
-    //::::::::::::::::::::::::
-    //:::::: Huespedes :::::::
-    //::::::::::::::::::::::::
-        // =Buscar Huespedes=
-    
-    //::::::::::::::::::::::::
-    //::::::: Empleados ::::::
-    //::::::::::::::::::::::::    
-    public List<Empleado> traerEmpleados(){
-        return myCP.traerEmpleados();
     }
+    public Usuario usuarioPorSession(String usuUsername){
+        return myCP.traerUsuarioPorUsername(usuUsername);
+    }    
     
     //::::::::::::::::::::::::
     //::::::: Reservas :::::::
@@ -192,4 +175,16 @@ public class Controladora {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }    
     }
+    
+    // Find:
+
+       
+    //::::::::::::::::::::::::
+    //:::::: Huespedes :::::::
+    //::::::::::::::::::::::::
+    
+    //::::::::::::::::::::::::
+    //::::::: Empleados ::::::
+    //::::::::::::::::::::::::
+    
 }

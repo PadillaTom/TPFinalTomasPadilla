@@ -20,8 +20,7 @@ public class SvLogin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException {        
     }
 
     @Override
@@ -47,8 +46,7 @@ public class SvLogin extends HttpServlet {
                 String errorMsg = "Ingreso Fallido, verificar Usuario y Contraseña";
                 request.getSession().setAttribute("errorMsg", errorMsg);
                 response.sendRedirect("index.jsp");
-            }
-            
+            }            
     }
     
     @Override

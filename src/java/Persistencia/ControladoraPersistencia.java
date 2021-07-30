@@ -1,10 +1,12 @@
 package Persistencia;
 
-import Logica.Empleado;
 import Logica.Habitacion;
 import Logica.Huesped;
 import Logica.Reserva;
 import Logica.Usuario;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,15 +22,8 @@ public class ControladoraPersistencia {
     //::::::::::::::::::::::::
     //::::::: Empleado :::::::
     //::::::::::::::::::::::::
-    
-    // Alta:
-    public void altaEmpleado(Empleado emp) {
-        empJPA.create(emp);
-    }
-    // Find:
-    public List<Empleado> traerEmpleados(){
-        return empJPA.findEmpleadoEntities();
-    }
+    // Alta:    
+    // Find:    
     
     //::::::::::::::::::::::::
     //::::: Habitacion :::::
@@ -42,10 +37,7 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    // Find:
-    public List<Habitacion> traerHabitaciones(){
-        return habJPA.findHabitacionEntities();
-    }
+    // Find:    
     public Habitacion traerHabitacionPorTipo(String resTipoHabitacion){
         List<Habitacion> myList = habJPA.findHabitacionEntities();
             for (Habitacion hab : myList){
@@ -53,11 +45,10 @@ public class ControladoraPersistencia {
                     return hab;
                 }     
         } return null;
-    }
-    
+    }    
     
     //::::::::::::::::::::::::
-    //::::: Huesped :::::
+    //::::::: Huesped ::::::::
     //::::::::::::::::::::::::
     
     // Alta:
@@ -72,20 +63,19 @@ public class ControladoraPersistencia {
                     return hues;
                 }     
         } return null;
-    }
-    
+    }    
     
     //::::::::::::::::::::::::
-    //::::: Reserva :::::
+    //::::::: Reserva ::::::::
     //::::::::::::::::::::::::
     
     // Alta:
     public void altaReserva(Reserva res){
         resJPA.create(res);
-    }
-    
-    // Find:    
+    }       
+    // Find:
 
+    
     //::::::::::::::::::::::::
     //::::: Usuario :::::
     //::::::::::::::::::::::::

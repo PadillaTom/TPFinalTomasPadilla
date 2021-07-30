@@ -24,8 +24,7 @@ public class SvUsuario extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException {        
         // Get Data:
         String empUsername = request.getParameter("empUsername");
         String empPassword = request.getParameter("empPassword");
