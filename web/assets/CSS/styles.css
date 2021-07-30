@@ -564,6 +564,7 @@ a {
 }
 
 /**** Single Screen ****/
+
 .singleScreen-description > h1 {
     color: var(--FontColorDark);
     font-size: 1.7rem;

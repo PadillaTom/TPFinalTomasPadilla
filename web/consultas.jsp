@@ -84,7 +84,9 @@
             <!--*** Main Screen ***-->
             <div class="cons-mainScreenContainer">
                 
-                <!--*** Single Screen ***-->
+                <!--*************************-->
+                <!--****** POR FECHA ******-->
+                <!--*************************-->
                 <div class="cons-singleScreen" id="screenResPorFecha">
                     <div class="singleScreen-description">
                         <h1>Reservas Por Fecha</h1>
@@ -113,8 +115,9 @@
                                     SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern); 
                                     
                                     List<Reserva> misReservas = (List) mySess.getAttribute("reservasPorFecha");
+//                                    System.out.println(misReservas);
                                     if(misReservas != null){
-                                        if (misReservas.size() > 1){
+                                        if (misReservas.size() > 0){
                             %>
                             <table>
                                 <thead>
@@ -171,19 +174,114 @@
                     </div>
                 </div>
                 
-                <!--*** Single Screen ***-->
+                <!--*************************-->
+                <!--****** POR EMPLEADO ******-->
+                <!--*************************-->
                 <div class="cons-singleScreen" id="screenResPorEmpleado">
-                    
+                    <div class="singleScreen-description">
+                        <h1>Reservas Por Empleado</h1>
+                        <h3>
+                            Ingresar el DNI de un Empleado para obtener sus Reservas.
+                        </h3>
+                    </div>
+                    <div class="singleScreen-buscador">
+                        <form action="SvConsResPorEmpleado" method="GET" >
+                            <div class="res-factSingleInput">
+                                <label for="buscador">DNI Empelado: </label>
+                                <input type="text" required="true" name="buscador"  style="background: none; text-align:center;">
+                            </div>
+                            <div class="login-formButtons">
+                                <input type="submit" class="formBtn" value="Buscar" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="singleScreen-resultsContainer">
+                        <div class="section-title-underline"></div>
+                        <h2>Resultados</h2>
+                        
+                        <div class="emp-tableContainer">
+                            <% 
+//                                List<Reserva> misReservas = (List) mySess.getAttribute("reservasPorFecha");
+//                                    if(misReservas != null){
+//                                        if (misReservas.size() > 1){
+                            %>
+                            <table>
+                                <thead>
+                                    <tr>
+                                      <th>N° Res</th>
+                                      <th>Check-in</th>
+                                      <th>Check-out</th>
+                                      <th>Habitacion</th>
+                                      <th>N° Huespedes</th>
+                                      <th>Huesped Dni</th>
+                                      <th>Huesped</th>
+                                      <th>Empleado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+//                                        for(Reserva res : misReservas) {
+//                                            String resIn = dateFormatter.format(res.getFechaDe());
+//                                            String resOut = dateFormatter.format(res.getFechaHasta());
+                                    %>
+                                    <tr>
+                                        <td>
+                                           <%--<%= // res.getId_reserva() %>--%>
+                                        </td>
+                                        <td>
+                                            <%--<%= // resIn %>--%>
+                                        </td>
+                                        <td>
+                                            <%--<%= // resOut %>--%>
+                                        </td>
+                                        <td>
+                                            <%--<%= // res.getResHabitacion().getTipo() %>--%>
+                                        </td>
+                                        <td>
+                                            <%--<%= // res.getCantidadPersonas() %>--%>
+                                        </td>
+                                        <td>
+                                            <%--<%= // res.getResHuesped().getDniHuesped() %>--%>
+                                        </td>
+                                        <td>
+                                            <%--<%= // res.getResHuesped().getNombreCompletoHuesped() %>--%>
+                                        </td>
+                                        <td>
+                                            <%--<%= // res.getResUsuario().getUsuEmpleado().getNombreEmpleado() %>--%>
+                                        </td>
+                                    </tr>
+                                    <% // } %>                                    
+                                    <% // } else { %> 
+                                    <h3 class="buscador-notFound">No se encuentran Reservas para la fecha seleccionada.</h2>
+                                    <% // } } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 
-                <!--*** Single Screen ***-->
+                <!--*************************-->
+                <!--****** LISTA HUESPEDES ******-->
+                <!--*************************-->
                 <div class="cons-singleScreen" id="screenListaHuespedes">
-                    
+                    <div class="singleScreen-description">
+                        <h1>Lista de Huespedes</h1>
+                        <h3>
+                            Lista de todos los huespedes ingresados en el sistema.
+                        </h3>
+                    </div>
                 </div>
                 
-                <!--*** Single Screen ***-->
+                <!--*************************-->
+                <!--***** POR HUESy FECHA *****-->
+                <!--*************************-->
                 <div class="cons-singleScreen" id="screenResPorHuesyFechas">
-                    
+                    <div class="singleScreen-description">
+                        <h1>Reservas Por Huesped y Fechas</h1>
+                        <h3>
+                            Ingresar DNI de Huesped y el rango de Fechas deseadas.
+                        </h3>
+                    </div>
                 </div>
                 
             </div>
@@ -213,6 +311,13 @@
             });
             
             // Active Menu:
+            let myFormFec = document.getElementById("screenResPorFecha");
+            let myFormEmp = document.getElementById("screenResPorEmpleado");
+            let myFormHues = document.getElementById("screenListaHuespedes");
+            let myFormHyF = document.getElementById("screenResPorHuesyFechas");
+            myFormEmp.style.display = "none";                         
+            myFormHues.style.display = "none";                         
+            myFormHyF.style.display = "none"; 
             function activeLink(id){
                 const allLinks = document.getElementsByClassName("link");                
                 let myLink = document.getElementById(id.id);
@@ -220,7 +325,34 @@
                 for(i = 0 ; i < allLinks.length; i++){
                     if(allLinks[i].id !== myLink.id){
                         allLinks[i].classList.remove("cons-active");
-                    } else myLink.classList.add("cons-active");
+                    } else { 
+                        myLink.classList.add("cons-active");
+
+                        if(myLink.id === "porFecha"){
+                            myFormEmp.style.display = "none";                         
+                            myFormHues.style.display = "none";                         
+                            myFormHyF.style.display = "none"; 
+                            myFormFec.style.display = "block";
+                        }
+                        if(myLink.id === "porEmp") {
+                            myFormFec.style.display = "none";                         
+                            myFormHues.style.display = "none";                         
+                            myFormHyF.style.display = "none"; 
+                            myFormEmp.style.display = "block";
+                        }
+                        if(myLink.id === "listaHues") {
+                            myFormFec.style.display = "none";                         
+                            myFormEmp.style.display = "none";                         
+                            myFormHyF.style.display = "none"; 
+                            myFormHues.style.display = "block";
+                        }
+                        if(myLink.id === "porHyF") {
+                            myFormFec.style.display = "none";                         
+                            myFormHues.style.display = "none";                         
+                            myFormEmp.style.display = "none"; 
+                            myFormHyF.style.display = "block";
+                        }
+                    }
                 }                
             }    
             // Mostrar BUSCADOR PARA EL ACTIVE

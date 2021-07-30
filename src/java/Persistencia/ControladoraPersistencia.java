@@ -1,5 +1,6 @@
 package Persistencia;
 
+import Logica.Empleado;
 import Logica.Habitacion;
 import Logica.Huesped;
 import Logica.Reserva;
@@ -20,7 +21,15 @@ public class ControladoraPersistencia {
     //::::::: Empleado :::::::
     //::::::::::::::::::::::::
     // Alta:    
-    // Find:    
+    // Find: 
+    public Empleado traerEmpleadoPorDni(String dniIngresado){
+        List<Empleado> myList = empJPA.findEmpleadoEntities();
+            for (Empleado emp : myList){
+                if(emp.getDniEmpleado().equals(dniIngresado)){
+                    return emp;
+                }     
+        } return null;
+    }
     
     //::::::::::::::::::::::::
     //::::: Habitacion :::::

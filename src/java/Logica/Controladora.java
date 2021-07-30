@@ -181,7 +181,7 @@ public class Controladora {
         // Instancias:
         List<Reserva> resAll = myCP.traerTodasLasReservas();
         List <Reserva> listaFinal = new ArrayList<>();
-        
+//        System.out.println("TODAS LAS RESERVAS: " + resAll);
         // All Dates to String and Compare:
         if(resAll != null) {
             for (Reserva res : resAll){
@@ -204,5 +204,22 @@ public class Controladora {
     //::::::::::::::::::::::::
     //::::::: Empleados ::::::
     //::::::::::::::::::::::::
-    
+    // Get emp by DNI:
+    public List<Reserva> traerResPorEmpleadoDni(String dniIngresado ){
+         // Instancias:
+        List<Reserva> resAll = myCP.traerTodasLasReservas();
+        List <Reserva> listaFinal = new ArrayList<>();
+        
+//        System.out.println("TODAS LAS RESERVAS: " + resAll);
+        // All Dates to String and Compare:
+        if(resAll != null) {
+            for (Reserva res : resAll){
+                String myResDni = res.getResUsuario().getUsuEmpleado().getDniEmpleado();
+                if(myResDni.equals(dniIngresado)){
+                    listaFinal.add(res);
+                }
+            }
+        }
+        return listaFinal;
+    }
 }
