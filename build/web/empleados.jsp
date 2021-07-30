@@ -171,7 +171,7 @@
                                 for(Usuario usu : usuLista) {
                                     Date usuDateBefore = usu.getUsuEmpleado().getFechaNacEmpleado();
                                     String usuDate = dateFormatter.format(usuDateBefore);
-                                    if(usu.getId_usuario() == 1){                                        
+                                    if(usu.getUsername().equals("AdminHotel")){                                        
                             %>
                                 <tr style="background-color: #DCE9F9">
                                     <td>

@@ -98,5 +98,10 @@ public class Empleado implements Serializable {
     public void setCargoEmpleado(String cargoEmpleado) {
         this.cargoEmpleado = cargoEmpleado;
     }
+    
+    // Metodos:
+    public String getNombreCompletoEmpleado(){
+        return this.nombreEmpleado + " " + this.apellidoEmpleado;
+    }
 
 }

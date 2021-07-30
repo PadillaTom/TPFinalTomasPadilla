@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Logica.*, java.util.*, java.text.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +10,23 @@
     <body>
     <%
         HttpSession mySess = request.getSession();
-        String myUsu = (String)mySess.getAttribute("usuUsername");
+        String myUsu = (String)mySess.getAttribute("usuUsername");              
+        Controladora myContr = new Controladora();                                        
+        Usuario usuSession = myContr.usuarioPorSession(myUsu); 
+        
+        Reserva myRes = usuSession.getUsuLastReserva();
+        Habitacion myHab = myRes.getResHabitacion();
+        Huesped myHues = myRes.getResHuesped();
+        
+        String datePattern = "dd/MM/yyyy";                                
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+        Date checkIn = myRes.getFechaDe();
+        Date checkOut = myRes.getFechaHasta();
+        Date fechaNac = myHues.getFechaNacHuesped();
+        String resIn = dateFormatter.format(checkIn);
+        String resOut = dateFormatter.format(checkOut);
+        String huesDate = dateFormatter.format(fechaNac);
+        
         if(myUsu == null){
             response.sendRedirect("index.jsp");
         } else {
@@ -75,7 +92,7 @@
                                         Habitacion:
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("resTipoHabitacion") %>
+                                        <%= myHab.getTipo() %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -83,7 +100,7 @@
                                         Cant. Personas:
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("resCantPersonas") %>
+                                        <%= myRes.getCantidadPersonas() %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -91,7 +108,7 @@
                                         Check-In:
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("resFechaDe") %>
+                                        <%= resIn %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -99,7 +116,7 @@
                                         Check-Out:
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("resFechaHasta") %>
+                                        <%= resOut %>
                                     </span>
                                 </div>
                             </div>
@@ -117,7 +134,7 @@
                                         DNI:
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("huesDni") %>
+                                        <%= myHues.getDniHuesped() %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -125,7 +142,7 @@
                                         Nombre
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("huesNombre") %>
+                                        <%= myHues.getNombreHuesped() %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -133,7 +150,7 @@
                                         Apellido
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("huesApellido") %>
+                                        <%= myHues.getApellidoHuesped() %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -141,7 +158,7 @@
                                         Fecha Nac:
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("huesFechaNac") %>
+                                        <%= huesDate %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -149,7 +166,7 @@
                                         Direccion:
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("huesDireccion") %>
+                                        <%= myHues.getDireccionHuesped() %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -157,7 +174,7 @@
                                         Profesion:
                                     </label>
                                     <span>
-                                        <%= session.getAttribute("huesProfesion") %>
+                                        <%= myHues.getProfesionHuesped() %>
                                     </span>
                                 </div>
                             </div>
@@ -175,7 +192,7 @@
                                         Total Noches:
                                     </label>
                                     <span>
-                                        <%= "5" %> Noches
+                                        <%= myRes.getCantidadNoches() %> Noches
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
@@ -183,7 +200,7 @@
                                         Precio Estadia:
                                     </label>
                                     <span style="letter-spacing: 1px; color: crimson">
-                                        $ <%= "1500" %>.- 
+                                        $ <%= myRes.getPrecioTotal() %>  
                                     </span>
                                 </div>
                             </div>
@@ -194,7 +211,7 @@
                             <div class="res-confSingleInput" style="justify-content: space-around; width: 50%;">
                                 <label>Cargada Por: </label>
                                 <span>
-                                    <%= "Empleado Apellido" %>
+                                    <%= usuSession.getUsuEmpleado().getNombreCompletoEmpleado() %>
                                 </span>
                             </div>
                         </div>

@@ -78,10 +78,10 @@
                                     <div class="res-singleInput">
                                         <label for="res-tipoHabitacion">Habitacion </label>
                                         <select class="res-select" name="res-tipoHabitacion" id="res-habSelect" onchange="getHabitacion();" required="true">
-                                            <option value="1" >Single Room</option>
-                                            <option value="2" >Double Room</option>
-                                            <option value="3" >Triple Room</option>
-                                            <option value="4" >Multiple Room</option>
+                                            <option value="Single Room" >Single Room</option>
+                                            <option value="Double Room" >Double Room</option>
+                                            <option value="Triple Room" >Triple Room</option>
+                                            <option value="Multiple Room" >Multiple Room</option>
                                         </select>
                                     </div>                                
                                     <div class="res-singleInput">
@@ -178,28 +178,28 @@
             function getHabitacion(){
                 var habitacionElegida = document.getElementById("res-habSelect").value;
 
-                if(habitacionElegida === "1") {
+                if(habitacionElegida === "Single Room") {
                     document.getElementById("2per").style.display = "none";
                     document.getElementById("3per").style.display = "none";
                     document.getElementById("4per").style.display = "none";
                     document.getElementById("5per").style.display = "none";
                     document.getElementById("6per").style.display = "none";
 
-                } else if (habitacionElegida === "2"){
+                } else if (habitacionElegida === "Double Room"){
                     document.getElementById("2per").style.display = "block";
                     document.getElementById("3per").style.display = "none";
                     document.getElementById("4per").style.display = "none";
                     document.getElementById("5per").style.display = "none";
                     document.getElementById("6per").style.display = "none";
 
-                } else if (habitacionElegida === "3") {
+                } else if (habitacionElegida === "Triple Room") {
                     document.getElementById("2per").style.display = "block";
                     document.getElementById("3per").style.display = "block";
                     document.getElementById("4per").style.display = "none";
                     document.getElementById("5per").style.display = "none";
                     document.getElementById("6per").style.display = "none";
 
-                } else if (habitacionElegida === "4") {
+                } else if (habitacionElegida === "Multiple Room") {
                     document.getElementById("2per").style.display = "block";
                     document.getElementById("3per").style.display = "block";
                     document.getElementById("4per").style.display = "block";

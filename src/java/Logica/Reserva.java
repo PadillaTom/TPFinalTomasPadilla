@@ -31,7 +31,7 @@ public class Reserva implements Serializable {
     double precioTotal;
     
     // One Huesped:
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     Huesped resHuesped;
     
     // ManyToOne Empleados:
@@ -57,10 +57,6 @@ public class Reserva implements Serializable {
         this.resUsuario = resUsuario;
         this.resHabitacion = resHabitacion;
     }
-
-
-
-
 
     public int getId_reserva() {
         return id_reserva;

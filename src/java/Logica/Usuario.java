@@ -80,5 +80,10 @@ public class Usuario implements Serializable {
         this.usuEmpleado = usuEmpleado;
     }
     
+    // Metodos:
+    public Reserva getUsuLastReserva(){
+        return usuReserva.get(usuReserva.size()-1);
+    }
+    
     
 }

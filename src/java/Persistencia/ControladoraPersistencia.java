@@ -46,9 +46,15 @@ public class ControladoraPersistencia {
     public List<Habitacion> traerHabitaciones(){
         return habJPA.findHabitacionEntities();
     }
-    public Habitacion traerHabitacionPorId(int habId){
-        return habJPA.findHabitacion(habId);
+    public Habitacion traerHabitacionPorTipo(String resTipoHabitacion){
+        List<Habitacion> myList = habJPA.findHabitacionEntities();
+            for (Habitacion hab : myList){
+                if(hab.getTipo().equals(resTipoHabitacion)){
+                    return hab;
+                }     
+        } return null;
     }
+    
     
     //::::::::::::::::::::::::
     //::::: Huesped :::::
@@ -78,6 +84,8 @@ public class ControladoraPersistencia {
         resJPA.create(res);
     }
     
+    // Find:    
+
     //::::::::::::::::::::::::
     //::::: Usuario :::::
     //::::::::::::::::::::::::
@@ -97,7 +105,8 @@ public class ControladoraPersistencia {
     }
     public Usuario traerUsuarioPorId(int usuId){
         return usuJPA.findUsuario(usuId);
-    }    
+    }
+    
     public Usuario traerUsuarioPorUsername(String usuUsername){
         List<Usuario> myList = usuJPA.findUsuarioEntities();
             for (Usuario usu : myList){

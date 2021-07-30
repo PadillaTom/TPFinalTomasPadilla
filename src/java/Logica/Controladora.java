@@ -109,6 +109,9 @@ public class Controladora {
     public Usuario primerUsuario(String usuUsername){
         return myCP.traerUsuarioPorUsername(usuUsername);
     }
+    public Usuario usuarioPorSession(String usuUsername){
+        return myCP.traerUsuarioPorUsername(usuUsername);
+    }
     public List<Usuario> traerUsuarios(){
         return myCP.traerUsuarios();
     }    
@@ -139,15 +142,16 @@ public class Controladora {
             Date resCheckin = formatter.parse(resFechaDe);
             Date resCheckout = formatter.parse(resFechaHasta);
             Date huesFecha = formatter.parse(huesFechaNac);
+            
             Date resFechaAlta = new Date();
+            // **** VERIFICAR RANGO DE FECHAS ***
 
             // Cantidad Noches:
             long nochesTime = resCheckout.getTime() - resCheckin.getTime();
             int cantidadNoches = (int) Math.floor(nochesTime / (1000*60*60*24));
 
-            // Find Habitacion por ID y Precio Total:
-            int myHabId = Integer.parseInt(resTipoHabitacion);
-            Habitacion myHab = myCP.traerHabitacionPorId(myHabId);
+            // Find Habitacion por Tipo y Precio Total:
+            Habitacion myHab = myCP.traerHabitacionPorTipo(resTipoHabitacion);
             double myHabPrecio = myHab.getPrecioPorNoche();
             double precioTotal = myHabPrecio * cantidadNoches;
 
@@ -165,8 +169,13 @@ public class Controladora {
                 myCP.altaHuesped(myHues);
                 myRes.setResHuesped(myHues);                
             }
+            // Cantidad Personas:
+            int cantPers = Integer.parseInt(resCantPersonas);
+            myRes.setCantidadPersonas(cantPers);
+            // *** VERIFICAR CANT PERSONAS ***
+            
             // Creamos Reserva: 
-            myRes.setCantidadNoches(cantidadNoches);
+            myRes.setCantidadNoches(cantidadNoches);            
             myRes.setFechaDe(resCheckin);
             myRes.setFechaHasta(resCheckout);
             myRes.setFechaDeCarga(resFechaAlta);
