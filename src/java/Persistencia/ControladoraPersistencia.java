@@ -69,7 +69,10 @@ public class ControladoraPersistencia {
                     return hues;
                 }     
         } return null;
-    }    
+    }   
+    public List<Huesped> traerHuespedes(){
+        return huesJPA.findHuespedEntities();
+    }
     
     //::::::::::::::::::::::::
     //::::::: Reserva ::::::::

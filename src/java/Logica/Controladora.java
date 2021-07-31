@@ -78,7 +78,7 @@ public class Controladora {
             Usuario myUsu = new Usuario();
             
             // String to Date:
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date empFecha = formatter.parse(empFechaNac);
             
             // Creamos:            
@@ -121,7 +121,7 @@ public class Controladora {
             Huesped myHues = new Huesped();
 
             // String to Date:
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date resCheckin = formatter.parse(resFechaDe);
             Date resCheckout = formatter.parse(resFechaHasta);
             Date huesFecha = formatter.parse(huesFechaNac);
@@ -200,6 +200,9 @@ public class Controladora {
     //::::::::::::::::::::::::
     //:::::: Huespedes :::::::
     //::::::::::::::::::::::::
+    public List<Huesped> traerHuespedes(){
+        return myCP.traerHuespedes();
+    }
     
     //::::::::::::::::::::::::
     //::::::: Empleados ::::::

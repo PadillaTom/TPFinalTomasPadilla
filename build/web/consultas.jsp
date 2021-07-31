@@ -199,9 +199,9 @@
                         <div class="section-title-underline"></div>
                         <h2>Resultados</h2>
                         
-                        <div class="emp-tableContainer"id="content">
-                           
+                        <div class="emp-tableContainer"id="empContent">
                         </div>
+                        
                     </div>
                 </div>
                 
@@ -215,6 +215,21 @@
                             Lista de todos los huespedes ingresados en el sistema.
                         </h3>
                     </div>
+                    <div class="singleScreen-buscador">
+                        <form action="SvConsListaHuespedes" method="GET" id="formListHosts">                            
+                            <div class="login-formButtons">
+                                <input type="submit" class="formBtn" value="Buscar" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="singleScreen-resultsContainer" style="margin-top: -5rem;">
+                        <div class="section-title-underline"></div>
+                        <h2>Resultados</h2>  
+                        
+                        <div class="emp-tableContainer"id="huesContent">                           
+                        </div>
+                        
+                    </div>
                 </div>
                 
                 <!--*************************-->
@@ -226,11 +241,12 @@
                         <h3>
                             Ingresar DNI de Huesped y el rango de Fechas deseadas.
                         </h3>
-                    </div>
+                    </div>                    
                 </div>
                 
             </div>
-        </section>
+        </section>                              
+                                
         <script
             src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -239,16 +255,34 @@
         
         <!--*** EMPLEADOS ***-->
         <script type="text/javascript">
-            var form = $('#formEmpleadosID');
-            form.submit(function (event) {
+            var formEmp = $('#formEmpleadosID');
+            formEmp.submit(function (event) {
                 event.preventDefault();
                 $.ajax({
-                type: form.attr('method'),
-                url: form.attr('action'),
-                data: form.serialize(),
+                type: formEmp.attr('method'),
+                url: formEmp.attr('action'),
+                data: formEmp.serialize(),
                 success: function (data) {
                     var result=data;
-                    $('#content').html(result);
+                    $('#empContent').html(result);
+                    }             
+                });
+                return false;
+            }); 
+        </script>
+        
+        <!--*** HUESPEDES ***-->
+        <script type="text/javascript">
+            var formHues = $('#formListHosts');
+            formHues.submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                type: formHues.attr('method'),
+                url: formHues.attr('action'),
+                data: formHues.serialize(),
+                success: function (data) {
+                    var result=data;
+                    $('#huesContent').html(result);
                     }             
                 });
                 return false;
