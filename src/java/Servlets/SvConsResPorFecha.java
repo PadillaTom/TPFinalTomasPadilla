@@ -1,6 +1,5 @@
 package Servlets;
 
-
 import Logica.Controladora;
 import Logica.Reserva;
 import java.io.IOException;
@@ -34,7 +33,6 @@ public class SvConsResPorFecha extends HttpServlet {
         mySess.setAttribute("reservasPorFecha", myList);
         
         response.sendRedirect("consultas.jsp");
-       
     }
 
     @Override

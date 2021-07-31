@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @WebServlet(name = "SvConsResPorEmpleado", urlPatterns = {"/SvConsResPorEmpleado"})
@@ -22,7 +24,6 @@ public class SvConsResPorEmpleado extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               
         // Data:
         String dniIngresado =  request.getParameter("buscador");
         // Controladora:
@@ -33,8 +34,54 @@ public class SvConsResPorEmpleado extends HttpServlet {
         HttpSession mySess = request.getSession();
         mySess.setAttribute("reservasPorEmpleado", myList);
         
-        System.out.println(myList);
-        response.sendRedirect("consultas.jsp");
+        // Response:
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        
+        // ====== ARMAMOS JSP ======
+        String datePattern = "dd/MM/yyyy";                                
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+        if(myList != null){
+            if (myList.size() > 0){                
+                    out.println(
+                        "<table>" +
+                            "<thead>" +
+                                "<tr>" +
+                                  "<th>N° Res </th>" +
+                                  "<th>Check-in</th>" +
+                                  "<th>Check-out</th>" +
+                                  "<th>Habitacion</th>" +
+                                  "<th>N° Huespedes</th>" +
+                                  "<th>Huesped Dni</th>" +
+                                  "<th>Huesped</th>" +
+                                  "<th>Empleado</th>" +
+                                "</tr>" +
+                            "</thead>" +                                    
+                            "<tbody>" );
+                    for(Reserva res : myList) {
+                        String resIn = dateFormatter.format(res.getFechaDe());
+                        String resOut = dateFormatter.format(res.getFechaHasta());
+                        out.println(                    
+                            "<tr>" +
+                                "<td>" + res.getId_reserva() + "</td>" +
+                                "<td>" + resIn + "</td>"+
+                                "<td>"+ resOut + "</td>"+
+                                "<td>" + res.getResHabitacion().getTipo() + "</td>" +
+                                "<td>" + res.getCantidadPersonas() + "</td>" +
+                                "<td>" + res.getResHuesped().getDniHuesped() + "</td>" +
+                                "<td>" + res.getResHuesped().getNombreCompletoHuesped() + "</td>" +
+                                "<td>" + res.getResUsuario().getUsuEmpleado().getNombreEmpleado() + "</td>" +
+                            "</tr>"
+                        );
+                    }
+                    out.println(
+                            "</tbody>" +
+                        "</table>"
+                    );
+            } else {
+                out.println("<h3 class="+"buscador-notFound"+">" + "No se encuentran Reservas para la fecha seleccionada." + "</h2>");
+            }           
+        }
     }
 
     @Override

@@ -548,6 +548,9 @@ a {
 .cons-filterMenu > ul > li:hover{
     color: crimson;
 }
+.huesped-link:hover{
+    color: crimson;
+}
 .cons-mainScreenContainer{
     width: 90%;
     margin: 0 auto; 

@@ -71,7 +71,7 @@
                     </li>
                     <li id="porEmp" class="link" onclick="activeLink(this);">
                         Res. por Empleado
-                    </li id="porFecha">
+                    </li>
                     <li id="listaHues" class="link" onclick="activeLink(this);">
                         Lista Huespedes
                     </li>
@@ -185,7 +185,7 @@
                         </h3>
                     </div>
                     <div class="singleScreen-buscador">
-                        <form action="SvConsResPorEmpleado" method="GET" >
+                        <form action="SvConsResPorEmpleado" method="GET" id="formEmpleadosID">
                             <div class="res-factSingleInput">
                                 <label for="buscador">DNI Empelado: </label>
                                 <input type="text" required="true" name="buscador"  style="background: none; text-align:center;">
@@ -199,63 +199,8 @@
                         <div class="section-title-underline"></div>
                         <h2>Resultados</h2>
                         
-                        <div class="emp-tableContainer">
-                            <% 
-//                                List<Reserva> misReservas = (List) mySess.getAttribute("reservasPorFecha");
-//                                    if(misReservas != null){
-//                                        if (misReservas.size() > 1){
-                            %>
-                            <table>
-                                <thead>
-                                    <tr>
-                                      <th>N° Res</th>
-                                      <th>Check-in</th>
-                                      <th>Check-out</th>
-                                      <th>Habitacion</th>
-                                      <th>N° Huespedes</th>
-                                      <th>Huesped Dni</th>
-                                      <th>Huesped</th>
-                                      <th>Empleado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <%
-//                                        for(Reserva res : misReservas) {
-//                                            String resIn = dateFormatter.format(res.getFechaDe());
-//                                            String resOut = dateFormatter.format(res.getFechaHasta());
-                                    %>
-                                    <tr>
-                                        <td>
-                                           <%--<%= // res.getId_reserva() %>--%>
-                                        </td>
-                                        <td>
-                                            <%--<%= // resIn %>--%>
-                                        </td>
-                                        <td>
-                                            <%--<%= // resOut %>--%>
-                                        </td>
-                                        <td>
-                                            <%--<%= // res.getResHabitacion().getTipo() %>--%>
-                                        </td>
-                                        <td>
-                                            <%--<%= // res.getCantidadPersonas() %>--%>
-                                        </td>
-                                        <td>
-                                            <%--<%= // res.getResHuesped().getDniHuesped() %>--%>
-                                        </td>
-                                        <td>
-                                            <%--<%= // res.getResHuesped().getNombreCompletoHuesped() %>--%>
-                                        </td>
-                                        <td>
-                                            <%--<%= // res.getResUsuario().getUsuEmpleado().getNombreEmpleado() %>--%>
-                                        </td>
-                                    </tr>
-                                    <% // } %>                                    
-                                    <% // } else { %> 
-                                    <h3 class="buscador-notFound">No se encuentran Reservas para la fecha seleccionada.</h2>
-                                    <% // } } %>
-                                </tbody>
-                            </table>
+                        <div class="emp-tableContainer"id="content">
+                           
                         </div>
                     </div>
                 </div>
@@ -286,6 +231,31 @@
                 
             </div>
         </section>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">            
+        </script>
+        
+        <!--*** EMPLEADOS ***-->
+        <script type="text/javascript">
+            var form = $('#formEmpleadosID');
+            form.submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serialize(),
+                success: function (data) {
+                    var result=data;
+                    $('#content').html(result);
+                    }             
+                });
+                return false;
+            }); 
+        </script>
+        
+        <!--*** DATE PICKER ***-->
         <script>
             // Date Picker DE:
             const picker1 = MCDatepicker.create({
@@ -354,8 +324,7 @@
                         }
                     }
                 }                
-            }    
-            // Mostrar BUSCADOR PARA EL ACTIVE
+            }
         </script>
     </body>
 </html>
