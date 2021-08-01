@@ -135,6 +135,20 @@ public class Controladora {
 
             // Find Habitacion por Tipo y Precio Total:
             Habitacion myHab = myCP.traerHabitacionPorTipo(resTipoHabitacion);
+            List<Reserva> resDeMyHab = myHab.getHabReservas();
+            if(resDeMyHab.size() > 0){                
+                for(Reserva res : resDeMyHab){
+                    Date fechaDesde = res.getFechaDe();
+                    Date fechaHasta = res.getFechaHasta();
+                    if((resCheckin.before(fechaDesde) && resCheckout.before(fechaDesde)) || (resCheckin.after(fechaHasta) && resCheckout.after(fechaHasta))){
+                        myRes.setResHabitacion(myHab);
+                    }
+                    return;                   
+                }
+            }
+                myRes.setResHabitacion(myHab);
+               
+            
             double myHabPrecio = myHab.getPrecioPorNoche();
             double precioTotal = myHabPrecio * cantidadNoches;
 
@@ -162,8 +176,7 @@ public class Controladora {
             myRes.setFechaDe(resCheckin);
             myRes.setFechaHasta(resCheckout);
             myRes.setFechaDeCarga(resFechaAlta);
-            myRes.setPrecioTotal(precioTotal);
-            myRes.setResHabitacion(myHab);   
+            myRes.setPrecioTotal(precioTotal); 
             
             // Find Usuario :
             Usuario myUsu = myCP.traerUsuarioPorUsername(usuUsername);

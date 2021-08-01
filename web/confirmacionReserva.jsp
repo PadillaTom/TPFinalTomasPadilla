@@ -92,7 +92,11 @@
                                         Habitacion:
                                     </label>
                                     <span>
+                                        <% if(myHab == null ){ %>
+                                        <%= "NULL" %>
+                                        <% } else {%>
                                         <%= myHab.getTipo() %>
+                                        <% } %>
                                     </span>
                                 </div>
                                 <div class="res-confSingleInput">
