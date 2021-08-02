@@ -66,6 +66,21 @@
             <div class="res-formContainer">
                 <form action="SvReservas" method="POST" id="myResForm">
                     <div class="res-formCenter">
+                        <%
+                            String msg = (String) mySess.getAttribute("noDispoMsg");
+                            if(msg != null){
+                                if(msg.equals("no")){
+                        %>
+                        <!--*** Message NO DISPO ***--> 
+                        <div style="display: grid; place-items: center; margin-bottom: 2rem;" id="resVer" class="res-noDispoContainer" >
+                            <h3 style="color: red; letter-spacing: 1.4px;">
+                                Habitacion NO Disponible. Por favor Rellenar el Formulario.
+                            </h3>
+                        </div>
+                        <% 
+                                }
+                            }
+                        %>
                         <div class="res-formSection">
                             <div class="res-formTitle">
                                 <h3>
@@ -109,9 +124,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="display: grid; place-items: center;" >
-                                <input type="submit" value="Verificar Disponibilidad" name="VerifDispo" class="formBtn" style="margin-top: 2rem;" onclick="preventDefault();"/>
-                            </div>  
                         </div>
                         <div class="res-formSection">
                             <div class="res-formTitle">
@@ -158,11 +170,14 @@
                                     <input type="text" name="hues-profesion" required="true" />
                                 </div>
                             </div>
-                        </div>
+                        </div>  
+
+                        <!--*** BTNs Confirmar ***-->
                         <div class="res-formBtnContainer">
                             <input type="submit" value="Guardar" class="formBtn" name="cargarReserva"/>
                             <button type="button" class="formBtn cancelBtn" onclick="borrarCampos(); selectedToDefault();" >Anular</button>
                         </div>
+                       
                     </div>
                 </form>
             </div>            

@@ -114,6 +114,35 @@ public class Controladora {
     //::::::::::::::::::::::::
     //::::::: Reservas :::::::
     //::::::::::::::::::::::::
+    public String verifRes(String resTipoHabitacion, String resFechaDe, String resFechaHasta){
+        try {
+            // String to Date:
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date resCheckin = formatter.parse(resFechaDe);
+            Date resCheckout = formatter.parse(resFechaHasta);
+            
+            // Find Habitacion por Tipo y Precio Total:
+            Habitacion myHab = myCP.traerHabitacionPorTipo(resTipoHabitacion);
+            List<Reserva> resDeMyHab = myHab.getHabReservas();                
+            if(resDeMyHab.size() > 0){
+                for(Reserva res : resDeMyHab){
+                    Date fechaDesde = res.getFechaDe();
+                    Date fechaHasta = res.getFechaHasta();
+                    if((resCheckin.before(fechaDesde) && resCheckout.before(fechaDesde)) || (resCheckin.after(fechaHasta) && resCheckout.after(fechaHasta))){
+                        return "yes";
+                    } else {
+                        return "no";
+                    }
+                }                
+            } else {
+                return "yes";
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "return";
+    }
+    
     public void crearReserva(String resTipoHabitacion, String resCantPersonas, String resFechaDe, String resFechaHasta, String huesDni, String huesNombre, String huesApellido, String huesFechaNac, String huesDireccion, String huesProfesion, String usuUsername){
         try {
             // Instancias:

@@ -7,6 +7,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @WebServlet(name = "SvReservas", urlPatterns = {"/SvReservas"})
 public class SvReservas extends HttpServlet {
@@ -25,10 +28,6 @@ public class SvReservas extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {   
-        
-        if(request.getParameter("VerifDispo") != null) {
-            response.sendRedirect("reservas.jsp");
-        } else if (request.getParameter("cargarReserva") != null) {  
             // Get Data:
             String resTipoHabitacion = request.getParameter("res-tipoHabitacion");
             String resCantPersonas = request.getParameter("res-cantPersonas");
@@ -42,22 +41,23 @@ public class SvReservas extends HttpServlet {
             String huesProfesion = request.getParameter("hues-profesion");
             String usuUsername = (String) request.getSession().getAttribute("usuUsername");
 
-            //  **** Mandarla a Confirm: HARDCODED ****        
-            request.getSession().setAttribute("resTipoHabitacion", resTipoHabitacion);
-            request.getSession().setAttribute("resCantPersonas", resCantPersonas);
-            request.getSession().setAttribute("resFechaDe", resFechaDe);
-            request.getSession().setAttribute("resFechaHasta", resFechaHasta);
-            request.getSession().setAttribute("huesDni", huesDni);
-            request.getSession().setAttribute("huesNombre", huesNombre.substring(0, 1).toUpperCase()+ huesNombre.substring(1));
-            request.getSession().setAttribute("huesApellido", huesApellido.substring(0, 1).toUpperCase()+ huesApellido.substring(1));
-            request.getSession().setAttribute("huesFechaNac", huesFechaNac);
-            request.getSession().setAttribute("huesDireccion", huesDireccion);
-            request.getSession().setAttribute("huesProfesion", huesProfesion.substring(0, 1).toUpperCase()+ huesProfesion.substring(1));       
-
             // Controladora:
             Controladora myContr = new Controladora();
+            String myRes = myContr.verifRes(resTipoHabitacion, resFechaDe, resFechaHasta);
+            if(myRes.equals("no")){
+                // Set:
+                final HttpSession mySess = request.getSession();
+                mySess.setAttribute("noDispoMsg", myRes);
+                response.sendRedirect("reservas.jsp");
+                // Timeout:
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        mySess.setAttribute("noDispoMsg", null);
+                    }
+                }, 5000L); 
+            } else if (myRes.equals("yes")){
             myContr.crearReserva(resTipoHabitacion, resCantPersonas, resFechaDe, resFechaHasta, huesDni, huesNombre, huesApellido, huesFechaNac, huesDireccion, huesProfesion, usuUsername);
-
             // Response:
             response.sendRedirect("confirmacionReserva.jsp");
         }
