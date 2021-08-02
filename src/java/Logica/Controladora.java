@@ -142,11 +142,13 @@ public class Controladora {
                     Date fechaHasta = res.getFechaHasta();
                     if((resCheckin.before(fechaDesde) && resCheckout.before(fechaDesde)) || (resCheckin.after(fechaHasta) && resCheckout.after(fechaHasta))){
                         myRes.setResHabitacion(myHab);
+                    } else {
+                        myRes.setResHabitacion(null);
                     }
-                    return;                   
-                }
-            }
+                }                
+            } else {
                 myRes.setResHabitacion(myHab);
+            }
                
             
             double myHabPrecio = myHab.getPrecioPorNoche();

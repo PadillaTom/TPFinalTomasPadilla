@@ -24,38 +24,43 @@ public class SvReservas extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
-        // Get Data:
-        String resTipoHabitacion = request.getParameter("res-tipoHabitacion");
-        String resCantPersonas = request.getParameter("res-cantPersonas");
-        String resFechaDe = request.getParameter("res-fechaDe");
-        String resFechaHasta = request.getParameter("res-fechaHasta");
-        String huesDni = request.getParameter("hues-dni");
-        String huesNombre = request.getParameter("hues-nombre");
-        String huesApellido = request.getParameter("hues-apellido");
-        String huesFechaNac = request.getParameter("hues-fechaNac");
-        String huesDireccion = request.getParameter("hues-direccion");
-        String huesProfesion = request.getParameter("hues-profesion");
-        String usuUsername = (String) request.getSession().getAttribute("usuUsername");
+            throws ServletException, IOException {   
         
-        //  **** Mandarla a Confirm: HARDCODED ****        
-        request.getSession().setAttribute("resTipoHabitacion", resTipoHabitacion);
-        request.getSession().setAttribute("resCantPersonas", resCantPersonas);
-        request.getSession().setAttribute("resFechaDe", resFechaDe);
-        request.getSession().setAttribute("resFechaHasta", resFechaHasta);
-        request.getSession().setAttribute("huesDni", huesDni);
-        request.getSession().setAttribute("huesNombre", huesNombre.substring(0, 1).toUpperCase()+ huesNombre.substring(1));
-        request.getSession().setAttribute("huesApellido", huesApellido.substring(0, 1).toUpperCase()+ huesApellido.substring(1));
-        request.getSession().setAttribute("huesFechaNac", huesFechaNac);
-        request.getSession().setAttribute("huesDireccion", huesDireccion);
-        request.getSession().setAttribute("huesProfesion", huesProfesion.substring(0, 1).toUpperCase()+ huesProfesion.substring(1));       
-        
-        // Controladora:
-        Controladora myContr = new Controladora();
-        myContr.crearReserva(resTipoHabitacion, resCantPersonas, resFechaDe, resFechaHasta, huesDni, huesNombre, huesApellido, huesFechaNac, huesDireccion, huesProfesion, usuUsername);
-        
-        // Response:
-        response.sendRedirect("confirmacionReserva.jsp");
+        if(request.getParameter("VerifDispo") != null) {
+            response.sendRedirect("reservas.jsp");
+        } else if (request.getParameter("cargarReserva") != null) {  
+            // Get Data:
+            String resTipoHabitacion = request.getParameter("res-tipoHabitacion");
+            String resCantPersonas = request.getParameter("res-cantPersonas");
+            String resFechaDe = request.getParameter("res-fechaDe");
+            String resFechaHasta = request.getParameter("res-fechaHasta");
+            String huesDni = request.getParameter("hues-dni");
+            String huesNombre = request.getParameter("hues-nombre");
+            String huesApellido = request.getParameter("hues-apellido");
+            String huesFechaNac = request.getParameter("hues-fechaNac");
+            String huesDireccion = request.getParameter("hues-direccion");
+            String huesProfesion = request.getParameter("hues-profesion");
+            String usuUsername = (String) request.getSession().getAttribute("usuUsername");
+
+            //  **** Mandarla a Confirm: HARDCODED ****        
+            request.getSession().setAttribute("resTipoHabitacion", resTipoHabitacion);
+            request.getSession().setAttribute("resCantPersonas", resCantPersonas);
+            request.getSession().setAttribute("resFechaDe", resFechaDe);
+            request.getSession().setAttribute("resFechaHasta", resFechaHasta);
+            request.getSession().setAttribute("huesDni", huesDni);
+            request.getSession().setAttribute("huesNombre", huesNombre.substring(0, 1).toUpperCase()+ huesNombre.substring(1));
+            request.getSession().setAttribute("huesApellido", huesApellido.substring(0, 1).toUpperCase()+ huesApellido.substring(1));
+            request.getSession().setAttribute("huesFechaNac", huesFechaNac);
+            request.getSession().setAttribute("huesDireccion", huesDireccion);
+            request.getSession().setAttribute("huesProfesion", huesProfesion.substring(0, 1).toUpperCase()+ huesProfesion.substring(1));       
+
+            // Controladora:
+            Controladora myContr = new Controladora();
+            myContr.crearReserva(resTipoHabitacion, resCantPersonas, resFechaDe, resFechaHasta, huesDni, huesNombre, huesApellido, huesFechaNac, huesDireccion, huesProfesion, usuUsername);
+
+            // Response:
+            response.sendRedirect("confirmacionReserva.jsp");
+        }
     }
 
     @Override

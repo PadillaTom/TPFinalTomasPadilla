@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                             <div style="display: grid; place-items: center;" >
-                                <input type="submit" value="Verificar Disponibilidad" class="formBtn" style="margin-top: 2rem;" onclick="doAction('Verificar');"/>
+                                <input type="submit" value="Verificar Disponibilidad" name="VerifDispo" class="formBtn" style="margin-top: 2rem;" onclick="preventDefault();"/>
                             </div>  
                         </div>
                         <div class="res-formSection">
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                         <div class="res-formBtnContainer">
-                            <input type="submit" value="Guardar" class="formBtn" onclick="doAction('Reservar');"/>
+                            <input type="submit" value="Guardar" class="formBtn" name="cargarReserva"/>
                             <button type="button" class="formBtn cancelBtn" onclick="borrarCampos(); selectedToDefault();" >Anular</button>
                         </div>
                     </div>
@@ -292,21 +292,7 @@
                 ],
                 customClearBTN: "Borrar",
                 customCancelBTN: "Anular",
-            });
-            
-            // Form Action:
-            const myForm = document.getElementById("myResForm");
-            console.log(myForm);
-            function doAction(click){
-                if(click === 'Verificar'){
-                    preventDefault();
-                    myForm.action("SvVerificarDispo");
-                } else{
-                    myForm.setAttribute(action,"SvReservas");
-                }
-                myForm.submit;
-            }
-
+            });  
         </script>
     </body>
 </html>
