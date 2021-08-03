@@ -156,7 +156,6 @@ public class Controladora {
             Date huesFecha = formatter.parse(huesFechaNac);
             
             Date resFechaAlta = new Date();
-            // **** VERIFICAR RANGO DE FECHAS ***
 
             // Cantidad Noches:
             long nochesTime = resCheckout.getTime() - resCheckin.getTime();
@@ -240,6 +239,43 @@ public class Controladora {
         }
         return listaFinal;
     }
+    
+    public List<Reserva> reservasPorHyF(String huesDni, String resFechaDe, String resFechaHasta){
+        try {
+            // Instancias:
+            List<Reserva> resAll = myCP.traerTodasLasReservas();
+            List<Reserva> listaResPorHues = new ArrayList<>();
+            List<Reserva> listaFinal = new ArrayList<>();
+            
+            // String to Date:
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date resFechaIn = formatter.parse(resFechaDe);
+            Date resFechaOut = formatter.parse(resFechaHasta);
+            
+            // Lista Reservas Por Huesped:
+            if(resAll != null) {
+                for (Reserva res : resAll){
+                    String myResHuesDni = res.getResHuesped().getDniHuesped();
+                    if(myResHuesDni.equals(huesDni)){
+                        listaResPorHues.add(res);
+                    }
+                }
+            }
+            
+            // Lista Reservas Final:
+            for(Reserva resFinal : listaResPorHues){
+                Date resIn = resFinal.getFechaDe();
+                Date resOut = resFinal.getFechaHasta();
+                if((resFechaIn.after(resIn) || resFechaIn.before(resOut)) || (resFechaOut.after(resIn)|| resFechaOut.before(resOut))){
+                    listaFinal.add(resFinal);
+                }
+            }
+            return listaFinal;
+        } catch (ParseException ex) {
+            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
        
     //::::::::::::::::::::::::
     //:::::: Huespedes :::::::
@@ -247,7 +283,6 @@ public class Controladora {
     public List<Huesped> traerHuespedes(){
         return myCP.traerHuespedes();
     }
-    
     //::::::::::::::::::::::::
     //::::::: Empleados ::::::
     //::::::::::::::::::::::::
@@ -257,7 +292,6 @@ public class Controladora {
         List<Reserva> resAll = myCP.traerTodasLasReservas();
         List <Reserva> listaFinal = new ArrayList<>();
         
-//        System.out.println("TODAS LAS RESERVAS: " + resAll);
         // All Dates to String and Compare:
         if(resAll != null) {
             for (Reserva res : resAll){
@@ -268,5 +302,7 @@ public class Controladora {
             }
         }
         return listaFinal;
-    }
+    }    
+    
+    
 }

@@ -199,7 +199,7 @@
                         <div class="section-title-underline"></div>
                         <h2>Resultados</h2>
                         
-                        <div class="emp-tableContainer"id="empContent">
+                        <div class="emp-tableContainer" id="empContent">
                         </div>
                         
                     </div>
@@ -226,7 +226,7 @@
                         <div class="section-title-underline"></div>
                         <h2>Resultados</h2>  
                         
-                        <div class="emp-tableContainer"id="huesContent">                           
+                        <div class="emp-tableContainer" id="huesContent">                           
                         </div>
                         
                     </div>
@@ -241,7 +241,37 @@
                         <h3>
                             Ingresar DNI de Huesped y el rango de Fechas deseadas.
                         </h3>
-                    </div>                    
+                    </div> 
+                    <div class="singleScreen-buscador">
+                        <form action="SvConsPorHyF" method="GET" id="formHyF">
+                            <div class="res-factSingleInput">
+                                <label for="buscador">DNI Huesped </label>
+                                <input type="text" required="true" name="hues-dni"  style="background: none; text-align:center;">
+                            </div>
+                            <div style="margin: 1rem 0rem;" >
+                                <div class="res-formTitle">
+                                    <h3>
+                                        Fechas 
+                                    </h3>
+                                    <p>Ingresar fechas de Check-in y Check-out.</p>
+                                </div> 
+                                <div class="datePickerBtnsContainer" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                    <input id="datepickerDeHF" type="text" class="datePickerBtn" placeholder="De" name="res-fechaDe" required="true" style="margin: 0rem 0.7rem;">
+                                    <input id="datepickerHastaHF" type="text" class="datePickerBtn" placeholder="Hasta" name="res-fechaHasta" required="true" style="margin: 0rem 0.7rem;">
+                                </div>
+                            </div>
+                            <div class="login-formButtons">
+                                <input type="submit" class="formBtn" value="Buscar" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="singleScreen-resultsContainer" style="margin-top: 5rem;">
+                        <div class="section-title-underline"></div>
+                        <h2>Resultados</h2>  
+                        
+                        <div class="emp-tableContainer" id="HFContent">                           
+                        </div>                        
+                    </div>
                 </div>
                 
             </div>
@@ -283,6 +313,24 @@
                 success: function (data) {
                     var result=data;
                     $('#huesContent').html(result);
+                    }             
+                });
+                return false;
+            }); 
+        </script>
+        
+        <!--*** HyF ***-->
+        <script type="text/javascript">
+            var formHF = $('#formHyF');
+            formHF.submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                type: formHF.attr('method'),
+                url: formHF.attr('action'),
+                data: formHF.serialize(),
+                success: function (data) {
+                    var result=data;
+                    $('#HFContent').html(result);
                     }             
                 });
                 return false;
@@ -359,6 +407,51 @@
                     }
                 }                
             }
+            
+            // DatePicker DeHF:
+            const picker2 = MCDatepicker.create({
+                el: '#datepickerDeHF',
+                dateFormat: 'dd-MM-yyyy',
+                customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                customMonths: [
+                  'Enero',
+                  'Febrero',
+                  'Marzo',
+                  'Abril',
+                  'Mayo',
+                  'Junio',
+                  'Julio',
+                  'Agosto',
+                  'Sept.',
+                  'Oct.',
+                  'Nov.',
+                  'Dic.',
+                ],
+                customClearBTN: "Borrar",
+                customCancelBTN: "Anular",
+            });
+            // Date Picker HastaHF:
+            const picker3 = MCDatepicker.create({
+                el: '#datepickerHastaHF',
+                dateFormat: 'dd-MM-yyyy',
+                customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                customMonths: [
+                  'Enero',
+                  'Febrero',
+                  'Marzo',
+                  'Abril',
+                  'Mayo',
+                  'Junio',
+                  'Julio',
+                  'Agosto',
+                  'Sept.',
+                  'Oct.',
+                  'Nov.',
+                  'Dic.',
+                ],
+                customClearBTN: "Borrar",
+                customCancelBTN: "Anular",
+            });
         </script>
     </body>
 </html>
