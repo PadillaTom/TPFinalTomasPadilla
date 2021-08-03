@@ -88,7 +88,7 @@ public class Controladora {
             myEmp.setFechaNacEmpleado(empFecha);
             myEmp.setDireccionEmpleado(empDireccion);
             myEmp.setCargoEmpleado(empCargo);
-            
+           
             myUsu.setUsername(empUsername);
             myUsu.setPassword(empPassword);
             myUsu.setUsuEmpleado(myEmp);

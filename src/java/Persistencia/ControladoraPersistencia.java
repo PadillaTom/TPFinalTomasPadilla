@@ -19,8 +19,7 @@ public class ControladoraPersistencia {
     
     //::::::::::::::::::::::::
     //::::::: Empleado :::::::
-    //::::::::::::::::::::::::
-    // Alta:    
+    //::::::::::::::::::::::::    
     // Find: 
     public Empleado traerEmpleadoPorDni(String dniIngresado){
         List<Empleado> myList = empJPA.findEmpleadoEntities();
