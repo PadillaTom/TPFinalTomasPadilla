@@ -81,13 +81,11 @@
                 </ul>
             </div>
             
-            <!--*** Main Screen ***-->
-            <div class="cons-mainScreenContainer">
-                
-                <!--*************************-->
-                <!--****** POR FECHA ******-->
-                <!--*************************-->
-                <div class="cons-singleScreen" id="screenResPorFecha">
+            <!--*************************-->
+            <!--****** POR FECHA ******-->
+            <!--*************************-->
+            <div class="cons-singleScreen" id="screenResPorFecha">
+                <div class="cons-mainScreenContainer"> 
                     <div class="singleScreen-description">
                         <h1>Reservas Por Fecha</h1>
                         <h3>
@@ -106,19 +104,20 @@
                         </form>
                     </div>
                     <div class="singleScreen-resultsContainer">
+                    <% 
+                        String datePattern = "dd/MM/yyyy";                                
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern); 
+
+                        List<Reserva> misReservas = (List) mySess.getAttribute("reservasPorFecha");
+//                                    System.out.println(misReservas);
+                        if(misReservas != null){
+                            if (misReservas.size() > 0){
+                    %>
                         <div class="section-title-underline"></div>
                         <h2>Resultados</h2>
-                        
+
                         <div class="emp-tableContainer">
-                            <% 
-                                    String datePattern = "dd/MM/yyyy";                                
-                                    SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern); 
-                                    
-                                    List<Reserva> misReservas = (List) mySess.getAttribute("reservasPorFecha");
-//                                    System.out.println(misReservas);
-                                    if(misReservas != null){
-                                        if (misReservas.size() > 0){
-                            %>
+
                             <table>
                                 <thead>
                                     <tr>
@@ -173,11 +172,13 @@
                         </div>
                     </div>
                 </div>
-                
-                <!--*************************-->
-                <!--****** POR EMPLEADO ******-->
-                <!--*************************-->
-                <div class="cons-singleScreen" id="screenResPorEmpleado">
+            </div>
+
+            <!--*************************-->
+            <!--****** POR EMPLEADO ******-->
+            <!--*************************-->
+            <div class="cons-singleScreen" id="screenResPorEmpleado">
+                <div class="cons-mainScreenContainer" style="padding-bottom: 0;"> 
                     <div class="singleScreen-description">
                         <h1>Reservas Por Empleado</h1>
                         <h3>
@@ -195,20 +196,18 @@
                             </div>
                         </form>
                     </div>
-                    <div class="singleScreen-resultsContainer">
-                        <div class="section-title-underline"></div>
-                        <h2>Resultados</h2>
-                        
-                        <div class="emp-tableContainer" id="empContent">
+                    <div >
+                        <div class="emp-tableContainer singleScreen-resultsContainer" id="empContent">
                         </div>
-                        
                     </div>
                 </div>
-                
-                <!--*************************-->
-                <!--****** LISTA HUESPEDES ******-->
-                <!--*************************-->
-                <div class="cons-singleScreen" id="screenListaHuespedes">
+            </div>
+            
+            <!--*************************-->
+            <!--****** LISTA HUESPEDES ******-->
+            <!--*************************-->
+            <div class="cons-singleScreen" id="screenListaHuespedes">
+                <div class="cons-mainScreenContainer" style="padding-bottom: 0;"> 
                     <div class="singleScreen-description">
                         <h1>Lista de Huespedes</h1>
                         <h3>
@@ -222,20 +221,18 @@
                             </div>
                         </form>
                     </div>
-                    <div class="singleScreen-resultsContainer" style="margin-top: -5rem;">
-                        <div class="section-title-underline"></div>
-                        <h2>Resultados</h2>  
-                        
-                        <div class="emp-tableContainer" id="huesContent">                           
+                    <div style="margin-top: -5rem;">
+                        <div class="emp-tableContainer singleScreen-resultsContainer" id="huesContent">                           
                         </div>
-                        
                     </div>
                 </div>
-                
-                <!--*************************-->
-                <!--***** POR HUESy FECHA *****-->
-                <!--*************************-->
-                <div class="cons-singleScreen" id="screenResPorHuesyFechas">
+            </div>    
+
+            <!--*************************-->
+            <!--***** POR HUESy FECHA *****-->
+            <!--*************************-->
+            <div class="cons-singleScreen" id="screenResPorHuesyFechas">
+                <div class="cons-mainScreenContainer" style="padding-bottom: 0;"> 
                     <div class="singleScreen-description">
                         <h1>Reservas Por Huesped y Fechas</h1>
                         <h3>
@@ -265,16 +262,13 @@
                             </div>
                         </form>
                     </div>
-                    <div class="singleScreen-resultsContainer" style="margin-top: 5rem;">
-                        <div class="section-title-underline"></div>
-                        <h2>Resultados</h2>  
-                        
-                        <div class="emp-tableContainer" id="HFContent">                           
+                    <div style="margin-top: 5rem;">
+                        <div class="emp-tableContainer singleScreen-resultsContainer" id="HFContent">                           
                         </div>                        
                     </div>
                 </div>
-                
             </div>
+            
         </section>                              
                                 
         <script
@@ -408,10 +402,15 @@
                 }                
             }
             
-            // DatePicker DeHF:
-            const picker2 = MCDatepicker.create({
+            let hastaBtn = document.getElementById("datepickerHastaHF");
+            hastaBtn.disabled=true;
+            hastaBtn.style.background="lightgray";
+            hastaBtn.style.cursor="default";
+            // Date Picker DE:
+            let pickerHF1 = MCDatepicker.create({
                 el: '#datepickerDeHF',
-                dateFormat: 'dd-MM-yyyy',
+                dateFormat: 'dd-mm-yyyy',
+                minDate: new Date(),
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
                   'Enero',
@@ -429,29 +428,42 @@
                 ],
                 customClearBTN: "Borrar",
                 customCancelBTN: "Anular",
-            });
-            // Date Picker HastaHF:
-            const picker3 = MCDatepicker.create({
+            });            
+            let pickerHF2;            
+            pickerHF1.onSelect((date)=> { 
+                // Habilitar HASTA
+                hastaBtn.disabled = false;
+                hastaBtn.style.background="#96baec"; // ColorBlue
+                hastaBtn.style.cursor="pointer";
+                
+                // Settear Min Date:
+                var myMin = new Date(date);
+                myMin.setDate(date.getDate() + 1);
+                
+                // Date Picker HASTA:
+                pickerHF2 = MCDatepicker.create({
                 el: '#datepickerHastaHF',
-                dateFormat: 'dd-MM-yyyy',
+                minDate: myMin,
+                dateFormat: 'dd-mm-yyyy',
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
-                  'Enero',
-                  'Febrero',
-                  'Marzo',
-                  'Abril',
-                  'Mayo',
-                  'Junio',
-                  'Julio',
-                  'Agosto',
-                  'Sept.',
-                  'Oct.',
-                  'Nov.',
-                  'Dic.',
-                ],
+                      'Enero',
+                      'Febrero',
+                      'Marzo',
+                      'Abril',
+                      'Mayo',
+                      'Junio',
+                      'Julio',
+                      'Agosto',
+                      'Sep.',
+                      'Oct.',
+                      'Nov.',
+                      'Dic.',
+                    ],
                 customClearBTN: "Borrar",
                 customCancelBTN: "Anular",
-            });
+            })
+        });
         </script>
     </body>
 </html>

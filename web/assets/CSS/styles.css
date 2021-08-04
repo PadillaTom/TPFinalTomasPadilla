@@ -560,7 +560,6 @@ a {
     border-radius: 1.5rem;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
     padding-top: 2rem;
-    padding-bottom: 4rem;
 }
 /****Links****/
 .cons-active{
@@ -568,7 +567,6 @@ a {
 }
 
 /**** Single Screen ****/
-
 .singleScreen-description > h1 {
     color: var(--FontColorDark);
     font-size: 1.7rem;
@@ -601,7 +599,7 @@ a {
     width: 85%;
     margin: 0 auto;
     margin-top: -1rem;
-    padding-bottom: 2rem;
+    padding-bottom: 4rem;
 }
 .singleScreen-resultsContainer > h2 {
     color: var(--FontColorDark);

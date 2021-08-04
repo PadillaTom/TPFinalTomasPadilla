@@ -45,42 +45,46 @@ public class SvConsPorHyF extends HttpServlet {
         String datePattern = "dd/MM/yyyy";                                
         SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
         if(myList != null){
-            if (myList.size() > 0){                
-                    out.println(
-                        "<table>" +
-                            "<thead>" +
-                                "<tr>" +
-                                  "<th>N° Res </th>" +
-                                  "<th>Check-in</th>" +
-                                  "<th>Check-out</th>" +
-                                  "<th>Habitacion</th>" +
-                                  "<th>N° Huespedes</th>" +
-                                  "<th>Huesped Dni</th>" +
-                                  "<th>Huesped</th>" +
-                                  "<th>Empleado</th>" +
-                                "</tr>" +
-                            "</thead>" +                                    
-                            "<tbody>" );
-                    for(Reserva res : myList) {
-                        String resIn = dateFormatter.format(res.getFechaDe());
-                        String resOut = dateFormatter.format(res.getFechaHasta());
-                        out.println(                    
+            if (myList.size() > 0){   
+                out.println(
+                "<div class='section-title-underline'></div>" +
+                "<h2>Resultados</h2>"
+                );
+                out.println(
+                    "<table>" +
+                        "<thead>" +
                             "<tr>" +
-                                "<td>" + res.getId_reserva() + "</td>" +
-                                "<td>" + resIn + "</td>"+
-                                "<td>"+ resOut + "</td>"+
-                                "<td>" + res.getResHabitacion().getTipo() + "</td>" +
-                                "<td>" + res.getCantidadPersonas() + "</td>" +
-                                "<td>" + res.getResHuesped().getDniHuesped() + "</td>" +
-                                "<td>" + res.getResHuesped().getNombreCompletoHuesped() + "</td>" +
-                                "<td>" + res.getResUsuario().getUsuEmpleado().getNombreEmpleado() + "</td>" +
-                            "</tr>"
-                        );
-                    }
-                    out.println(
-                            "</tbody>" +
-                        "</table>"
+                              "<th>N° Res </th>" +
+                              "<th>Check-in</th>" +
+                              "<th>Check-out</th>" +
+                              "<th>Habitacion</th>" +
+                              "<th>N° Huespedes</th>" +
+                              "<th>Huesped Dni</th>" +
+                              "<th>Huesped</th>" +
+                              "<th>Empleado</th>" +
+                            "</tr>" +
+                        "</thead>" +                                    
+                        "<tbody>" );
+                for(Reserva res : myList) {
+                    String resIn = dateFormatter.format(res.getFechaDe());
+                    String resOut = dateFormatter.format(res.getFechaHasta());
+                    out.println(                    
+                        "<tr>" +
+                            "<td>" + res.getId_reserva() + "</td>" +
+                            "<td>" + resIn + "</td>"+
+                            "<td>"+ resOut + "</td>"+
+                            "<td>" + res.getResHabitacion().getTipo() + "</td>" +
+                            "<td>" + res.getCantidadPersonas() + "</td>" +
+                            "<td>" + res.getResHuesped().getDniHuesped() + "</td>" +
+                            "<td>" + res.getResHuesped().getNombreCompletoHuesped() + "</td>" +
+                            "<td>" + res.getResUsuario().getUsuEmpleado().getNombreEmpleado() + "</td>" +
+                        "</tr>"
                     );
+                }
+                out.println(
+                        "</tbody>" +
+                    "</table>"
+                );
             } else {
                 out.println("<h3 class="+"buscador-notFound"+">" + "No se encuentran Reservas para la fecha seleccionada." + "</h2>");
             }           

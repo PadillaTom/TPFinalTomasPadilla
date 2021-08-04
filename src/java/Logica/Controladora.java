@@ -258,19 +258,21 @@ public class Controladora {
                     String myResHuesDni = res.getResHuesped().getDniHuesped();
                     if(myResHuesDni.equals(huesDni)){
                         listaResPorHues.add(res);
+                        System.out.println("Lista por Huespedes: " + listaResPorHues);
+                        for(Reserva resFinal : listaResPorHues){
+                            Date resIn = resFinal.getFechaDe();
+                            Date resOut = resFinal.getFechaHasta();
+                            System.out.println("Fecha de resFinal: " + resIn + " hasta " + resOut);
+                            if( (resIn.after(resFechaIn) && resIn.before(resFechaOut)) || (resOut.before(resFechaOut) && resOut.after(resFechaIn)) ){
+                                listaFinal.add(resFinal);                            
+                                System.out.println("Lista Final: " + listaFinal);
+                                return listaFinal; 
+                            }
+                        }                        
                     }
                 }
             }
-            
-            // Lista Reservas Final:
-            for(Reserva resFinal : listaResPorHues){
-                Date resIn = resFinal.getFechaDe();
-                Date resOut = resFinal.getFechaHasta();
-                if((resFechaIn.after(resIn) || resFechaIn.before(resOut)) || (resFechaOut.after(resIn)|| resFechaOut.before(resOut))){
-                    listaFinal.add(resFinal);
-                }
-            }
-            return listaFinal;
+            return listaFinal; 
         } catch (ParseException ex) {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
