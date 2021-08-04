@@ -117,7 +117,10 @@ public class Controladora {
     }
     public Usuario usuarioPorSession(String usuUsername){
         return myCP.traerUsuarioPorUsername(usuUsername);
-    }    
+    }   
+    public Usuario traerUsuarioPorId(int id){
+        return myCP.traerUsuarioPorId(id);
+    }
     
     //::::::::::::::::::::::::
     //::::::: Reservas :::::::
@@ -319,6 +322,12 @@ public class Controladora {
         int idEmp = miUsu.getUsuEmpleado().getId_empleado();
         myCP.borrarEmpYUsu(idEmp, idUsu);
     }
+    // Editar:
+//    public void editarEmpYUsu(int idUsu){
+//        Usuario miUsu = myCP.traerUsuarioPorId(idUsu);
+//        int idEmp = miUsu.getUsuEmpleado().getId_empleado();
+//        myCP.editarEmpYUsu(idEmp, idUsu);
+//    }
     
     
 }

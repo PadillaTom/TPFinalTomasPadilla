@@ -183,16 +183,74 @@
                                     String usuDate = dateFormatter.format(usuDateBefore);
                                     if(usu.getUsername().equals("AdminHotel")){                                        
                             %>
-                                <tr style="background-color: #DCE9F9">
+                            <tr style="background-color: #DCE9F9">
+                                <td>
+                                    <%= usu.getUsername() %>
+                                </td>
+                                <td>
+                                    <%= usu.getPassword() %>
+                                </td>
+                                <td>
+                                    <%= usu.getUsuEmpleado().getDniEmpleado() %>
+                                </td>
+                                <td>
+                                    <%= usu.getUsuEmpleado().getNombreEmpleado() %>
+                                </td>
+                                <td>
+                                    <%= usu.getUsuEmpleado().getApellidoEmpleado() %>
+                                </td>
+                                <td>
+                                    <%= usuDate %>
+                                </td>
+                                <td>
+                                    <%= usu.getUsuEmpleado().getDireccionEmpleado() %>
+                                </td>
+                                <td>
+                                    <%= usu.getUsuEmpleado().getCargoEmpleado() %>
+                                </td>
+                                <td class="emp-tableIconsContainer">
+                                    <div>
+                                        <button type="submit" style="outline: none; background: none; border: none;"></button>
+                                    </div>
+                                    <div>
+                                          <button type="submit" style="outline: none; background: none; border: none;"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% } else {%>                            
+                            <!--*** MODAL ***-->
+                            <div class="emp-Modal" id="myModal">
+                                <div class="modal-content">
+                                    <div class="modal-texts">
+                                        <h2>Se eliminará definitivamente al Empleado y su Usuario.</h2>
+                                        <h3>Desea continuar?</h3>
+                                    </div>
+                                    <div class="modal-btns">
+                                        <div class="modal-singleBtn">
+                                            <form action="SvDeleteEmp" method="POST" class="modal-singleBtn">
+                                                <input type="hidden" name="idEmp" value="<%= usu.getId_usuario()%>">
+                                                <button type="submit" style="outline: none; background: none; border: none; background: #d85888 " class="formBtn">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-singleBtn">
+                                            <button type="submit" style="outline: none; background: none; border: none; background: #faeecf" class="formBtn" onclick="closeModal();">
+                                                Anular
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--*** Tabla Empleados ***-->
+                                <tr>
                                     <td>
                                         <%= usu.getUsername() %>
                                     </td>
                                     <td>
                                         <%= usu.getPassword() %>
                                     </td>
-                                    <td>
-                                        <%= usu.getUsuEmpleado().getDniEmpleado() %>
-                                    </td>
+                                    <td><%= usu.getUsuEmpleado().getDniEmpleado() %></td>
                                     <td>
                                         <%= usu.getUsuEmpleado().getNombreEmpleado() %>
                                     </td>
@@ -209,54 +267,26 @@
                                         <%= usu.getUsuEmpleado().getCargoEmpleado() %>
                                     </td>
                                     <td class="emp-tableIconsContainer">
-                                        <div>
-                                            <button type="submit" style="outline: none; background: none; border: none;"></button>
-                                        </div>
-                                        <div>
-                                              <button type="submit" style="outline: none; background: none; border: none;"></button>
+                                        <form action="SvEditEmp" method="POST" id="formEditBtn">
+                                            <input type="hidden" name="idEmp" value="<%= usu.getId_usuario() %>">
+                                            <button type="submit" style="outline: none; background: none; border: none;" onclick="openModalEdit();">
+                                                <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
+                                            </button>
+                                        </form>
+                                        <div>                                                
+                                            <button style="outline: none; background: none; border: none;" onclick="openModal();">
+                                                <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Eliminar Empleado" />
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
-                                <% } else {%>
-                                    <tr>
-                                        <td>
-                                            <%= usu.getUsername() %>
-                                        </td>
-                                        <td>
-                                            <%= usu.getPassword() %>
-                                        </td>
-                                        <td><%= usu.getUsuEmpleado().getDniEmpleado() %></td>
-                                        <td>
-                                            <%= usu.getUsuEmpleado().getNombreEmpleado() %>
-                                        </td>
-                                        <td>
-                                            <%= usu.getUsuEmpleado().getApellidoEmpleado() %>
-                                        </td>
-                                        <td>
-                                            <%= usuDate %>
-                                        </td>
-                                        <td>
-                                            <%= usu.getUsuEmpleado().getDireccionEmpleado() %>
-                                        </td>
-                                        <td>
-                                            <%= usu.getUsuEmpleado().getCargoEmpleado() %>
-                                        </td>
-                                        <td class="emp-tableIconsContainer">
-                                            <form action="SvEditEmp" method="POST">
-                                                <input type="hidden" name="idEmp" value="<%= usu.getId_usuario() %>">
-                                                <button type="submit" style="outline: none; background: none; border: none;">
-                                                    <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
-                                                </button>
-                                            </form>
-                                            <form action="SvDeleteEmp" method="POST">
-                                                <input type="hidden" name="idEmp" value="<%= usu.getId_usuario()%>">
-                                                <button type="submit" style="outline: none; background: none; border: none;">
-                                                    <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado"/>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <% } %>
+                                <!--*** Modal EDIT ***-->                           
+                                <div id="modal-EditEmp" >
+                                    <div id="editableEmpleado">
+                                        
+                                    </div>
+                                </div>
+                                <% } %>
                             <% } %>
                         </tbody>
                     </table>
@@ -264,7 +294,40 @@
             </div>
         </section>
     <script src="./assets/JS/main.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">            
+    </script>
     <script>
+        // Modal Delte:
+        var modal = document.getElementById("myModal");
+        function openModal(){
+            modal.style.display= "grid";
+        }
+        function closeModal(){
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+            }
+        }
+        // Modal Edit:
+        var modalEdit = document.getElementById("modal-EditEmp");
+        function openModalForm(){
+            modalEdit.style.display="grid";
+        }
+        function closeModalEdit(){
+            modalEdit.style.display="none";
+        }
+        window.onclick = function(event) {
+        if (event.target === modalEdit) {
+          modalEdit.style.display = "none";
+            }
+        }
+
+        
         //  Date Picker EMPFECHANAC:
         const picker3 = MCDatepicker.create({
                 el: '#datepickerEmpFechaNac',
@@ -288,6 +351,22 @@
                 customCancelBTN: "Anular",
             });
     </script>
+            <!--*** EDIT Emple ***-->
+     <script type="text/javascript">
+         var formEdit = $('#formEditBtn');
+         formEdit.submit(function (event) {   
+             $.ajax({
+             type: formEdit.attr('method'),
+             url: formEdit.attr('action'),
+             data: formEdit.serialize(),
+             success: function (data) {
+                 var result=data;
+                 $('#editableEmpleado').html(result);
+                 }             
+             });
+             return false;
+         }); 
+     </script>
     <%}%>
     </body>
 </html>

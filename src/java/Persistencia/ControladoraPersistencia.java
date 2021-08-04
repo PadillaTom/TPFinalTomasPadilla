@@ -30,6 +30,7 @@ public class ControladoraPersistencia {
                 }     
         } return null;
     }
+ 
     // Borrar:
     public void borrarEmpYUsu(int idEmp, int idUsu){
         try {
@@ -39,6 +40,14 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    // Editar:
+//    public void EditarEmpYUsu(int idUsu){
+//        try {
+//           
+//        } catch (NonexistentEntityException ex) {
+//            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
     //::::::::::::::::::::::::
     //::::: Habitacion :::::
@@ -113,6 +122,7 @@ public class ControladoraPersistencia {
     public List<Usuario> traerUsuarios(){
         return usuJPA.findUsuarioEntities();
     }
+    
     public Usuario traerUsuarioPorId(int usuId){
         return usuJPA.findUsuario(usuId);
     }

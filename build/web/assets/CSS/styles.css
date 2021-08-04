@@ -21,7 +21,9 @@ Variables
     --FontColorPink: #d85888;
     /* Font Colors */
     --BtnColorPrimary: #f2d0de;
-    --BtnColorSecondary: #faeecf;    
+    --BtnColorSecondary: #faeecf;     
+    /* Others */
+    --MainTrans: 0.3s linear all;
 }
 
 /* 
@@ -78,12 +80,15 @@ a {
     padding: 0.65rem 1.1rem;
     font-size: 1.1rem;
     cursor: pointer;
+    transition: var(--MainTrans);
 }
 .formBtn:hover {
     box-shadow: 0px 2px 5px rgba(50,50,50,0.2);
+    transition: var(--MainTrans);
 }
 .cancelBtn {
     background-color: var(--ColorPink);
+    transition: var(--MainTrans);
 }
 
 
@@ -150,6 +155,7 @@ a {
     font-size: 1.2rem;
     cursor: pointer;
     margin-left: 1rem;
+    transition: var(--MainTrans);
 }
 .login-singleInput > input:focus {
     border-color: var(--ColorBlue);
@@ -354,6 +360,7 @@ a {
     font-size: 1.2rem;
     cursor: pointer;
     margin-left: 1rem;
+    transition: var(--MainTrans);
 }
 
 .res-factSingleInput > input:focus{
@@ -401,6 +408,7 @@ a {
     font-size: 1rem;
     color: white;
     cursor: pointer;
+    transition: var(--MainTrans);
 }
 .datePickerBtn::placeholder {
     text-align: center;
@@ -438,6 +446,7 @@ a {
     display: none;    
     place-items: center;
     margin-top: 2rem;
+    transition: var(--MainTrans);
 }
 .emp-addEmpHiddenForm > form {
     background: var(--ColorWhite);
@@ -502,6 +511,82 @@ a {
     cursor: pointer; 
 }
 
+/**** MODAL ****/
+.emp-Modal {
+    display: none;
+    place-items: center;
+    position: fixed; 
+    z-index: 100000; 
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+    transition: var(--MainTrans);
+}
+.modal-content{
+    width: 35rem;
+    height: 20rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    border-radius: 2rem;
+}
+.modal-texts {
+    padding: 0rem 2.5rem;
+    color: var(--FontColorBlack);
+}
+.modal-texts > h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.8px;
+}
+.modal-texts > h3 {
+    margin-top: 0.7rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+}
+.modal-btns{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -8rem;
+    transition: var(--MainTrans);
+}
+
+/*Modal EDIT*/
+.modal-EditEmp{
+    display: grid;
+    place-items: center;
+    position: fixed; 
+    z-index: 100000; 
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+    transition: var(--MainTrans);
+}
+.modal-EditEmp > * {
+    background: var(--ColorWhite);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    border-radius: 1.3rem;
+    width: 50rem; 
+}
+
+
+
+/*Delte Modal*/
+
+/*Edit Modal*/
+
 /***************************** 
 **** Confirmacion Reserva ****
 ******************************/
@@ -549,6 +634,7 @@ a {
     letter-spacing: 1px;
     color: var(--FontColorDark);
     cursor: pointer;
+    transition: var(--MainTrans);
 }
 .cons-filterMenu > ul > li:hover{
     color: crimson;
@@ -617,3 +703,4 @@ a {
     text-align: center;
     padding-bottom: 2rem;
 }
+
