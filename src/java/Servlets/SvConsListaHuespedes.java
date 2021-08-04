@@ -48,7 +48,7 @@ public class SvConsListaHuespedes extends HttpServlet {
                 "<h2>Resultados</h2>"
                 );
                 out.println(
-                    "<table>" +
+                    "<table style='margin-bottom: 2rem;'>" +
                         "<thead>" +
                             "<tr>" +
                               "<th>DNI</th>" +

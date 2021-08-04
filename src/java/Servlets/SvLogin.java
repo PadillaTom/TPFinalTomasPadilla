@@ -40,7 +40,6 @@ public class SvLogin extends HttpServlet {
                 HttpSession mySess = request.getSession(true);
                 mySess.setAttribute("usuUsername", usuUsername);
                 mySess.setAttribute("usuPassword", usuPassword);
-                
                 response.sendRedirect("dashboard.jsp");  
             } else {
                 String errorMsg = "Ingreso Fallido, verificar Usuario y Contraseña";

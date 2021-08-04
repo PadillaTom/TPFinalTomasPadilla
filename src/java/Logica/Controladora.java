@@ -100,6 +100,14 @@ public class Controladora {
         }
     }
     
+    public String verifUsuario(String usuUsername){
+        Usuario myUsu = myCP.traerUsuarioPorUsername(usuUsername);
+        if (myUsu != null){
+            return "true";
+        } else {
+            return "false";
+        }
+    }
     // Find: 
     public Usuario primerUsuario(String usuUsername){
         return myCP.traerUsuarioPorUsername(usuUsername);
@@ -244,7 +252,6 @@ public class Controladora {
         try {
             // Instancias:
             List<Reserva> resAll = myCP.traerTodasLasReservas();
-            List<Reserva> listaResPorHues = new ArrayList<>();
             List<Reserva> listaFinal = new ArrayList<>();
             
             // String to Date:
@@ -257,22 +264,21 @@ public class Controladora {
                 for (Reserva res : resAll){
                     String myResHuesDni = res.getResHuesped().getDniHuesped();
                     if(myResHuesDni.equals(huesDni)){
-                        listaResPorHues.add(res);
-                        System.out.println("Lista por Huespedes: " + listaResPorHues);
-                        for(Reserva resFinal : listaResPorHues){
+                        List<Reserva> tempList = new ArrayList<>();
+                        tempList.add(res);
+                        for(Reserva resFinal : tempList){
                             Date resIn = resFinal.getFechaDe();
                             Date resOut = resFinal.getFechaHasta();
-                            System.out.println("Fecha de resFinal: " + resIn + " hasta " + resOut);
-                            if( (resIn.after(resFechaIn) && resIn.before(resFechaOut)) || (resOut.before(resFechaOut) && resOut.after(resFechaIn)) ){
-                                listaFinal.add(resFinal);                            
-                                System.out.println("Lista Final: " + listaFinal);
-                                return listaFinal; 
+                            if( ( (resIn.after(resFechaIn) && resIn.before(resFechaOut)) || (resOut.after(resFechaIn) && resOut.before(resFechaOut)) ) || (resIn.before(resFechaOut)&&(resOut.after(resFechaIn))) ){
+                                System.out.println(resFinal.getId_reserva());
+                                listaFinal.add(resFinal); 
                             }
-                        }                        
+                        } 
                     }
                 }
+            return listaFinal;
             }
-            return listaFinal; 
+             
         } catch (ParseException ex) {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -285,6 +291,7 @@ public class Controladora {
     public List<Huesped> traerHuespedes(){
         return myCP.traerHuespedes();
     }
+    
     //::::::::::::::::::::::::
     //::::::: Empleados ::::::
     //::::::::::::::::::::::::
@@ -305,6 +312,13 @@ public class Controladora {
         }
         return listaFinal;
     }    
+    
+    // Borrar:
+    public void borrarEmpYUsu(int idUsu){
+        Usuario miUsu = myCP.traerUsuarioPorId(idUsu);
+        int idEmp = miUsu.getUsuEmpleado().getId_empleado();
+        myCP.borrarEmpYUsu(idEmp, idUsu);
+    }
     
     
 }

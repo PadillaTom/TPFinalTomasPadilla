@@ -5,6 +5,7 @@ import Logica.Habitacion;
 import Logica.Huesped;
 import Logica.Reserva;
 import Logica.Usuario;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,15 @@ public class ControladoraPersistencia {
                     return emp;
                 }     
         } return null;
+    }
+    // Borrar:
+    public void borrarEmpYUsu(int idEmp, int idUsu){
+        try {
+            usuJPA.destroy(idUsu);
+            empJPA.destroy(idEmp);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     //::::::::::::::::::::::::

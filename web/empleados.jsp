@@ -74,6 +74,16 @@
                 <div class="emp-addEmpContainer">
                     <input type="submit" class="emp-addEmp formBtn" value="Nuevo Empleado" id="displayAddEmpForm"  onclick="showForm();" />
                 </div>
+                
+                <%
+                String errorMsg = (String) mySess.getAttribute("errorMsg");
+                if(errorMsg != null){
+                    if(errorMsg.equals("true")){
+                %>
+                <div class="buscador-notFound">
+                    <h2>El Username esta en uso. Por favor elegir otro Username.</h2>
+                </div>
+                <% }} %>
                     
                 <!--*** Add Empleado ***-->
                 <div class="emp-addEmpHiddenForm" id="empForm">
@@ -199,6 +209,12 @@
                                         <%= usu.getUsuEmpleado().getCargoEmpleado() %>
                                     </td>
                                     <td class="emp-tableIconsContainer">
+                                        <div>
+                                            <button type="submit" style="outline: none; background: none; border: none;"></button>
+                                        </div>
+                                        <div>
+                                              <button type="submit" style="outline: none; background: none; border: none;"></button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <% } else {%>
@@ -226,8 +242,18 @@
                                             <%= usu.getUsuEmpleado().getCargoEmpleado() %>
                                         </td>
                                         <td class="emp-tableIconsContainer">
-                                            <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
-                                            <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado"/>
+                                            <form action="SvEditEmp" method="POST">
+                                                <input type="hidden" name="idEmp" value="<%= usu.getId_usuario() %>">
+                                                <button type="submit" style="outline: none; background: none; border: none;">
+                                                    <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
+                                                </button>
+                                            </form>
+                                            <form action="SvDeleteEmp" method="POST">
+                                                <input type="hidden" name="idEmp" value="<%= usu.getId_usuario()%>">
+                                                <button type="submit" style="outline: none; background: none; border: none;">
+                                                    <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Editar Empleado"/>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     <% } %>

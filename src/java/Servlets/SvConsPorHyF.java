@@ -51,7 +51,7 @@ public class SvConsPorHyF extends HttpServlet {
                 "<h2>Resultados</h2>"
                 );
                 out.println(
-                    "<table>" +
+                    "<table style='margin-bottom: 2rem;'>" +
                         "<thead>" +
                             "<tr>" +
                               "<th>N° Res </th>" +
@@ -86,7 +86,7 @@ public class SvConsPorHyF extends HttpServlet {
                     "</table>"
                 );
             } else {
-                out.println("<h3 class="+"buscador-notFound"+">" + "No se encuentran Reservas para la fecha seleccionada." + "</h2>");
+                out.println("<h3 class="+"buscador-notFound"+">" + "No se encuentran Reservas para el Huesped, en el rango de Fechas seleccionada." + "</h2>");
             }           
         }
     }     

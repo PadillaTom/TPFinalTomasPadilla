@@ -117,8 +117,7 @@
                         <h2>Resultados</h2>
 
                         <div class="emp-tableContainer">
-
-                            <table>
+                            <table style="margin-bottom: 2rem;">
                                 <thead>
                                     <tr>
                                       <th>N° Res</th>
@@ -165,7 +164,7 @@
                                     </tr>
                                     <% } %>                                    
                                     <% } else { %> 
-                                    <h3 class="buscador-notFound">No se encuentran Reservas para la fecha seleccionada.</h2>
+                                    <h3 class="buscador-notFound">No se encuentran Reservas para la Fecha seleccionada.</h2>
                                     <% } } %>
                                 </tbody>
                             </table>
@@ -196,10 +195,10 @@
                             </div>
                         </form>
                     </div>
-                    <div >
-                        <div class="emp-tableContainer singleScreen-resultsContainer" id="empContent">
-                        </div>
+                    
+                    <div class="emp-tableContainer singleScreen-resultsContainer" id="empContent">
                     </div>
+                    
                 </div>
             </div>
             
@@ -214,7 +213,7 @@
                             Lista de todos los huespedes ingresados en el sistema.
                         </h3>
                     </div>
-                    <div class="singleScreen-buscador">
+                    <div class="singleScreen-buscador" >
                         <form action="SvConsListaHuespedes" method="GET" id="formListHosts">                            
                             <div class="login-formButtons">
                                 <input type="submit" class="formBtn" value="Buscar" />
@@ -410,7 +409,6 @@
             let pickerHF1 = MCDatepicker.create({
                 el: '#datepickerDeHF',
                 dateFormat: 'dd-mm-yyyy',
-                minDate: new Date(),
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
                   'Enero',

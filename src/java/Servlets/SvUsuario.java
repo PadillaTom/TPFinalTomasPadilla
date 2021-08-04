@@ -1,12 +1,16 @@
 package Servlets;
 
 import Logica.Controladora;
+import Logica.Usuario;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @WebServlet(name = "SvUsuario", urlPatterns = {"/SvUsuario"})
 public class SvUsuario extends HttpServlet {
@@ -37,9 +41,19 @@ public class SvUsuario extends HttpServlet {
         
         // Controller:
         Controladora myControladora = new Controladora();
-        myControladora.altaUsuario(empUsername, empPassword, empDni, empNombre, empApellido, empFechaNac, empDireccion, empCargo);
-        
-        // Response:
+        String verifUsu = myControladora.verifUsuario(empUsername);
+        if(verifUsu.equals("true")){
+            final HttpSession mySess = request.getSession(true);
+            mySess.setAttribute("errorMsg", verifUsu);
+            new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        mySess.setAttribute("errorMsg", null);
+                    }
+                }, 5000L); 
+        } else if (verifUsu.equals("false")){
+            myControladora.altaUsuario(empUsername, empPassword, empDni, empNombre, empApellido, empFechaNac, empDireccion, empCargo);
+        }
         response.sendRedirect("empleados.jsp");
     }
 
