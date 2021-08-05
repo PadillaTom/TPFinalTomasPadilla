@@ -323,11 +323,9 @@ public class Controladora {
         myCP.borrarEmpYUsu(idEmp, idUsu);
     }
     // Editar:
-//    public void editarEmpYUsu(int idUsu){
-//        Usuario miUsu = myCP.traerUsuarioPorId(idUsu);
-//        int idEmp = miUsu.getUsuEmpleado().getId_empleado();
-//        myCP.editarEmpYUsu(idEmp, idUsu);
-//    }
-    
+    public void modificarEmpleado(Usuario usu, Empleado emple){
+        myCP.modificarEmpleado(usu, emple);
+        
+    }
     
 }

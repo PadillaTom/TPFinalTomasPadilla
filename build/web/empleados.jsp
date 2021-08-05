@@ -267,9 +267,9 @@
                                         <%= usu.getUsuEmpleado().getCargoEmpleado() %>
                                     </td>
                                     <td class="emp-tableIconsContainer">
-                                        <form action="SvEditEmp" method="POST" id="formEditBtn">
+                                        <form action="SvEditEmp" method="POST">
                                             <input type="hidden" name="idEmp" value="<%= usu.getId_usuario() %>">
-                                            <button type="submit" style="outline: none; background: none; border: none;" onclick="openModalEdit();">
+                                            <button type="submit" style="outline: none; background: none; border: none;">
                                                 <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
                                             </button>
                                         </form>
@@ -279,13 +279,7 @@
                                             </button>
                                         </div>
                                     </td>
-                                </tr>
-                                <!--*** Modal EDIT ***-->                           
-                                <div id="modal-EditEmp" >
-                                    <div id="editableEmpleado">
-                                        
-                                    </div>
-                                </div>
+                                </tr>      
                                 <% } %>
                             <% } %>
                         </tbody>
@@ -312,22 +306,7 @@
         if (event.target === modal) {
           modal.style.display = "none";
             }
-        }
-        // Modal Edit:
-        var modalEdit = document.getElementById("modal-EditEmp");
-        function openModalForm(){
-            modalEdit.style.display="grid";
-        }
-        function closeModalEdit(){
-            modalEdit.style.display="none";
-        }
-        window.onclick = function(event) {
-        if (event.target === modalEdit) {
-          modalEdit.style.display = "none";
-            }
-        }
-
-        
+        }        
         //  Date Picker EMPFECHANAC:
         const picker3 = MCDatepicker.create({
                 el: '#datepickerEmpFechaNac',
@@ -351,7 +330,7 @@
                 customCancelBTN: "Anular",
             });
     </script>
-            <!--*** EDIT Emple ***-->
+<!--            *** EDIT Emple ***
      <script type="text/javascript">
          var formEdit = $('#formEditBtn');
          formEdit.submit(function (event) {   
@@ -366,7 +345,7 @@
              });
              return false;
          }); 
-     </script>
+     </script>-->
     <%}%>
     </body>
 </html>

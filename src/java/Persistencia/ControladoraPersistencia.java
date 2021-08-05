@@ -41,13 +41,15 @@ public class ControladoraPersistencia {
         }
     }
     // Editar:
-//    public void EditarEmpYUsu(int idUsu){
-//        try {
-//           
-//        } catch (NonexistentEntityException ex) {
-//            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    public void modificarEmpleado(Usuario usu, Empleado emple){
+        try {
+            usuJPA.edit(usu);
+            empJPA.edit(emple);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     
     //::::::::::::::::::::::::
     //::::: Habitacion :::::

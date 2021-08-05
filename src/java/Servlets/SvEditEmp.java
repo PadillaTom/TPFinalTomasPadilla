@@ -1,6 +1,7 @@
 package Servlets;
 
 import Logica.Controladora;
+import Logica.Empleado;
 import Logica.Usuario;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -9,7 +10,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet(name = "SvEditEmp", urlPatterns = {"/SvEditEmp"})
 public class SvEditEmp extends HttpServlet {
@@ -22,7 +29,48 @@ public class SvEditEmp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            // Get Data:
+            String empUsername = request.getParameter("empUsername");
+            String empPassword = request.getParameter("empPassword");
+            String empDni = request.getParameter("empDni");
+            String empNombre = request.getParameter("empNombre");
+            String empApellido = request.getParameter("empApellido");
+            String empFechaNac = request.getParameter("empFechaNac");
+            String empDireccion = request.getParameter("empDireccion");
+            String empCargo = request.getParameter("empCargo");            
+            int idUsu = Integer.parseInt(request.getParameter("idUsuario"));
+            
+            // Controladora GET:
+            Controladora myController = new Controladora();
+            Usuario myUsuModif = myController.traerUsuarioPorId(idUsu);
+            Empleado myEmpModif = myUsuModif.getUsuEmpleado();
+            
+            // String to Date:
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date empDate = formatter.parse(empFechaNac);
+            
+            //Set:    
+            myUsuModif.setUsername(empUsername);
+            myUsuModif.setPassword(empPassword);
+            myEmpModif.setDniEmpleado(empDni);
+            myEmpModif.setNombreEmpleado(empNombre);
+            myEmpModif.setApellidoEmpleado(empApellido);
+            myEmpModif.setFechaNacEmpleado(empDate);
+            myEmpModif.setDireccionEmpleado(empDireccion);
+            myEmpModif.setCargoEmpleado(empCargo);
+            
+            // Controladora SET:
+            myController.modificarEmpleado(myUsuModif, myEmpModif);
+            
+            // Response:
+            response.sendRedirect("empleados.jsp");               
+            
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(SvEditEmp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override
@@ -40,80 +88,8 @@ public class SvEditEmp extends HttpServlet {
         mySess.setAttribute("myEmpModif", myUsu);
         
         // Response:
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        
-        if(myUsu != null){
-        out.println(       
-                "<div class='modal-EditEmpFormContainer'>" +
-                "<form class='emp-addEmpForm' action='SvUsuario' method='POST' id='myEmpForm' >"+
-                        "<div class='res-formCenter'>"+
-                        "<div class='res-formSection'>"+
-                        "<div class='res-formTitle'>"+
-                        " <h3>"+
-                        " Editar Empleado"+
-                        "</h3>"+
-                        "<p>Se Modificaran los datos del empleado.</p>"+
-                        "</div> "+
-                        "<div class='res-formInputsContainer res-facturacionContainer'>"+
-                        "<div class='res-factSingleInput'>"+
-                        "<label for='empUsernam'>"+
-                        "Usuario:"+
-                        "</label>"+
-                        "<input type='text' name='empUsername' required='true' />"+
-                        "</div>"+
-                        "<div class='res-factSingleInput'>"+
-                        " <label for='empPassword'>"+
-                        " Contraseña:"+
-                        "</label>"+
-                        "<input type='text' name='empPassword' required='true' />"+
-                        "</div>"+
-                        "<div class='res-factSingleInput'>"+
-                        "<label for='empDni'>"+
-                        "DNI:"+
-                        "</label>"+
-                        "<input type='text' name='empDni' required='true' />"+
-                        " </div>"+
-                        "<div class='res-factSingleInput'>"+
-                        "<label for='empNombre'>"+
-                        "Nombre:"+
-                        " </label>"+
-                        "<input type='text' name='empNombre' required='true' />"+
-                        "</div>"+
-                        "<div class='res-factSingleInput'>"+
-                        "<label for='empApellido'>"+
-                        " Apellido:"+
-                        "</label>"+
-                        "<input type='text' name='empApellido' required='true' />"+
-                        "</div>"+
-                        " <div class='res-factSingleInput'>"+
-                        "<label for='empFechaNac'>"+
-                        " Fecha Nac:"+
-                        " </label>"+
-                        "<input type='text' name='empFechaNac' required='true' id='datepickerEmpFechaNac' placeholder='Seleccionar Fecha' />"+
-                        "</div>"+
-                        " <div class='res-factSingleInput'>"+
-                        " <label for='empDireccion'>"+
-                        " Direccion:"+
-                        " </label>"+
-                        "  <input type='text' name='empDireccion' required='true' />"+
-                        " </div>"+
-                        "<div class='res-factSingleInput'>"+
-                        " <label for='empCargo'>"+
-                        "Cargo:"+
-                        " </label>"+
-                        " <input type='text' name='empCargo' required='true' />"+
-                        " </div>"+
-                        " </div>"+
-                        " </div>"+
-                        " <div class='emp-addEmpFormBtns'>"+
-                        "<input type='submit' value='Modificar' class='formBtn' />" +
-                        " <button type='button' class='formBtn cancelBtn' onclick='closeModalEdit();' >Anular</button>"+
-                        "</div>"+
-                        " </div>"+
-                        " </form>"+
-                        " </div>");
-    }}
+        response.sendRedirect("modificacionEmpleado.jsp");
+    }
 
     @Override
     public String getServletInfo() {
