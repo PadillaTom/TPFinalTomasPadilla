@@ -53,8 +53,9 @@ public class SvUsuario extends HttpServlet {
                 }, 5000L); 
         } else if (verifUsu.equals("false")){
             myControladora.altaUsuario(empUsername, empPassword, empDni, empNombre, empApellido, empFechaNac, empDireccion, empCargo);
+            response.sendRedirect("empleados.jsp");
         }
-        response.sendRedirect("empleados.jsp");
+        
     }
 
     @Override

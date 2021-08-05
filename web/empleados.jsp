@@ -216,10 +216,10 @@
                                 </td>
                                 <td class="emp-tableIconsContainer">
                                     <div>
-                                        <button type="submit" style="outline: none; background: none; border: none;"></button>
+                                        <div></div>
                                     </div>
                                     <div>
-                                          <button type="submit" style="outline: none; background: none; border: none;"></button>
+                                          <div></div>
                                     </div>
                                 </td>
                             </tr>
@@ -255,37 +255,38 @@
                                             <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
                                         </button>
                                     </form>
-                                    <div>                                                
-                                        <button style="outline: none; background: none; border: none;" onclick="openModal();">
+                                                
+                                    <!--*** MODAL ***-->
+                                    <div class="emp-Modal" id="myModal">
+                                        <div class="modal-content">
+                                            <div class="modal-texts">
+                                                <h2>Se eliminará definitivamente al Empleado y su Usuario.</h2>
+                                                <h3>Desea continuar?</h3>
+                                            </div>
+                                            <div class="modal-btns">
+                                                <div class="modal-singleBtn">
+                                                    <form action="SvDeleteEmp" method="POST" class="modal-singleBtn">
+                                                        <input type="hidden" name="idEmp"  id="inputData">
+                                                        <button type="submit" style="outline: none; background: none; border: none; background: #d85888 " class="formBtn">
+                                                            Eliminar
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-singleBtn">
+                                                    <button type="submit" style="outline: none; background: none; border: none; background: #faeecf" class="formBtn" onclick="closeModal();">
+                                                        Anular
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div> 
+                                        <button style="outline: none; background: none; border: none;" onclick="openModal(<%=usu.getId_usuario()%>);" data-usuId="123" >
                                             <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Eliminar Empleado" />
                                         </button>
                                     </div>
                                 </td>
                             </tr>
-                            <!--*** MODAL ***-->
-                            <div class="emp-Modal" id="myModal">
-                                <div class="modal-content">
-                                    <div class="modal-texts">
-                                        <h2>Se eliminará definitivamente al Empleado y su Usuario.</h2>
-                                        <h3>Desea continuar?</h3>
-                                    </div>
-                                    <div class="modal-btns">
-                                        <div class="modal-singleBtn">
-                                            <form action="SvDeleteEmp" method="POST" class="modal-singleBtn">
-                                                <input type="hidden" name="idEmp" value="<%= usu.getId_usuario()%>">
-                                                <button type="submit" style="outline: none; background: none; border: none; background: #d85888 " class="formBtn">
-                                                    Eliminar
-                                                </button>
-                                            </form>
-                                        </div>
-                                        <div class="modal-singleBtn">
-                                            <button type="submit" style="outline: none; background: none; border: none; background: #faeecf" class="formBtn" onclick="closeModal();">
-                                                Anular
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <% } %>
                             <% } %>
                         </tbody>
@@ -304,8 +305,10 @@
     <script>
         // Modal Delte:
         var modal = document.getElementById("myModal");
-        function openModal(){
+        function openModal(el){
             modal.style.display= "grid";
+            let eliminarBtn = document.getElementById("inputData");
+            eliminarBtn.setAttribute("value", el);
         }
         function closeModal(){
             modal.style.display = "none";

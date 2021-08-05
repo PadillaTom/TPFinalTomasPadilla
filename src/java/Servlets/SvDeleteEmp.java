@@ -28,6 +28,7 @@ public class SvDeleteEmp extends HttpServlet {
             throws ServletException, IOException {
         // Get Data:
         int empId = Integer.parseInt(request.getParameter("idEmp"));
+        System.out.println(empId);
         
         // Controller:
         Controladora myController = new Controladora();
