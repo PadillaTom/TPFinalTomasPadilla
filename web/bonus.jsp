@@ -47,7 +47,7 @@
                         </li>
                         <li class="nav-singleLink  nav-linkActivo">
                             <a href="bonus.jsp">
-                                Bonus
+                                Utiles
                             </a>
                         </li>
                         <li class="nav-singleLink singleLink-logout">
@@ -93,15 +93,15 @@
                         </h3>
                     </div> 
                     <div class="singleScreen-buscador">
-                        <form action="SvConsBonus" method="GET" id="">
+                        <form action="SvBonificacionEmp" method="GET" id="formBonifEmp">
                             <div class="res-factSingleInput">
-                                <label for="buscador">DNI Empleado </label>
-                                <input type="text" required="true" name="hues-dni"  style="background: none; text-align:center;">
+                                <label for="dniEmp">DNI Empleado </label>
+                                <input type="text" required="true" name="dniEmp"  style="background: none; text-align:center;">
                             </div>
                             <div style="margin: 1rem 0rem; margin-bottom: 2rem;" >
                                 <div class="res-factSingleInput">
                                     <label for="buscador">Fecha: </label>
-                                    <input id="datepickerEmpFecha" type="text" required="true" name="buscador"  style="background: none; text-align:center;">
+                                    <input id="datepickerEmpFecha" type="text" required="true" name="fechaEmp"  style="background: none; text-align:center;">
                                 </div>
                             </div>
                             <div class="login-formButtons">
@@ -112,7 +112,7 @@
                     
                     <!--*** Tabla AJAX y armado HTML en Servlet ***-->
                     <div style="margin-top: 5rem;">
-                        <div class="emp-tableContainer singleScreen-resultsContainer" id="">                           
+                        <div class="emp-tableContainer singleScreen-resultsContainer" id="responseBonifEmp">                           
                         </div>                        
                     </div>
                     
@@ -131,19 +131,19 @@
                         </h3>
                     </div>
                     <div class="singleScreen-buscador">
-                        <form action="SvConsBonus" method="GET" id="formEmpleadosID">
+                        <form action="SvBonusGanancias" method="GET" id="formGanDiarias">
                             <div class="res-factSingleInput">
-                                <label for="buscador">Fecha: </label>
-                                <input id="datepickerGanDiarias" type="text" required="true" name="buscador"  style="background: none; text-align:center;">
+                                <label for="fechaDiarias">Fecha: </label>
+                                <input id="datepickerGanDiarias" type="text" required="true" name="fechaDiarias"  style="background: none; text-align:center;">
                             </div>
                             <div class="login-formButtons">
-                                <input type="submit" class="formBtn" value="Buscar" />
+                                <input type="submit" class="formBtn" value="Buscar"  />
                             </div>
                         </form>
                     </div>
                     
                     <!--*** Tabla AJAX y armado HTML en Servlet ***-->
-                    <div class="emp-tableContainer singleScreen-resultsContainer" id="">
+                    <div class="emp-tableContainer singleScreen-resultsContainer" id="responseGanDiarias">
                     </div>
                     
                 </div>
@@ -152,16 +152,23 @@
             <!--*************************-->
             <!--*** Ganancias Mensuales ***-->
             <!--*************************-->
-            <div class="cons-singleScreen" id="screenGanMensuales">
+                 <div class="cons-singleScreen" id="screenGanMensuales">
                 <div class="cons-mainScreenContainer" style="padding-bottom: 0;"> 
                     <div class="singleScreen-description">
                         <h1>Ganancias Mensuales</h1>
                         <h3>
-                            Seleccionar un mes para obtener un Resumen de las ganancias mensuales.
+                            Seleccionar CUALQUIER fecha del Mes deseado ver un Resumen de ganancias.
+                            <br>
+                            <br>
+                            Ejemplo: 02-02-2020 Para ver ganancias de "Febrero 2020".
                         </h3>
                     </div>
-                    <div class="singleScreen-buscador" >
-                        <form action="SvConsBonus" method="GET" id="formListHosts">                            
+                    <div class="singleScreen-buscador">
+                        <form action="SvBonusGanancias" method="POST" id="formGanMensuales">
+                            <div class="res-factSingleInput">
+                                <label for="buscador">Mes: </label>
+                                <input id="datepickerGanMensuales" type="text" required="true" name="fechaMensual"  style="background: none; text-align:center;">
+                            </div>
                             <div class="login-formButtons">
                                 <input type="submit" class="formBtn" value="Buscar" />
                             </div>
@@ -169,15 +176,11 @@
                     </div>
                     
                     <!--*** Tabla AJAX y armado HTML en Servlet ***-->
-                    <div style="margin-top: -5rem;">
-                        <div class="emp-tableContainer singleScreen-resultsContainer" id="">                           
-                        </div>
+                    <div class="emp-tableContainer singleScreen-resultsContainer" id="responseGanMensuales">
                     </div>
                     
                 </div>
-            </div>    
-
-            
+            </div>
             
         </section>                              
          
@@ -189,16 +192,16 @@
         </script>        
         <!--*** Emp y Fecha ***-->
         <script type="text/javascript">
-            var formEmp = $('#');
-            formEmp.submit(function (event) {
+            var formBonifEmp = $('#formBonifEmp');
+            formBonifEmp.submit(function (event) {
                 event.preventDefault();
                 $.ajax({
-                type: formEmp.attr('method'),
-                url: formEmp.attr('action'),
-                data: formEmp.serialize(),
+                type: formBonifEmp.attr('method'),
+                url: formBonifEmp.attr('action'),
+                data: formBonifEmp.serialize(),
                 success: function (data) {
                     var result=data;
-                    $('#').html(result);
+                    $('#responseBonifEmp').html(result);
                     }             
                 });
                 return false;
@@ -206,16 +209,16 @@
         </script>        
         <!--*** Ganancias Diarias ***-->
         <script type="text/javascript">
-            var formHues = $('#');
-            formHues.submit(function (event) {
+            var formGanDiarias = $('#formGanDiarias');
+            formGanDiarias.submit(function (event) {
                 event.preventDefault();
                 $.ajax({
-                type: formHues.attr('method'),
-                url: formHues.attr('action'),
-                data: formHues.serialize(),
+                type: formGanDiarias.attr('method'),
+                url: formGanDiarias.attr('action'),
+                data: formGanDiarias.serialize(),
                 success: function (data) {
                     var result=data;
-                    $('#').html(result);
+                    $('#responseGanDiarias').html(result);
                     }             
                 });
                 return false;
@@ -223,16 +226,16 @@
         </script>        
         <!--*** Ganancias Mensuales ***-->
         <script type="text/javascript">
-            var formHF = $('#');
-            formHF.submit(function (event) {
+            var formGanMensuales = $('#formGanMensuales');
+            formGanMensuales.submit(function (event) {
                 event.preventDefault();
                 $.ajax({
-                type: formHF.attr('method'),
-                url: formHF.attr('action'),
-                data: formHF.serialize(),
+                type: formGanMensuales.attr('method'),
+                url: formGanMensuales.attr('action'),
+                data: formGanMensuales.serialize(),
                 success: function (data) {
                     var result=data;
-                    $('#').html(result);
+                    $('#responseGanMensuales').html(result);
                     }             
                 });
                 return false;

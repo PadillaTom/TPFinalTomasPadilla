@@ -4,6 +4,7 @@ import Persistencia.ControladoraPersistencia;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -156,6 +157,73 @@ public class Controladora {
         return "return";
     }
     
+    public double gananciasMensuales(String fecha){
+        try {
+            // String to Date:
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date empFecha = formatter.parse(fecha);
+            // Get Month:
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(empFecha);
+            int mesMio = calendar.get(Calendar.MONTH);
+            
+            // Lista a Sumar:
+            List<Double> listaSumar = new ArrayList<>();
+            
+            // Traer todas mis res, comparar con dateGetMonth:
+            List<Reserva> todasRes = myCP.traerTodasLasReservas();
+            Calendar calendarRes = Calendar.getInstance();
+            for (Reserva res : todasRes){
+                // Get Month:
+                Date dateRes = res.getFechaDeCarga();
+                calendarRes.setTime(dateRes);
+                int mesBD = calendarRes.get(Calendar.MONTH);
+                if(mesBD == mesMio){
+                    listaSumar.add(res.getPrecioTotal());
+                }
+            }
+            
+            double montoTotal= 0;
+            for (double i : listaSumar){
+                montoTotal += i;
+            }
+            
+            return montoTotal;
+        } catch (ParseException ex) {
+            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public List<Reserva> reservasMensuales(String fecha){
+        try {
+            List<Reserva> reservasMensuales = new ArrayList<>();
+            // String to Date:
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date empFecha = formatter.parse(fecha);
+            // Get Month:
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(empFecha);
+            int mesMio = calendar.get(Calendar.MONTH);
+            
+            // Traer todas mis res, comparar con dateGetMonth:
+            List<Reserva> todasRes = myCP.traerTodasLasReservas();
+            Calendar calendarRes = Calendar.getInstance();
+            for (Reserva res : todasRes){
+                // Get Month:
+                Date dateRes = res.getFechaDeCarga();
+                calendarRes.setTime(dateRes);
+                int mesBD = calendarRes.get(Calendar.MONTH);
+                if(mesBD == mesMio){
+                    reservasMensuales.add(res);
+                }
+            }
+            return reservasMensuales;
+        } catch (ParseException ex) {
+            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public void crearReserva(String resTipoHabitacion, String resCantPersonas, String resFechaDe, String resFechaHasta, String huesDni, String huesNombre, String huesApellido, String huesFechaNac, String huesDireccion, String huesProfesion, String usuUsername){
         try {
             // Instancias:
@@ -236,7 +304,7 @@ public class Controladora {
         // Instancias:
         List<Reserva> resAll = myCP.traerTodasLasReservas();
         List <Reserva> listaFinal = new ArrayList<>();
-//        System.out.println("TODAS LAS RESERVAS: " + resAll);
+        // System.out.println("TODAS LAS RESERVAS: " + resAll);
         // All Dates to String and Compare:
         if(resAll != null) {
             for (Reserva res : resAll){
@@ -246,6 +314,7 @@ public class Controladora {
                 String fechaRes = dateFormatter.format(fechaDate);
                 if(fechaIngresada.equals(fechaRes)){
                     listaFinal.add(res);
+                    System.out.println("Controladora " + listaFinal);
                 }
             }
         }
@@ -282,7 +351,6 @@ public class Controladora {
                 }
             return listaFinal;
             }
-             
         } catch (ParseException ex) {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -314,7 +382,11 @@ public class Controladora {
             }
         }
         return listaFinal;
-    }    
+    }  
+    
+    public Empleado traerEmpleadoPorDni(String dni){
+        return myCP.traerEmpleadoPorDni(dni);
+    }
     
     // Borrar:
     public void borrarEmpYUsu(int idUsu){

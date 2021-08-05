@@ -46,7 +46,7 @@
                         </li>
                         <li class="nav-singleLink">
                             <a href="bonus.jsp">
-                                Bonus
+                                Utiles
                             </a>
                         </li>
                         <li class="nav-singleLink singleLink-logout">
