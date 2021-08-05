@@ -17,8 +17,7 @@
     %>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">
-            <div class="navigationCenter">
-                
+            <div class="navigationCenter">                
                 <div class="nav-logoContainer">
                     <h1>Mi Hotel</h1>
                 </div>
@@ -44,14 +43,18 @@
                                 Empleados
                             </a>
                         </li>
+                        <li class="nav-singleLink">
+                            <a href="bonus.jsp">
+                                Bonus
+                            </a>
+                        </li>
                         <li class="nav-singleLink singleLink-logout">
                             <a href="SvLogout">
                                 Cerrar Sesión
                             </a>
                         </li>
                     </ul>
-                </div>
-                
+                </div>                
             </div>
         </nav>
         <!-- *** Seccion Principal *** -->

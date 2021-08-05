@@ -7,13 +7,12 @@
         <link rel="stylesheet" href="./assets/CSS/styles.css" type="text/css" />
         <link href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
-        <title>Mi Hotel - Form Enviado</title>
+        <title>Mi Hotel - Modificar Empleado</title>
     </head>
     <body>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">
-            <div class="navigationCenter">
-                
+            <div class="navigationCenter">                
                 <div class="nav-logoContainer">
                     <h1>Mi Hotel</h1>
                 </div>
@@ -39,16 +38,21 @@
                                 Empleados
                             </a>
                         </li>
+                        <li class="nav-singleLink">
+                            <a href="bonus.jsp">
+                                Bonus
+                            </a>
+                        </li>
                         <li class="nav-singleLink singleLink-logout">
                             <a href="SvLogout">
                                 Cerrar Sesión
                             </a>
                         </li>
                     </ul>
-                </div>
-                
+                </div>                
             </div>
         </nav>
+        
         <!-- *** Seccion Principal *** -->
         <section class="section main-sect">
             <h1 class="section-title" style="color: green;">
@@ -68,15 +72,6 @@
                 <form class="emp-addEmpForm" action="SvEditEmp" method="GET" id="EditEmpleForm">
                     <div class="res-formCenter">
                         <div class="res-formSection">
-                        <%
-                            String errorMsg = (String) mySess.getAttribute("errorMsg");
-                            if(errorMsg != null){
-                                if(errorMsg.equals("true")){
-                            %>
-                            <div class="buscador-notFound">
-                                <h2>El Username esta en uso. Por favor elegir otro Username.</h2>
-                            </div>
-                        <% }} %>
                             <div class="res-formTitle">
                                 <h3>
                                     Editar Empleado
@@ -143,6 +138,8 @@
                 </form>
             </div>
         </section>    
+                            
+    <!--*** JAVASCRIPT ***-->
     <script src="./assets/JS/main.js"></script>
     <script>
         //  Date Picker EMPFECHANAC:

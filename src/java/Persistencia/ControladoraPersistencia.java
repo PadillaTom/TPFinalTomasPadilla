@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ControladoraPersistencia {
+public class ControladoraPersistencia {    
     // ::: Instancias :::
     EmpleadoJpaController empJPA = new EmpleadoJpaController();
     HabitacionJpaController habJPA = new HabitacionJpaController();
@@ -49,12 +49,10 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     
     //::::::::::::::::::::::::
-    //::::: Habitacion :::::
-    //::::::::::::::::::::::::
-    
+    //:::::: Habitacion ::::::
+    //::::::::::::::::::::::::    
     // Alta:
     public void altaHabitacion(Habitacion hab){
         try {
@@ -63,6 +61,7 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     // Find:    
     public Habitacion traerHabitacionPorTipo(String resTipoHabitacion){
         List<Habitacion> myList = habJPA.findHabitacionEntities();
@@ -75,8 +74,7 @@ public class ControladoraPersistencia {
     
     //::::::::::::::::::::::::
     //::::::: Huesped ::::::::
-    //::::::::::::::::::::::::
-    
+    //::::::::::::::::::::::::    
     // Alta:
     public void altaHuesped(Huesped hues){
         huesJPA.create(hues);
@@ -106,11 +104,18 @@ public class ControladoraPersistencia {
     public List<Reserva> traerTodasLasReservas(){
         return resJPA.findReservaEntities();
     }
+    // Modificacion:
+    public void modifReserva(Reserva res){
+        try {
+            resJPA.edit(res);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     //::::::::::::::::::::::::
-    //::::: Usuario :::::
-    //::::::::::::::::::::::::
-    
+    //::::::: Usuario ::::::::
+    //::::::::::::::::::::::::    
     // Alta:
     public void altaUsuario(Usuario usu){
         usuJPA.create(usu);
@@ -136,5 +141,6 @@ public class ControladoraPersistencia {
                     return usu;
                 }     
         } return null;
-    }    
+    }   
+    
 }

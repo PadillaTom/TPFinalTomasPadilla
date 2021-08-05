@@ -47,6 +47,11 @@
                                 Empleados
                             </a>
                         </li>
+                        <li class="nav-singleLink">
+                            <a href="bonus.jsp">
+                                Bonus
+                            </a>
+                        </li>
                         <li class="nav-singleLink singleLink-logout">
                             <a href="SvLogout">
                                 Cerrar Sesión
@@ -57,6 +62,7 @@
                 
             </div>
         </nav>
+        
         <!-- *** Seccion Principal *** -->
         <section class="section main-sect">
             <h1 class="section-title">
@@ -174,14 +180,14 @@
                         <tbody>
                             <!--*** CONSULTA EMPLEADOS ***-->
                             <% 
-                                Controladora myContr = new Controladora();                                
-                                String datePattern = "dd/MM/yyyy";                                
-                                SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);                                 
-                                List<Usuario> usuLista = myContr.traerUsuarios();
-                                for(Usuario usu : usuLista) {
-                                    Date usuDateBefore = usu.getUsuEmpleado().getFechaNacEmpleado();
-                                    String usuDate = dateFormatter.format(usuDateBefore);
-                                    if(usu.getUsername().equals("AdminHotel")){                                        
+                            Controladora myContr = new Controladora();                                
+                            String datePattern = "dd/MM/yyyy";                                
+                            SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);                                 
+                            List<Usuario> usuLista = myContr.traerUsuarios();
+                            for(Usuario usu : usuLista) {
+                                Date usuDateBefore = usu.getUsuEmpleado().getFechaNacEmpleado();
+                                String usuDate = dateFormatter.format(usuDateBefore);
+                                if(usu.getUsername().equals("AdminHotel")){                                        
                             %>
                             <tr style="background-color: #DCE9F9">
                                 <td>
@@ -217,7 +223,45 @@
                                     </div>
                                 </td>
                             </tr>
-                            <% } else {%>                            
+                            <% } else {%>
+                            <!--*** Tabla Empleados ***-->
+                            <tr>
+                                <td>
+                                    <%= usu.getUsername() %>
+                                </td>
+                                <td>
+                                    <%= usu.getPassword() %>
+                                </td>
+                                <td><%= usu.getUsuEmpleado().getDniEmpleado() %></td>
+                                <td>
+                                    <%= usu.getUsuEmpleado().getNombreEmpleado() %>
+                                </td>
+                                <td>
+                                    <%= usu.getUsuEmpleado().getApellidoEmpleado() %>
+                                </td>
+                                <td>
+                                    <%= usuDate %>
+                                </td>
+                                <td>
+                                    <%= usu.getUsuEmpleado().getDireccionEmpleado() %>
+                                </td>
+                                <td>
+                                    <%= usu.getUsuEmpleado().getCargoEmpleado() %>
+                                </td>
+                                <td class="emp-tableIconsContainer">
+                                    <form action="SvEditEmp" method="POST">
+                                        <input type="hidden" name="idEmp" value="<%= usu.getId_usuario() %>">
+                                        <button type="submit" style="outline: none; background: none; border: none;">
+                                            <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
+                                        </button>
+                                    </form>
+                                    <div>                                                
+                                        <button style="outline: none; background: none; border: none;" onclick="openModal();">
+                                            <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Eliminar Empleado" />
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
                             <!--*** MODAL ***-->
                             <div class="emp-Modal" id="myModal">
                                 <div class="modal-content">
@@ -242,51 +286,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--*** Tabla Empleados ***-->
-                                <tr>
-                                    <td>
-                                        <%= usu.getUsername() %>
-                                    </td>
-                                    <td>
-                                        <%= usu.getPassword() %>
-                                    </td>
-                                    <td><%= usu.getUsuEmpleado().getDniEmpleado() %></td>
-                                    <td>
-                                        <%= usu.getUsuEmpleado().getNombreEmpleado() %>
-                                    </td>
-                                    <td>
-                                        <%= usu.getUsuEmpleado().getApellidoEmpleado() %>
-                                    </td>
-                                    <td>
-                                        <%= usuDate %>
-                                    </td>
-                                    <td>
-                                        <%= usu.getUsuEmpleado().getDireccionEmpleado() %>
-                                    </td>
-                                    <td>
-                                        <%= usu.getUsuEmpleado().getCargoEmpleado() %>
-                                    </td>
-                                    <td class="emp-tableIconsContainer">
-                                        <form action="SvEditEmp" method="POST">
-                                            <input type="hidden" name="idEmp" value="<%= usu.getId_usuario() %>">
-                                            <button type="submit" style="outline: none; background: none; border: none;">
-                                                <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
-                                            </button>
-                                        </form>
-                                        <div>                                                
-                                            <button style="outline: none; background: none; border: none;" onclick="openModal();">
-                                                <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Eliminar Empleado" />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>      
-                                <% } %>
+                            <% } %>
                             <% } %>
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
+                        
+    <!--*** JAVASCRIPT ***-->
     <script src="./assets/JS/main.js"></script>
     <script
         src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -306,8 +314,8 @@
         if (event.target === modal) {
           modal.style.display = "none";
             }
-        }        
-        //  Date Picker EMPFECHANAC:
+        };    
+        //  Date Picker: Empleado Fecha Nacimiento:
         const picker3 = MCDatepicker.create({
                 el: '#datepickerEmpFechaNac',
                 dateFormat: 'dd-mm-yyyy',
@@ -324,28 +332,12 @@
                   'Sept.',
                   'Oct.',
                   'Nov.',
-                  'Dic.',
+                  'Dic.'
                 ],
                 customClearBTN: "Borrar",
-                customCancelBTN: "Anular",
+                customCancelBTN: "Anular"
             });
     </script>
-<!--            *** EDIT Emple ***
-     <script type="text/javascript">
-         var formEdit = $('#formEditBtn');
-         formEdit.submit(function (event) {   
-             $.ajax({
-             type: formEdit.attr('method'),
-             url: formEdit.attr('action'),
-             data: formEdit.serialize(),
-             success: function (data) {
-                 var result=data;
-                 $('#editableEmpleado').html(result);
-                 }             
-             });
-             return false;
-         }); 
-     </script>-->
     <%}%>
     </body>
 </html>

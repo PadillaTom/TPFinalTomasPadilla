@@ -66,6 +66,7 @@ public class Controladora {
             myUsu.setUsuEmpleado(myEmp);
             
             myCP.altaUsuario(myUsu);
+            
         } catch (ParseException ex) {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -108,6 +109,7 @@ public class Controladora {
             return "false";
         }
     }
+    
     // Find: 
     public Usuario primerUsuario(String usuUsername){
         return myCP.traerUsuarioPorUsername(usuUsername);
@@ -188,8 +190,7 @@ public class Controladora {
             } else {
                 myRes.setResHabitacion(myHab);
             }
-               
-            
+                           
             double myHabPrecio = myHab.getPrecioPorNoche();
             double precioTotal = myHabPrecio * cantidadNoches;
 
@@ -207,10 +208,10 @@ public class Controladora {
                 myCP.altaHuesped(myHues);
                 myRes.setResHuesped(myHues);                
             }
+            
             // Cantidad Personas:
             int cantPers = Integer.parseInt(resCantPersonas);
             myRes.setCantidadPersonas(cantPers);
-            // *** VERIFICAR CANT PERSONAS ***
             
             // Creamos Reserva: 
             myRes.setCantidadNoches(cantidadNoches);            
@@ -297,8 +298,7 @@ public class Controladora {
     
     //::::::::::::::::::::::::
     //::::::: Empleados ::::::
-    //::::::::::::::::::::::::
-    // Get emp by DNI:
+    //::::::::::::::::::::::::   
     public List<Reserva> traerResPorEmpleadoDni(String dniIngresado ){
          // Instancias:
         List<Reserva> resAll = myCP.traerTodasLasReservas();
@@ -310,7 +310,7 @@ public class Controladora {
                 String myResDni = res.getResUsuario().getUsuEmpleado().getDniEmpleado();
                 if(myResDni.equals(dniIngresado)){
                     listaFinal.add(res);
-                }
+                }                            
             }
         }
         return listaFinal;
@@ -320,8 +320,19 @@ public class Controladora {
     public void borrarEmpYUsu(int idUsu){
         Usuario miUsu = myCP.traerUsuarioPorId(idUsu);
         int idEmp = miUsu.getUsuEmpleado().getId_empleado();
+        
+        List<Reserva> miUsuRes = miUsu.getUsuReserva();
+        if(miUsuRes.size()>0){
+            for(Reserva res : miUsuRes){
+                Usuario admin = myCP.primerUsuario();
+                res.setResUsuario(admin);
+                myCP.modifReserva(res);
+            }
+        }      
+        
         myCP.borrarEmpYUsu(idEmp, idUsu);
     }
+    
     // Editar:
     public void modificarEmpleado(Usuario usu, Empleado emple){
         myCP.modificarEmpleado(usu, emple);

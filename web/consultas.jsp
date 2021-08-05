@@ -19,8 +19,7 @@
     %>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">
-            <div class="navigationCenter">
-                
+            <div class="navigationCenter">                
                 <div class="nav-logoContainer">
                     <h1>Mi Hotel</h1>
                 </div>
@@ -46,14 +45,18 @@
                                 Empleados
                             </a>
                         </li>
+                        <li class="nav-singleLink">
+                            <a href="bonus.jsp">
+                                Bonus
+                            </a>
+                        </li>
                         <li class="nav-singleLink singleLink-logout">
                             <a href="SvLogout">
                                 Cerrar Sesión
                             </a>
                         </li>
                     </ul>
-                </div>
-                
+                </div>                
             </div>
         </nav>
         
@@ -82,7 +85,7 @@
             </div>
             
             <!--*************************-->
-            <!--****** POR FECHA ******-->
+            <!--******* POR FECHA *******-->
             <!--*************************-->
             <div class="cons-singleScreen" id="screenResPorFecha">
                 <div class="cons-mainScreenContainer"> 
@@ -115,7 +118,8 @@
                     %>
                         <div class="section-title-underline"></div>
                         <h2>Resultados</h2>
-
+                        
+                        <!--*** Tabla Como Visto en Clase ***-->
                         <div class="emp-tableContainer">
                             <table style="margin-bottom: 2rem;">
                                 <thead>
@@ -159,7 +163,13 @@
                                             <%= res.getResHuesped().getNombreCompletoHuesped() %>
                                         </td>
                                         <td>
-                                            <%= res.getResUsuario().getUsuEmpleado().getNombreEmpleado() %>
+                                            <% if(res.getResUsuario() == null) {
+                                            %>
+                                            Usuario Eliminado
+                                            <% } else { 
+                                            %>
+                                            <%=res.getResUsuario().getUsuEmpleado().getNombreEmpleado() %>
+                                            <% } %>
                                         </td>
                                     </tr>
                                     <% } %>                                    
@@ -173,9 +183,9 @@
                 </div>
             </div>
 
-            <!--*************************-->
-            <!--****** POR EMPLEADO ******-->
-            <!--*************************-->
+            <!--************************-->
+            <!--***** POR EMPLEADO *****-->
+            <!--************************-->
             <div class="cons-singleScreen" id="screenResPorEmpleado">
                 <div class="cons-mainScreenContainer" style="padding-bottom: 0;"> 
                     <div class="singleScreen-description">
@@ -196,6 +206,7 @@
                         </form>
                     </div>
                     
+                    <!--*** Tabla AJAX y armado HTML en Servlet ***-->
                     <div class="emp-tableContainer singleScreen-resultsContainer" id="empContent">
                     </div>
                     
@@ -203,7 +214,7 @@
             </div>
             
             <!--*************************-->
-            <!--****** LISTA HUESPEDES ******-->
+            <!--**** LISTA HUESPEDES ****-->
             <!--*************************-->
             <div class="cons-singleScreen" id="screenListaHuespedes">
                 <div class="cons-mainScreenContainer" style="padding-bottom: 0;"> 
@@ -220,15 +231,18 @@
                             </div>
                         </form>
                     </div>
+                    
+                    <!--*** Tabla AJAX y armado HTML en Servlet ***-->
                     <div style="margin-top: -5rem;">
                         <div class="emp-tableContainer singleScreen-resultsContainer" id="huesContent">                           
                         </div>
                     </div>
+                    
                 </div>
             </div>    
 
             <!--*************************-->
-            <!--***** POR HUESy FECHA *****-->
+            <!--**** POR HUESy FECHA ****-->
             <!--*************************-->
             <div class="cons-singleScreen" id="screenResPorHuesyFechas">
                 <div class="cons-mainScreenContainer" style="padding-bottom: 0;"> 
@@ -261,22 +275,25 @@
                             </div>
                         </form>
                     </div>
+                    
+                    <!--*** Tabla AJAX y armado HTML en Servlet ***-->
                     <div style="margin-top: 5rem;">
                         <div class="emp-tableContainer singleScreen-resultsContainer" id="HFContent">                           
                         </div>                        
                     </div>
+                    
                 </div>
             </div>
             
         </section>                              
-                                
+         
+        <!--*** JAVASCRIPT ***-->
         <script
             src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous">            
-        </script>
-        
-        <!--*** EMPLEADOS ***-->
+        </script>        
+        <!--*** Empleados ***-->
         <script type="text/javascript">
             var formEmp = $('#formEmpleadosID');
             formEmp.submit(function (event) {
@@ -292,9 +309,8 @@
                 });
                 return false;
             }); 
-        </script>
-        
-        <!--*** HUESPEDES ***-->
+        </script>        
+        <!--*** Huespedes ***-->
         <script type="text/javascript">
             var formHues = $('#formListHosts');
             formHues.submit(function (event) {
@@ -310,9 +326,8 @@
                 });
                 return false;
             }); 
-        </script>
-        
-        <!--*** HyF ***-->
+        </script>        
+        <!--*** Hues y Fecha ***-->
         <script type="text/javascript">
             var formHF = $('#formHyF');
             formHF.submit(function (event) {
@@ -332,7 +347,7 @@
         
         <!--*** DATE PICKER ***-->
         <script>
-            // Date Picker DE:
+            // Date Picker DE: Consulta Por Fecha
             const picker1 = MCDatepicker.create({
                 el: '#datepicker',
                 dateFormat: 'dd-MM-yyyy',
@@ -355,7 +370,7 @@
                 customCancelBTN: "Anular",
             });
             
-            // Active Menu:
+            // Active Menu: NO ME DEJABA IMPORTARLO DE "main.js"
             let myFormFec = document.getElementById("screenResPorFecha");
             let myFormEmp = document.getElementById("screenResPorEmpleado");
             let myFormHues = document.getElementById("screenListaHuespedes");
@@ -405,7 +420,7 @@
             hastaBtn.disabled=true;
             hastaBtn.style.background="lightgray";
             hastaBtn.style.cursor="default";
-            // Date Picker DE:
+            // Date Picker DE: Constulca Huesped y Fecha
             let pickerHF1 = MCDatepicker.create({
                 el: '#datepickerDeHF',
                 dateFormat: 'dd-mm-yyyy',
@@ -438,7 +453,7 @@
                 var myMin = new Date(date);
                 myMin.setDate(date.getDate() + 1);
                 
-                // Date Picker HASTA:
+                // Date Picker HASTA: Constulca Huesped y Fecha
                 pickerHF2 = MCDatepicker.create({
                 el: '#datepickerHastaHF',
                 minDate: myMin,

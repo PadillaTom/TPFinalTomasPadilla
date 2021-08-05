@@ -6,8 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./assets/CSS/styles.css" type="text/css" />
         <title>Hotel Management</title>
-    </head>
-    
+    </head>    
     <body>
     <%
         Controladora myContr = new Controladora();
@@ -40,6 +39,7 @@
                         </div>
                     </form>
                     <div class="login-errorMsg">
+                        <h3></h3>
                     <%
                         String msg = (String) session.getAttribute("errorMsg");
                         if(msg != null){
@@ -52,6 +52,5 @@
                 </div>
             </div>
         </section>
-
     </body>
 </html>

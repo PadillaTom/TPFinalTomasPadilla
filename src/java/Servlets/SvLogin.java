@@ -25,8 +25,7 @@ public class SvLogin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException { 
-        
+        throws ServletException, IOException {         
             // Tomar Data:
             String usuUsername = request.getParameter("username");
             String usuPassword = request.getParameter("password"); 
@@ -51,6 +50,6 @@ public class SvLogin extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

@@ -15,12 +15,10 @@
         if(myUsu == null){
             response.sendRedirect("index.jsp");
         } 
-
     %>
         <!-- *** Navigation *** -->
         <nav class="navigationContainer">
-            <div class="navigationCenter">
-                
+            <div class="navigationCenter">                
                 <div class="nav-logoContainer">
                     <h1>Mi Hotel</h1>
                 </div>
@@ -46,16 +44,21 @@
                                 Empleados
                             </a>
                         </li>
+                        <li class="nav-singleLink">
+                            <a href="bonus.jsp">
+                                Bonus
+                            </a>
+                        </li>
                         <li class="nav-singleLink singleLink-logout">
                             <a href="SvLogout">
                                 Cerrar Sesión
                             </a>
                         </li>
                     </ul>
-                </div>
-                
+                </div>                
             </div>
         </nav>
+        
         <!-- *** Seccion Principal *** -->
         <section class="section main-sect">
             <h1 class="section-title">
@@ -171,13 +174,11 @@
                                 </div>
                             </div>
                         </div>  
-
                         <!--*** BTNs Confirmar ***-->
                         <div class="res-formBtnContainer">
                             <input type="submit" value="Guardar" class="formBtn" name="cargarReserva"/>
                             <button type="button" class="formBtn cancelBtn" onclick="borrarCampos(); selectedToDefault();" >Anular</button>
-                        </div>
-                       
+                        </div>                       
                     </div>
                 </form>
             </div>            
@@ -192,7 +193,7 @@
             hastaBtn.style.background="lightgray";
             hastaBtn.style.cursor="default";
             
-            // Cantidad Personas:
+            // Cantidad Personas: NO ME DEJABA PONER EN "main.js"
             function getHabitacion(){
                 var habitacionElegida = document.getElementById("res-habSelect").value;
 
@@ -225,7 +226,6 @@
                     document.getElementById("6per").style.display = "block";
                 }
             };
-
             getHabitacion();
             
             // Date Picker DE:
@@ -246,14 +246,14 @@
                   'Sept.',
                   'Oct.',
                   'Nov.',
-                  'Dic.',
+                  'Dic.'
                 ],
                 customClearBTN: "Borrar",
-                customCancelBTN: "Anular",
+                customCancelBTN: "Anular"
             });
             let picker2;
             picker1.onSelect((date)=> { 
-                // Habilitar HASTA
+                // Habilitar HASTA:
                 hastaBtn.disabled = false;
                 hastaBtn.style.background="#96baec"; // ColorBlue
                 hastaBtn.style.cursor="pointer";
@@ -280,13 +280,13 @@
                       'Sep.',
                       'Oct.',
                       'Nov.',
-                      'Dic.',
+                      'Dic.'
                     ],
                 customClearBTN: "Borrar",
-                customCancelBTN: "Anular",
-            })
+                customCancelBTN: "Anular"
+            });
         });
-        //  Date Picker FECHANAC:
+        //  Date Picker: Fecha Nacimiento Huesped
         const picker3 = MCDatepicker.create({
                 el: '#datepickerFechaNac',
                 dateFormat: 'dd-mm-yyyy',
@@ -303,10 +303,10 @@
                   'Sept.',
                   'Oct.',
                   'Nov.',
-                  'Dic.',
+                  'Dic.'
                 ],
                 customClearBTN: "Borrar",
-                customCancelBTN: "Anular",
+                customCancelBTN: "Anular"
             });  
         </script>
     </body>
