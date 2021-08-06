@@ -194,6 +194,7 @@ public class Controladora {
         }
         return 0;
     }
+    
     public List<Reserva> reservasMensuales(String fecha){
         try {
             List<Reserva> reservasMensuales = new ArrayList<>();
@@ -304,7 +305,7 @@ public class Controladora {
         // Instancias:
         List<Reserva> resAll = myCP.traerTodasLasReservas();
         List <Reserva> listaFinal = new ArrayList<>();
-        // System.out.println("TODAS LAS RESERVAS: " + resAll);
+        
         // All Dates to String and Compare:
         if(resAll != null) {
             for (Reserva res : resAll){
@@ -314,7 +315,6 @@ public class Controladora {
                 String fechaRes = dateFormatter.format(fechaDate);
                 if(fechaIngresada.equals(fechaRes)){
                     listaFinal.add(res);
-                    System.out.println("Controladora " + listaFinal);
                 }
             }
         }
@@ -343,7 +343,6 @@ public class Controladora {
                             Date resIn = resFinal.getFechaDe();
                             Date resOut = resFinal.getFechaHasta();
                             if( ( (resIn.after(resFechaIn) && resIn.before(resFechaOut)) || (resOut.after(resFechaIn) && resOut.before(resFechaOut)) ) || (resIn.before(resFechaOut)&&(resOut.after(resFechaIn))) ){
-                                System.out.println(resFinal.getId_reserva());
                                 listaFinal.add(resFinal); 
                             }
                         } 
@@ -356,7 +355,13 @@ public class Controladora {
         }
         return null;
     }
-       
+    
+    // Borrar:
+    public void borrarReserva(int id){
+        // Remover RES de Usuario, Huesped y Habitacion.
+        myCP.borrarRes(id);
+    }
+    
     //::::::::::::::::::::::::
     //:::::: Huespedes :::::::
     //::::::::::::::::::::::::

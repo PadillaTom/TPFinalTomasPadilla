@@ -109,7 +109,9 @@
                     <div class="singleScreen-resultsContainer">
                     <% 
                         String datePattern = "dd/MM/yyyy";                                
+                        String datePattern2 = "dd-MM-yyyy";                                
                         SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern); 
+                        SimpleDateFormat dateFormatter2 = new SimpleDateFormat(datePattern2); 
 
                         List<Reserva> misReservas = (List) mySess.getAttribute("reservasPorFecha");
 //                                    System.out.println(misReservas);
@@ -132,6 +134,7 @@
                                       <th>Huesped Dni</th>
                                       <th>Huesped</th>
                                       <th>Empleado</th>
+                                      <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -139,6 +142,7 @@
                                         for(Reserva res : misReservas) {
                                             String resIn = dateFormatter.format(res.getFechaDe());
                                             String resOut = dateFormatter.format(res.getFechaHasta());
+                                            String resInDelete = dateFormatter2.format(res.getFechaDeCarga());
                                     %>
                                     <tr>
                                         <td>
@@ -170,6 +174,46 @@
                                             %>
                                             <%=res.getResUsuario().getUsuEmpleado().getNombreEmpleado() %>
                                             <% } %>
+                                        </td>
+                                        <!--***-->
+                                        <td class="emp-tableIconsContainer">
+                                            <form action="SvEditRes" method="POST">
+                                                <input type="hidden" name="idRes" value="<%= res.getId_reserva() %>">
+                                                <button type="submit" style="outline: none; background: none; border: none;">
+                                                    <img  class="emp-tableIcon" src="./assets/Icons/editEmp.png" alt="Editar Empleado"/>
+                                                </button>
+                                            </form>
+
+                                            <!--*** MODAL ***-->
+                                            <div class="emp-Modal" id="myModal">
+                                                <div class="modal-content">
+                                                    <div class="modal-texts">
+                                                        <h2>Se eliminará definitivamente al Empleado y su Usuario.</h2>
+                                                        <h3>Desea continuar?</h3>
+                                                    </div>
+                                                    <div class="modal-btns">
+                                                        <div class="modal-singleBtn">
+                                                            <form action="SvDeleteEmp" method="GET" class="modal-singleBtn">
+                                                                <input type="hidden" name="idRes"  id="inputData">
+                                                                <input type="hidden" name="fechaRes"  id="inputData2">
+                                                                <button type="submit" style="outline: none; background: none; border: none; background: #d85888 " class="formBtn">
+                                                                    Eliminar
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-singleBtn">
+                                                            <button type="submit" style="outline: none; background: none; border: none; background: #faeecf" class="formBtn" onclick="closeModal();">
+                                                                Anular
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div> 
+                                                <button style="outline: none; background: none; border: none;" onclick="openModal('<%=res.getId_reserva()%>', '<%=resInDelete%>')">
+                                                    <img  class="emp-tableIcon" src="./assets/Icons/deleteEmp.png" alt="Eliminar Empleado" />
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                     <% } %>                                    
@@ -347,6 +391,25 @@
         
         <!--*** DATE PICKER ***-->
         <script>
+            // Modal Delte:
+            var modal = document.getElementById("myModal");
+            function openModal(el, el2){
+                modal.style.display= "grid";
+                let eliminarBtn = document.getElementById("inputData");
+                let eliminarBtn2 = document.getElementById("inputData2");
+                eliminarBtn.setAttribute("value", el);
+                eliminarBtn2.setAttribute("value", el2);
+                
+            }
+            function closeModal(){
+                modal.style.display = "none";
+            }
+            window.onclick = function(event) {
+            if (event.target === modal) {
+              modal.style.display = "none";
+                }
+            };    
+            
             // Date Picker DE: Consulta Por Fecha
             const picker1 = MCDatepicker.create({
                 el: '#datepicker',

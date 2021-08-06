@@ -1,12 +1,15 @@
 package Servlets;
 
 import Logica.Controladora;
+import Logica.Reserva;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 @WebServlet(name = "SvDeleteEmp", urlPatterns = {"/SvDeleteEmp"})
 public class SvDeleteEmp extends HttpServlet {
@@ -20,7 +23,20 @@ public class SvDeleteEmp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+                // Get Data:
+        int resId = Integer.parseInt(request.getParameter("idRes"));        
+        String fechaIngresada = request.getParameter("fechaRes");
+        // Controller:
+        Controladora myController = new Controladora();
+        myController.borrarReserva(resId);
+        
+        List<Reserva> myList = myController.reservasPorFecha(fechaIngresada);
+        // Set:
+        HttpSession mySess = request.getSession();
+        mySess.setAttribute("reservasPorFecha", myList);
+        
+        // Response:
+        response.sendRedirect("consultas.jsp");
     }
 
     @Override
@@ -28,7 +44,6 @@ public class SvDeleteEmp extends HttpServlet {
             throws ServletException, IOException {
         // Get Data:
         int empId = Integer.parseInt(request.getParameter("idEmp"));
-        System.out.println(empId);
         
         // Controller:
         Controladora myController = new Controladora();

@@ -113,6 +113,15 @@ public class ControladoraPersistencia {
         }
     }
     
+    // Borrar:
+    public void borrarRes(int id){
+        try {
+            resJPA.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     //::::::::::::::::::::::::
     //::::::: Usuario ::::::::
     //::::::::::::::::::::::::    

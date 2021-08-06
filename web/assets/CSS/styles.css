@@ -510,9 +510,6 @@ a {
     cursor: pointer; 
     transition: var(--MainTras);
 }
-.emp-tableIcon:hover{
-    width: 1.6rem;
-}
 
 /**** MODAL ****/
 .emp-Modal {
