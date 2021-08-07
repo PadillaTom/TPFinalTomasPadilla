@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="./assets/CSS/styles.css" type="text/css" />
         <link href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
-        <title>Mi Hotel - Modificar Empleado</title>
+        <title>Mi Hotel - Modificar Reserva</title>
     </head>
     <body>
         <!-- *** Navigation *** -->
@@ -56,95 +56,242 @@
         <!-- *** Seccion Principal *** -->
         <section class="section main-sect">
             <h1 class="section-title" style="color: green;">
-                Edicion Empleado
+                Edicion Reserva
             </h1>
             <!--*** Formulario ***-->
             <%
             HttpSession mySess = request.getSession();
-            Usuario myUsu = (Usuario)mySess.getAttribute("myEmpModif");
-            Date empleDate = myUsu.getUsuEmpleado().getFechaNacEmpleado();
+            Reserva myRes = (Reserva)mySess.getAttribute("myResModif");
+            Date resIn = myRes.getFechaDe();
+            Date resOut = myRes.getFechaHasta();
+            Date resCarga = myRes.getFechaDeCarga();
+            Date huesNac = myRes.getResHuesped().getFechaNacHuesped();
+            Date newDate = new Date();
             // Date to String
             String datePattern = "dd-MM-yyyy";                                
             SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-            String fechaEmple = dateFormatter.format(empleDate);
+            String resFechaDe = dateFormatter.format(resIn);
+            String resFechaHasta = dateFormatter.format(resOut);
+            String resFechaDeCarga = dateFormatter.format(resCarga);
+            String huesFechaNac = dateFormatter.format(huesNac);
+            String newFecha = dateFormatter.format(newDate);
             %>
+            
+            <!--*** Formulario ***-->
             <div class="res-formContainer">
-                <form class="emp-addEmpForm" action="SvEditEmp" method="GET" id="EditEmpleForm">
+                <form action="SvEditRes" method="GET" id="myResForm">
                     <div class="res-formCenter">
+                        <%
+                            String msg = (String) mySess.getAttribute("noDispoMsg");
+                            if(msg != null){
+                                if(msg.equals("no")){
+                        %>
+                        <!--*** Message NO DISPO ***--> 
+                        <div style="display: grid; place-items: center; margin-bottom: 2rem;" id="resVer" class="res-noDispoContainer" >
+                            <h3 style="color: red; letter-spacing: 1.4px;">
+                                Habitacion NO Disponible. Por favor Rellenar el Formulario.
+                            </h3>
+                        </div>
+                        <% 
+                                }
+                            }
+                        %>
                         <div class="res-formSection">
                             <div class="res-formTitle">
                                 <h3>
-                                    Editar Empleado
+                                    Habitacion 
                                 </h3>
-                                <p>Se modificaran los datos del empleado.</p>
+                                <p>Seleccionar el Tipo de Habitacion y Cantidad de Huespedes.</p>
+                            </div> 
+                            <div class="res-formInputsContainer">
+                                <div class="res-formInputsTop">  
+                                    <div class="res-singleInput">
+                                        <label for="res-tipoHabitacion">Habitacion </label>
+                                        <select class="res-select" name="res-tipoHabitacion" id="res-habSelect" onchange="getHabitacion();" required="true" >
+                                            <option value="Single Room" >Single Room</option>
+                                            <option value="Double Room" >Double Room</option>
+                                            <option value="Triple Room" >Triple Room</option>
+                                            <option value="Multiple Room" >Multiple Room</option>
+                                        </select>
+                                    </div>                                
+                                    <div class="res-singleInput">
+                                        <label for="res-cantPersonas">Cantidad de Personas </label>
+                                        <select class="res-select" name="res-cantPersonas" required="true" id="res-cantPers">
+                                            <option value="1" id="1per">1</option>
+                                            <option value="2" id="2per">2</option>
+                                            <option value="3" id="3per">3</option>
+                                            <option value="4" id="4per">4</option>
+                                            <option value="5" id="5per">5</option>
+                                            <option value="6" id="6per">6</option>
+                                        </select> 
+                                    </div>
+                                </div>
+                                <div class="res-fechasContainer">
+                                    <div class="res-formTitle">
+                                        <h3>
+                                            Fechas 
+                                        </h3>
+                                        <p>Ingresar fechas de Check-in y Check-out.</p>
+                                    </div> 
+                                    <div class="datePickerBtnsContainer">
+                                        <input id="datepickerDe" type="text" class="datePickerBtn" placeholder="De" name="res-fechaDe" required="true" value="<%= resFechaDe %>">
+                                        <input id="datepickerHasta" type="text" class="datePickerBtn" placeholder="Hasta" name="res-fechaHasta" required="true" value="<%= resFechaHasta %>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="res-formSection">
+                            <div class="res-formTitle">
+                                <h3>
+                                    Datos de Facturacion
+                                </h3>
+                                <p>Ingresar los datos proporcionados por el Huesped.</p>
                             </div> 
                             <div class="res-formInputsContainer res-facturacionContainer">
                                 <div class="res-factSingleInput">
-                                    <label for="empUsername">
-                                        Usuario:
-                                    </label>
-                                    <input type="text" name="empUsername" required="true" value="<%=myUsu.getUsername()%>" />
-                                </div>
-                                <div class="res-factSingleInput">
-                                    <label for="empPassword">
-                                        Contraseña:
-                                    </label>
-                                    <input type="text" name="empPassword" required="true" value="<%=myUsu.getPassword()%>" />
-                                </div>
-                                <div class="res-factSingleInput">
-                                    <label for="empDni">
+                                    <label for="hues-dni">
                                         DNI:
                                     </label>
-                                    <input type="text" name="empDni" required="true" value="<%=myUsu.getUsuEmpleado().getDniEmpleado()%>" />
+                                    <input type="text" name="hues-dni" required="true" value="<%= myRes.getResHuesped().getDniHuesped() %>" />
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="empNombre">
+                                    <label for="hues-nombre">
                                         Nombre:
                                     </label>
-                                    <input type="text" name="empNombre" required="true" value="<%=myUsu.getUsuEmpleado().getNombreEmpleado()%>" />
+                                    <input type="text" name="hues-nombre" required="true" value="<%= myRes.getResHuesped().getNombreHuesped() %>"/>
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="empApellido">
+                                    <label for="hues-apellido">
                                         Apellido:
                                     </label>
-                                    <input type="text" name="empApellido" required="true" value="<%=myUsu.getUsuEmpleado().getApellidoEmpleado()%>" />
+                                    <input type="text" name="hues-apellido" required="true" value="<%= myRes.getResHuesped().getApellidoHuesped() %>" />
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="empFechaNac">
+                                    <label for="hues-fechaNac">
                                         Fecha Nac:
                                     </label>
-                                    <input type="text" name="empFechaNac" required="true" id="datepickerEmpFechaNac2" value="<%=fechaEmple%>" placeholder="Seleccionar Fecha" />
+                                    <input type="text" name="hues-fechaNac" id="datepickerFechaNac" required="true" placeholder="Seleccionar Fecha" value="<%= huesFechaNac %>" />
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="empDireccion">
+                                    <label for="hues-direccion">
                                         Direccion:
                                     </label>
-                                    <input type="text" name="empDireccion" required="true" value="<%=myUsu.getUsuEmpleado().getDireccionEmpleado()%>" />
+                                    <input type="text" name="hues-direccion" required="true" value="<%= myRes.getResHuesped().getDireccionHuesped() %>"/>
                                 </div>
                                 <div class="res-factSingleInput">
-                                    <label for="empCargo">
-                                        Cargo:
+                                    <label for="hues-profesion">
+                                        Profesion:
                                     </label>
-                                    <input type="text" name="empCargo" required="true" value="<%=myUsu.getUsuEmpleado().getCargoEmpleado()%>" />
+                                    <input type="text" name="hues-profesion" required="true" value="<%= myRes.getResHuesped().getProfesionHuesped() %>" />
                                 </div>
-                                <input type="hidden" name="idUsuario" value="<%=myUsu.getId_usuario()%>">
+                                <input type="hidden" value="<%= myRes.getId_reserva()%>" name="idResHidden">
+                                <input type="hidden" value="<%=newFecha%>" name="fechaCargaResHidden">
                             </div>
-                        </div>
-                        <div class="emp-addEmpFormBtns">
-                            <input type="submit" value="Modificar" class="formBtn" />
-                            <a href="empleados.jsp" type="button" class="formBtn cancelBtn" onclick="borrarCampos();" >Anular</a>
-                        </div>
+                        </div>  
+                        <!--*** BTNs Confirmar ***-->
+                        <div class="res-formBtnContainer">
+                            <input type="submit" value="Modificar" class="formBtn" name="cargarReserva"/>
+                            <a href="consultas.jsp" type="button" class="formBtn cancelBtn" onclick="borrarCampos(); selectedToDefault();" >Anular</a>
+                        </div>                       
                     </div>
                 </form>
-            </div>
+            </div>            
         </section>    
                             
-    <!--*** JAVASCRIPT ***-->
-    <script src="./assets/JS/main.js"></script>
-    <script>
-        //  Date Picker EMPFECHANAC:
-        const picker5 = MCDatepicker.create({
-                el: '#datepickerEmpFechaNac2',
+<!--*** JAVASCRIPT ***-->
+        <script src="./assets/JS/main.js"></script>
+        <script>           
+            
+            // Habitacion:
+            var habEleg = document.getElementById("res-habSelect").value='<%=myRes.getResHabitacion().getTipo()%>';
+            
+            // Cant Personas:
+            var cantPers = document.getElementById("res-cantPers").value='<%=myRes.getCantidadPersonas()%>';
+            
+            function getHabitacion(){    
+                let habitacionElegida = document.getElementById("res-habSelect").value;                
+                if(habitacionElegida === "Single Room") {
+                    document.getElementById("2per").style.display = "none";
+                    document.getElementById("3per").style.display = "none";
+                    document.getElementById("4per").style.display = "none";
+                    document.getElementById("5per").style.display = "none";
+                    document.getElementById("6per").style.display = "none";
+
+                } else if (habitacionElegida === "Double Room"){
+                    document.getElementById("2per").style.display = "block";
+                    document.getElementById("3per").style.display = "none";
+                    document.getElementById("4per").style.display = "none";
+                    document.getElementById("5per").style.display = "none";
+                    document.getElementById("6per").style.display = "none";
+
+                } else if (habitacionElegida === "Triple Room") {
+                    document.getElementById("2per").style.display = "block";
+                    document.getElementById("3per").style.display = "block";
+                    document.getElementById("4per").style.display = "none";
+                    document.getElementById("5per").style.display = "none";
+                    document.getElementById("6per").style.display = "none";
+
+                } else if (habitacionElegida === "Multiple Room") {
+                    document.getElementById("2per").style.display = "block";
+                    document.getElementById("3per").style.display = "block";
+                    document.getElementById("4per").style.display = "block";
+                    document.getElementById("5per").style.display = "block";
+                    document.getElementById("6per").style.display = "block";
+                }
+            };
+            getHabitacion();
+            
+            // Date Picker DE:
+            const picker1 = MCDatepicker.create({
+                el: '#datepickerDe',
+                dateFormat: 'dd-mm-yyyy',
+                minDate: new Date(),
+                customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                customMonths: [
+                  'Enero',
+                  'Febrero',
+                  'Marzo',
+                  'Abril',
+                  'Mayo',
+                  'Junio',
+                  'Julio',
+                  'Agosto',
+                  'Sept.',
+                  'Oct.',
+                  'Nov.',
+                  'Dic.'
+                ],
+                customClearBTN: "Borrar",
+                customCancelBTN: "Anular"
+            });
+            
+            // Date Picker HASTA:                     
+            var myMin = new Date();
+            const picker2 = MCDatepicker.create({
+            el: '#datepickerHasta',
+            minDate: myMin,
+            dateFormat: 'dd-mm-yyyy',
+            customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+            customMonths: [
+                  'Enero',
+                  'Febrero',
+                  'Marzo',
+                  'Abril',
+                  'Mayo',
+                  'Junio',
+                  'Julio',
+                  'Agosto',
+                  'Sep.',
+                  'Oct.',
+                  'Nov.',
+                  'Dic.'
+                ],
+            customClearBTN: "Borrar",
+            customCancelBTN: "Anular"
+        });        
+        //  Date Picker: Fecha Nacimiento Huesped
+        const picker3 = MCDatepicker.create({
+                el: '#datepickerFechaNac',
                 dateFormat: 'dd-mm-yyyy',
                 customWeekDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 customMonths: [
@@ -159,11 +306,11 @@
                   'Sept.',
                   'Oct.',
                   'Nov.',
-                  'Dic.',
+                  'Dic.'
                 ],
                 customClearBTN: "Borrar",
-                customCancelBTN: "Anular",
-            });
-    </script>
+                customCancelBTN: "Anular"
+            });  
+        </script>
     </body>
 </html>

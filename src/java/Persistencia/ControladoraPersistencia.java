@@ -104,9 +104,21 @@ public class ControladoraPersistencia {
     public List<Reserva> traerTodasLasReservas(){
         return resJPA.findReservaEntities();
     }
+    
+    public Reserva traerResPorId(int id){
+        return resJPA.findReserva(id);
+    }
     // Modificacion:
-    public void modifReserva(Reserva res){
+    public void modifResDirecto(Reserva res, Huesped hues){
         try {
+            huesJPA.edit(hues);            
+            resJPA.edit(res);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void modifReserva(Reserva res){
+        try {            
             resJPA.edit(res);
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);

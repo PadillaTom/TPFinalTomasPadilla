@@ -44,6 +44,11 @@ public class Controladora {
         myCP.altaHabitacion(myHab4);
     }  
     
+    // Find:
+    public Habitacion traerHabPorTipo(String tipo){
+        return myCP.traerHabitacionPorTipo(tipo);
+    }
+    
     //::::::::::::::::::::::::
     //::::::: Usuario ::::::::
     //::::::::::::::::::::::::
@@ -354,6 +359,29 @@ public class Controladora {
             Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public Reserva traerReservaPorId(int id){
+        return myCP.traerResPorId(id);
+    }
+    
+    // Modificar:
+    public void modificarReserva(Reserva resModif, Huesped huesModif){
+        
+        // Cantidad Noches:
+        long nochesTime = resModif.getFechaHasta().getTime() - resModif.getFechaDe().getTime();
+        int cantidadNoches = (int) Math.floor(nochesTime / (1000*60*60*24));
+        // Recalcular Precio Total:   
+        Habitacion myHab = resModif.getResHabitacion();
+        double myHabPrecio = myHab.getPrecioPorNoche();
+        double precioTotal = myHabPrecio * cantidadNoches;
+        
+        // Set:
+        resModif.setCantidadNoches(cantidadNoches);
+        resModif.setPrecioTotal(precioTotal);
+        
+        
+        myCP.modifResDirecto(resModif, huesModif);
     }
     
     // Borrar:
