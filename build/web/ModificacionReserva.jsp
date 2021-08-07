@@ -202,15 +202,16 @@
         <script src="./assets/JS/main.js"></script>
         <script>           
             
+            // Cant Personas:
+            var cantPers = document.getElementById("res-cantPers").value='<%=myRes.getCantidadPersonas()%>';            
             // Habitacion:
             var habEleg = document.getElementById("res-habSelect").value='<%=myRes.getResHabitacion().getTipo()%>';
             
-            // Cant Personas:
-            var cantPers = document.getElementById("res-cantPers").value='<%=myRes.getCantidadPersonas()%>';
-            
             function getHabitacion(){    
                 let habitacionElegida = document.getElementById("res-habSelect").value;                
+                var editPers = document.getElementById("res-cantPers");                
                 if(habitacionElegida === "Single Room") {
+                    editPers.value="1";
                     document.getElementById("2per").style.display = "none";
                     document.getElementById("3per").style.display = "none";
                     document.getElementById("4per").style.display = "none";
@@ -218,6 +219,7 @@
                     document.getElementById("6per").style.display = "none";
 
                 } else if (habitacionElegida === "Double Room"){
+                    editPers.value="2";
                     document.getElementById("2per").style.display = "block";
                     document.getElementById("3per").style.display = "none";
                     document.getElementById("4per").style.display = "none";
@@ -225,6 +227,7 @@
                     document.getElementById("6per").style.display = "none";
 
                 } else if (habitacionElegida === "Triple Room") {
+                    editPers.value="3";
                     document.getElementById("2per").style.display = "block";
                     document.getElementById("3per").style.display = "block";
                     document.getElementById("4per").style.display = "none";
@@ -232,6 +235,7 @@
                     document.getElementById("6per").style.display = "none";
 
                 } else if (habitacionElegida === "Multiple Room") {
+                    editPers.value="4";
                     document.getElementById("2per").style.display = "block";
                     document.getElementById("3per").style.display = "block";
                     document.getElementById("4per").style.display = "block";
@@ -239,7 +243,7 @@
                     document.getElementById("6per").style.display = "block";
                 }
             };
-            getHabitacion();
+//            getHabitacion();
             
             // Date Picker DE:
             const picker1 = MCDatepicker.create({

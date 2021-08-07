@@ -188,7 +188,7 @@
                                             <div class="emp-Modal" id="myModal">
                                                 <div class="modal-content">
                                                     <div class="modal-texts">
-                                                        <h2>Se eliminará definitivamente al Empleado y su Usuario.</h2>
+                                                        <h2>Se eliminará definitivamente la Reserva y su Huesped(De no tener otras cargadas en el sistema).</h2>
                                                         <h3>Desea continuar?</h3>
                                                     </div>
                                                     <div class="modal-btns">

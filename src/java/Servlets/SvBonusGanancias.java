@@ -92,7 +92,7 @@ public class SvBonusGanancias extends HttpServlet {
                             "<td>" + res.getResHabitacion().getTipo() + "</td>" +
                             "<td>" + res.getResHuesped().getNombreCompletoHuesped() + "</td>" +
                             "<td>" + res.getCantidadNoches() + "</td>" +
-                            "<td>" + res.getPrecioTotal() + "- CHF</td>" +
+                            "<td>" + res.getPrecioTotal() + " CHF</td>" +
                         "</tr>"
                     );
                 }
@@ -161,7 +161,7 @@ public class SvBonusGanancias extends HttpServlet {
                             "<td>" + res.getResHabitacion().getTipo() + "</td>" +
                             "<td>" + res.getResHuesped().getNombreCompletoHuesped() + "</td>" +
                             "<td>" + res.getCantidadNoches() + "</td>" +
-                            "<td>" + res.getPrecioTotal() + "- CHF</td>" +
+                            "<td>" + res.getPrecioTotal() + " CHF</td>" +
                         "</tr>"
                     );
                 }

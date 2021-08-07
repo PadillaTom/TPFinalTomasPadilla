@@ -104,7 +104,7 @@
                                     </div>                                
                                     <div class="res-singleInput">
                                         <label for="res-cantPersonas">Cantidad de Personas </label>
-                                        <select class="res-select" name="res-cantPersonas" required="true">
+                                        <select class="res-select" name="res-cantPersonas" required="true" id="res-cantPers">
                                             <option value="1" id="1per">1</option>
                                             <option value="2" id="2per">2</option>
                                             <option value="3" id="3per">3</option>
@@ -196,8 +196,9 @@
             // Cantidad Personas: NO ME DEJABA PONER EN "main.js"
             function getHabitacion(){
                 var habitacionElegida = document.getElementById("res-habSelect").value;
-
+                var resPers = document.getElementById("res-cantPers");
                 if(habitacionElegida === "Single Room") {
+                    resPers.value="1";
                     document.getElementById("2per").style.display = "none";
                     document.getElementById("3per").style.display = "none";
                     document.getElementById("4per").style.display = "none";
@@ -205,6 +206,7 @@
                     document.getElementById("6per").style.display = "none";
 
                 } else if (habitacionElegida === "Double Room"){
+                    resPers.value="2";
                     document.getElementById("2per").style.display = "block";
                     document.getElementById("3per").style.display = "none";
                     document.getElementById("4per").style.display = "none";
@@ -212,6 +214,7 @@
                     document.getElementById("6per").style.display = "none";
 
                 } else if (habitacionElegida === "Triple Room") {
+                    resPers.value="3";
                     document.getElementById("2per").style.display = "block";
                     document.getElementById("3per").style.display = "block";
                     document.getElementById("4per").style.display = "none";
@@ -219,6 +222,7 @@
                     document.getElementById("6per").style.display = "none";
 
                 } else if (habitacionElegida === "Multiple Room") {
+                    resPers.value="4";
                     document.getElementById("2per").style.display = "block";
                     document.getElementById("3per").style.display = "block";
                     document.getElementById("4per").style.display = "block";

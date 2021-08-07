@@ -91,6 +91,14 @@ public class ControladoraPersistencia {
     public List<Huesped> traerHuespedes(){
         return huesJPA.findHuespedEntities();
     }
+    // Borrar:
+    public void borrarHuesped(int hues){
+        try {
+            huesJPA.destroy(hues);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     //::::::::::::::::::::::::
     //::::::: Reserva ::::::::

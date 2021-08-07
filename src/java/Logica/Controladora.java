@@ -374,20 +374,27 @@ public class Controladora {
         // Recalcular Precio Total:   
         Habitacion myHab = resModif.getResHabitacion();
         double myHabPrecio = myHab.getPrecioPorNoche();
-        double precioTotal = myHabPrecio * cantidadNoches;
+        double precioTotal = myHabPrecio * cantidadNoches;       
         
         // Set:
         resModif.setCantidadNoches(cantidadNoches);
         resModif.setPrecioTotal(precioTotal);
-        
         
         myCP.modifResDirecto(resModif, huesModif);
     }
     
     // Borrar:
     public void borrarReserva(int id){
-        // Remover RES de Usuario, Huesped y Habitacion.
-        myCP.borrarRes(id);
+        Reserva myRes = myCP.traerResPorId(id);
+        int myHuesId = myRes.getResHuesped().getId_huesped();  
+        List<Reserva> myHuesRes = myRes.getResHuesped().getHuesReserva();
+        if( myHuesRes.size() == 1){
+            myCP.borrarHuesped(myHuesId);
+            myCP.borrarRes(id);            
+        } else {
+            myCP.borrarRes(id);
+        }
+        
     }
     
     //::::::::::::::::::::::::
