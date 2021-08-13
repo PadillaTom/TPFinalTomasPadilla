@@ -9,7 +9,7 @@
     <class>Logica.Usuario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://92.204.218.67:3306/tpfinal_db?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:8889/tpfinal_db?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="tpfinal"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="tpfinal"/>
